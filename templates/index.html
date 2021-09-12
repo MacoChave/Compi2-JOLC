@@ -1,0 +1,31 @@
+{% extends "layout.html" %} {% block body %}
+
+<div class="container">
+	<div class="card text-center">
+		<img
+			src="https://i.blogs.es/9e7f93/650_1000_julia/1024_2000.png"
+			alt="Julia logo"
+			class="card-img-top"
+		/>
+		<div class="card-body">
+			<h5 class="card-title">
+				Julia Organización de Lenguajes y Compiladores
+			</h5>
+			<figure>
+				<blockquote class="blockquote"><p>201020831</p></blockquote>
+				<figcaption class="blockquote-footer">Carnet</figcaption>
+			</figure>
+			<figure>
+				<blockquote class="blockquote">
+					<p>Marco Antonio Fidencio Chávez Fuentes</p>
+				</blockquote>
+				<figcaption class="blockquote-footer">Nombre</figcaption>
+			</figure>
+			<a href="{{ url_for('editor') }}" class="btn btn-primary"
+				>Ir al editor</a
+			>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

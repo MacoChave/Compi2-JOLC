@@ -1,0 +1,33 @@
+{% extends "layout.html" %} {% block body %}
+<div class="d-md-flex flex-row p-2 bd-highlight">
+	<div class="card m-2 flex-fill">
+		<div class="card-body">
+			<h5 class="card-title">Código fuente</h5>
+			<form action="{{url_for('analize')}}" method="POST">
+				<textarea
+					class="form-control"
+					name="code"
+					id="code"
+					cols="30"
+					rows="20"
+					placeholder="Escribe aquí el código"
+				></textarea>
+				<button class="btn btn-primary mt-2 w-100">Analizar</button>
+			</form>
+		</div>
+	</div>
+	<div class="card m-2 flex-fill">
+		<div class="card-body">
+			<h5 class="card-title">Consola</h5>
+			<textarea
+				class="form-control"
+				name="console"
+				id="console"
+				cols="30"
+				rows="20"
+				placeholder="Tus resultados se muestran aquí"
+			></textarea>
+		</div>
+	</div>
+</div>
+{% endblock %}

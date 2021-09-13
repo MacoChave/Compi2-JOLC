@@ -1,4 +1,6 @@
-from flask import Flask, render_template 
+from flask import Flask, render_template, request
+from analizar import ejecutar_instrucciones
+from gramatica import *
 
 app = Flask(__name__)
 
@@ -12,11 +14,15 @@ def editor():
 
 @app.route('/analize', methods=['POST'])
 def analize():
-    return 'Analize page works!'
+    if request.method == 'POST' :
+        source = request.form['code']
+        instrucciones = parse(source)
+        ejecutar_instrucciones(instrucciones)
+    return 'Analize works!'
 
 @app.route('/reports')
 def reports():
     return 'Reports page works!'
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

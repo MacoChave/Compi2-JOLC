@@ -1,0 +1,1607 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    FLOAT
+    INT
+    LOWERCASE
+    PARSE
+    SEMICOL
+    STR
+    TYPEOF
+    UPPERCASE
+
+Grammar
+
+Rule 0     S' -> init
+Rule 1     init -> instrucciones
+Rule 2     instrucciones -> instrucciones instruccion
+Rule 3     instrucciones -> instruccion
+Rule 4     instruccion -> print
+Rule 5     instruccion -> println
+Rule 6     instruccion -> definicion
+Rule 7     instruccion -> asignacion
+Rule 8     instruccion -> while
+Rule 9     instruccion -> if
+Rule 10    instruccion -> if_else
+Rule 11    print -> PRINT LPAR expresion_cadena RPAR
+Rule 12    println -> PRINTLN LPAR expresion_cadena RPAR
+Rule 13    definicion -> ID
+Rule 14    asignacion -> ID EQUAL expresion_numerica
+Rule 15    while -> WHILE LPAR expresion_logica RPAR LBRACE instrucciones RBRACE
+Rule 16    if -> IF LPAR expresion_logica RPAR LBRACE instrucciones RBRACE
+Rule 17    if_else -> IF LPAR expresion_logica RPAR LBRACE instrucciones RBRACE ELSE LBRACE instrucciones RBRACE
+Rule 18    expresion_numerica -> expresion_numerica PLUS expresion_numerica
+Rule 19    expresion_numerica -> expresion_numerica MINUS expresion_numerica
+Rule 20    expresion_numerica -> expresion_numerica TIMES expresion_numerica
+Rule 21    expresion_numerica -> expresion_numerica DIV expresion_numerica
+Rule 22    expresion_numerica -> expresion_numerica POT expresion_numerica
+Rule 23    expresion_numerica -> MINUS expresion_numerica
+Rule 24    expresion_numerica -> LPAR expresion_numerica RPAR
+Rule 25    expresion_numerica -> NUMBER
+Rule 26    expresion_numerica -> DECIMAL
+Rule 27    expresion_numerica -> ID
+Rule 28    expresion_cadena -> STRING
+Rule 29    expresion_cadena -> expresion_numerica
+Rule 30    expresion_logica -> expresion_numerica LESS expresion_numerica
+Rule 31    expresion_logica -> expresion_numerica LESSEQ expresion_numerica
+Rule 32    expresion_logica -> expresion_numerica GREATHER expresion_numerica
+Rule 33    expresion_logica -> expresion_numerica GREATHEREQ expresion_numerica
+Rule 34    expresion_logica -> expresion_numerica EQUALITY expresion_numerica
+Rule 35    expresion_logica -> expresion_numerica DIFERENT expresion_numerica
+
+Terminals, with rules where they appear
+
+DECIMAL              : 26
+DIFERENT             : 35
+DIV                  : 21
+ELSE                 : 17
+EQUAL                : 14
+EQUALITY             : 34
+FLOAT                : 
+GREATHER             : 32
+GREATHEREQ           : 33
+ID                   : 13 14 27
+IF                   : 16 17
+INT                  : 
+LBRACE               : 15 16 17 17
+LESS                 : 30
+LESSEQ               : 31
+LOWERCASE            : 
+LPAR                 : 11 12 15 16 17 24
+MINUS                : 19 23
+NUMBER               : 25
+PARSE                : 
+PLUS                 : 18
+POT                  : 22
+PRINT                : 11
+PRINTLN              : 12
+RBRACE               : 15 16 17 17
+RPAR                 : 11 12 15 16 17 24
+SEMICOL              : 
+STR                  : 
+STRING               : 28
+TIMES                : 20
+TYPEOF               : 
+UPPERCASE            : 
+WHILE                : 15
+error                : 
+
+Nonterminals, with rules where they appear
+
+asignacion           : 7
+definicion           : 6
+expresion_cadena     : 11 12
+expresion_logica     : 15 16 17
+expresion_numerica   : 14 18 18 19 19 20 20 21 21 22 22 23 24 29 30 30 31 31 32 32 33 33 34 34 35 35
+if                   : 9
+if_else              : 10
+init                 : 0
+instruccion          : 2 3
+instrucciones        : 1 2 15 16 17 17
+print                : 4
+println              : 5
+while                : 8
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . init
+    (1) init -> . instrucciones
+    (2) instrucciones -> . instrucciones instruccion
+    (3) instrucciones -> . instruccion
+    (4) instruccion -> . print
+    (5) instruccion -> . println
+    (6) instruccion -> . definicion
+    (7) instruccion -> . asignacion
+    (8) instruccion -> . while
+    (9) instruccion -> . if
+    (10) instruccion -> . if_else
+    (11) print -> . PRINT LPAR expresion_cadena RPAR
+    (12) println -> . PRINTLN LPAR expresion_cadena RPAR
+    (13) definicion -> . ID
+    (14) asignacion -> . ID EQUAL expresion_numerica
+    (15) while -> . WHILE LPAR expresion_logica RPAR LBRACE instrucciones RBRACE
+    (16) if -> . IF LPAR expresion_logica RPAR LBRACE instrucciones RBRACE
+    (17) if_else -> . IF LPAR expresion_logica RPAR LBRACE instrucciones RBRACE ELSE LBRACE instrucciones RBRACE
+
+    PRINT           shift and go to state 11
+    PRINTLN         shift and go to state 12
+    ID              shift and go to state 13
+    WHILE           shift and go to state 14
+    IF              shift and go to state 15
+
+    init                           shift and go to state 1
+    instrucciones                  shift and go to state 2
+    instruccion                    shift and go to state 3
+    print                          shift and go to state 4
+    println                        shift and go to state 5
+    definicion                     shift and go to state 6
+    asignacion                     shift and go to state 7
+    while                          shift and go to state 8
+    if                             shift and go to state 9
+    if_else                        shift and go to state 10
+
+state 1
+
+    (0) S' -> init .
+
+
+
+state 2
+
+    (1) init -> instrucciones .
+    (2) instrucciones -> instrucciones . instruccion
+    (4) instruccion -> . print
+    (5) instruccion -> . println
+    (6) instruccion -> . definicion
+    (7) instruccion -> . asignacion
+    (8) instruccion -> . while
+    (9) instruccion -> . if
+    (10) instruccion -> . if_else
+    (11) print -> . PRINT LPAR expresion_cadena RPAR
+    (12) println -> . PRINTLN LPAR expresion_cadena RPAR
+    (13) definicion -> . ID
+    (14) asignacion -> . ID EQUAL expresion_numerica
+    (15) while -> . WHILE LPAR expresion_logica RPAR LBRACE instrucciones RBRACE
+    (16) if -> . IF LPAR expresion_logica RPAR LBRACE instrucciones RBRACE
+    (17) if_else -> . IF LPAR expresion_logica RPAR LBRACE instrucciones RBRACE ELSE LBRACE instrucciones RBRACE
+
+    $end            reduce using rule 1 (init -> instrucciones .)
+    PRINT           shift and go to state 11
+    PRINTLN         shift and go to state 12
+    ID              shift and go to state 13
+    WHILE           shift and go to state 14
+    IF              shift and go to state 15
+
+    instruccion                    shift and go to state 16
+    print                          shift and go to state 4
+    println                        shift and go to state 5
+    definicion                     shift and go to state 6
+    asignacion                     shift and go to state 7
+    while                          shift and go to state 8
+    if                             shift and go to state 9
+    if_else                        shift and go to state 10
+
+state 3
+
+    (3) instrucciones -> instruccion .
+
+    PRINT           reduce using rule 3 (instrucciones -> instruccion .)
+    PRINTLN         reduce using rule 3 (instrucciones -> instruccion .)
+    ID              reduce using rule 3 (instrucciones -> instruccion .)
+    WHILE           reduce using rule 3 (instrucciones -> instruccion .)
+    IF              reduce using rule 3 (instrucciones -> instruccion .)
+    $end            reduce using rule 3 (instrucciones -> instruccion .)
+    RBRACE          reduce using rule 3 (instrucciones -> instruccion .)
+
+
+state 4
+
+    (4) instruccion -> print .
+
+    PRINT           reduce using rule 4 (instruccion -> print .)
+    PRINTLN         reduce using rule 4 (instruccion -> print .)
+    ID              reduce using rule 4 (instruccion -> print .)
+    WHILE           reduce using rule 4 (instruccion -> print .)
+    IF              reduce using rule 4 (instruccion -> print .)
+    $end            reduce using rule 4 (instruccion -> print .)
+    RBRACE          reduce using rule 4 (instruccion -> print .)
+
+
+state 5
+
+    (5) instruccion -> println .
+
+    PRINT           reduce using rule 5 (instruccion -> println .)
+    PRINTLN         reduce using rule 5 (instruccion -> println .)
+    ID              reduce using rule 5 (instruccion -> println .)
+    WHILE           reduce using rule 5 (instruccion -> println .)
+    IF              reduce using rule 5 (instruccion -> println .)
+    $end            reduce using rule 5 (instruccion -> println .)
+    RBRACE          reduce using rule 5 (instruccion -> println .)
+
+
+state 6
+
+    (6) instruccion -> definicion .
+
+    PRINT           reduce using rule 6 (instruccion -> definicion .)
+    PRINTLN         reduce using rule 6 (instruccion -> definicion .)
+    ID              reduce using rule 6 (instruccion -> definicion .)
+    WHILE           reduce using rule 6 (instruccion -> definicion .)
+    IF              reduce using rule 6 (instruccion -> definicion .)
+    $end            reduce using rule 6 (instruccion -> definicion .)
+    RBRACE          reduce using rule 6 (instruccion -> definicion .)
+
+
+state 7
+
+    (7) instruccion -> asignacion .
+
+    PRINT           reduce using rule 7 (instruccion -> asignacion .)
+    PRINTLN         reduce using rule 7 (instruccion -> asignacion .)
+    ID              reduce using rule 7 (instruccion -> asignacion .)
+    WHILE           reduce using rule 7 (instruccion -> asignacion .)
+    IF              reduce using rule 7 (instruccion -> asignacion .)
+    $end            reduce using rule 7 (instruccion -> asignacion .)
+    RBRACE          reduce using rule 7 (instruccion -> asignacion .)
+
+
+state 8
+
+    (8) instruccion -> while .
+
+    PRINT           reduce using rule 8 (instruccion -> while .)
+    PRINTLN         reduce using rule 8 (instruccion -> while .)
+    ID              reduce using rule 8 (instruccion -> while .)
+    WHILE           reduce using rule 8 (instruccion -> while .)
+    IF              reduce using rule 8 (instruccion -> while .)
+    $end            reduce using rule 8 (instruccion -> while .)
+    RBRACE          reduce using rule 8 (instruccion -> while .)
+
+
+state 9
+
+    (9) instruccion -> if .
+
+    PRINT           reduce using rule 9 (instruccion -> if .)
+    PRINTLN         reduce using rule 9 (instruccion -> if .)
+    ID              reduce using rule 9 (instruccion -> if .)
+    WHILE           reduce using rule 9 (instruccion -> if .)
+    IF              reduce using rule 9 (instruccion -> if .)
+    $end            reduce using rule 9 (instruccion -> if .)
+    RBRACE          reduce using rule 9 (instruccion -> if .)
+
+
+state 10
+
+    (10) instruccion -> if_else .
+
+    PRINT           reduce using rule 10 (instruccion -> if_else .)
+    PRINTLN         reduce using rule 10 (instruccion -> if_else .)
+    ID              reduce using rule 10 (instruccion -> if_else .)
+    WHILE           reduce using rule 10 (instruccion -> if_else .)
+    IF              reduce using rule 10 (instruccion -> if_else .)
+    $end            reduce using rule 10 (instruccion -> if_else .)
+    RBRACE          reduce using rule 10 (instruccion -> if_else .)
+
+
+state 11
+
+    (11) print -> PRINT . LPAR expresion_cadena RPAR
+
+    LPAR            shift and go to state 17
+
+
+state 12
+
+    (12) println -> PRINTLN . LPAR expresion_cadena RPAR
+
+    LPAR            shift and go to state 18
+
+
+state 13
+
+    (13) definicion -> ID .
+    (14) asignacion -> ID . EQUAL expresion_numerica
+
+    PRINT           reduce using rule 13 (definicion -> ID .)
+    PRINTLN         reduce using rule 13 (definicion -> ID .)
+    ID              reduce using rule 13 (definicion -> ID .)
+    WHILE           reduce using rule 13 (definicion -> ID .)
+    IF              reduce using rule 13 (definicion -> ID .)
+    $end            reduce using rule 13 (definicion -> ID .)
+    RBRACE          reduce using rule 13 (definicion -> ID .)
+    EQUAL           shift and go to state 19
+
+
+state 14
+
+    (15) while -> WHILE . LPAR expresion_logica RPAR LBRACE instrucciones RBRACE
+
+    LPAR            shift and go to state 20
+
+
+state 15
+
+    (16) if -> IF . LPAR expresion_logica RPAR LBRACE instrucciones RBRACE
+    (17) if_else -> IF . LPAR expresion_logica RPAR LBRACE instrucciones RBRACE ELSE LBRACE instrucciones RBRACE
+
+    LPAR            shift and go to state 21
+
+
+state 16
+
+    (2) instrucciones -> instrucciones instruccion .
+
+    PRINT           reduce using rule 2 (instrucciones -> instrucciones instruccion .)
+    PRINTLN         reduce using rule 2 (instrucciones -> instrucciones instruccion .)
+    ID              reduce using rule 2 (instrucciones -> instrucciones instruccion .)
+    WHILE           reduce using rule 2 (instrucciones -> instrucciones instruccion .)
+    IF              reduce using rule 2 (instrucciones -> instrucciones instruccion .)
+    $end            reduce using rule 2 (instrucciones -> instrucciones instruccion .)
+    RBRACE          reduce using rule 2 (instrucciones -> instrucciones instruccion .)
+
+
+state 17
+
+    (11) print -> PRINT LPAR . expresion_cadena RPAR
+    (28) expresion_cadena -> . STRING
+    (29) expresion_cadena -> . expresion_numerica
+    (18) expresion_numerica -> . expresion_numerica PLUS expresion_numerica
+    (19) expresion_numerica -> . expresion_numerica MINUS expresion_numerica
+    (20) expresion_numerica -> . expresion_numerica TIMES expresion_numerica
+    (21) expresion_numerica -> . expresion_numerica DIV expresion_numerica
+    (22) expresion_numerica -> . expresion_numerica POT expresion_numerica
+    (23) expresion_numerica -> . MINUS expresion_numerica
+    (24) expresion_numerica -> . LPAR expresion_numerica RPAR
+    (25) expresion_numerica -> . NUMBER
+    (26) expresion_numerica -> . DECIMAL
+    (27) expresion_numerica -> . ID
+
+    STRING          shift and go to state 24
+    MINUS           shift and go to state 26
+    LPAR            shift and go to state 22
+    NUMBER          shift and go to state 27
+    DECIMAL         shift and go to state 28
+    ID              shift and go to state 29
+
+    expresion_cadena               shift and go to state 23
+    expresion_numerica             shift and go to state 25
+
+state 18
+
+    (12) println -> PRINTLN LPAR . expresion_cadena RPAR
+    (28) expresion_cadena -> . STRING
+    (29) expresion_cadena -> . expresion_numerica
+    (18) expresion_numerica -> . expresion_numerica PLUS expresion_numerica
+    (19) expresion_numerica -> . expresion_numerica MINUS expresion_numerica
+    (20) expresion_numerica -> . expresion_numerica TIMES expresion_numerica
+    (21) expresion_numerica -> . expresion_numerica DIV expresion_numerica
+    (22) expresion_numerica -> . expresion_numerica POT expresion_numerica
+    (23) expresion_numerica -> . MINUS expresion_numerica
+    (24) expresion_numerica -> . LPAR expresion_numerica RPAR
+    (25) expresion_numerica -> . NUMBER
+    (26) expresion_numerica -> . DECIMAL
+    (27) expresion_numerica -> . ID
+
+    STRING          shift and go to state 24
+    MINUS           shift and go to state 26
+    LPAR            shift and go to state 22
+    NUMBER          shift and go to state 27
+    DECIMAL         shift and go to state 28
+    ID              shift and go to state 29
+
+    expresion_cadena               shift and go to state 30
+    expresion_numerica             shift and go to state 25
+
+state 19
+
+    (14) asignacion -> ID EQUAL . expresion_numerica
+    (18) expresion_numerica -> . expresion_numerica PLUS expresion_numerica
+    (19) expresion_numerica -> . expresion_numerica MINUS expresion_numerica
+    (20) expresion_numerica -> . expresion_numerica TIMES expresion_numerica
+    (21) expresion_numerica -> . expresion_numerica DIV expresion_numerica
+    (22) expresion_numerica -> . expresion_numerica POT expresion_numerica
+    (23) expresion_numerica -> . MINUS expresion_numerica
+    (24) expresion_numerica -> . LPAR expresion_numerica RPAR
+    (25) expresion_numerica -> . NUMBER
+    (26) expresion_numerica -> . DECIMAL
+    (27) expresion_numerica -> . ID
+
+    MINUS           shift and go to state 26
+    LPAR            shift and go to state 22
+    NUMBER          shift and go to state 27
+    DECIMAL         shift and go to state 28
+    ID              shift and go to state 29
+
+    expresion_numerica             shift and go to state 31
+
+state 20
+
+    (15) while -> WHILE LPAR . expresion_logica RPAR LBRACE instrucciones RBRACE
+    (30) expresion_logica -> . expresion_numerica LESS expresion_numerica
+    (31) expresion_logica -> . expresion_numerica LESSEQ expresion_numerica
+    (32) expresion_logica -> . expresion_numerica GREATHER expresion_numerica
+    (33) expresion_logica -> . expresion_numerica GREATHEREQ expresion_numerica
+    (34) expresion_logica -> . expresion_numerica EQUALITY expresion_numerica
+    (35) expresion_logica -> . expresion_numerica DIFERENT expresion_numerica
+    (18) expresion_numerica -> . expresion_numerica PLUS expresion_numerica
+    (19) expresion_numerica -> . expresion_numerica MINUS expresion_numerica
+    (20) expresion_numerica -> . expresion_numerica TIMES expresion_numerica
+    (21) expresion_numerica -> . expresion_numerica DIV expresion_numerica
+    (22) expresion_numerica -> . expresion_numerica POT expresion_numerica
+    (23) expresion_numerica -> . MINUS expresion_numerica
+    (24) expresion_numerica -> . LPAR expresion_numerica RPAR
+    (25) expresion_numerica -> . NUMBER
+    (26) expresion_numerica -> . DECIMAL
+    (27) expresion_numerica -> . ID
+
+    MINUS           shift and go to state 26
+    LPAR            shift and go to state 22
+    NUMBER          shift and go to state 27
+    DECIMAL         shift and go to state 28
+    ID              shift and go to state 29
+
+    expresion_logica               shift and go to state 32
+    expresion_numerica             shift and go to state 33
+
+state 21
+
+    (16) if -> IF LPAR . expresion_logica RPAR LBRACE instrucciones RBRACE
+    (17) if_else -> IF LPAR . expresion_logica RPAR LBRACE instrucciones RBRACE ELSE LBRACE instrucciones RBRACE
+    (30) expresion_logica -> . expresion_numerica LESS expresion_numerica
+    (31) expresion_logica -> . expresion_numerica LESSEQ expresion_numerica
+    (32) expresion_logica -> . expresion_numerica GREATHER expresion_numerica
+    (33) expresion_logica -> . expresion_numerica GREATHEREQ expresion_numerica
+    (34) expresion_logica -> . expresion_numerica EQUALITY expresion_numerica
+    (35) expresion_logica -> . expresion_numerica DIFERENT expresion_numerica
+    (18) expresion_numerica -> . expresion_numerica PLUS expresion_numerica
+    (19) expresion_numerica -> . expresion_numerica MINUS expresion_numerica
+    (20) expresion_numerica -> . expresion_numerica TIMES expresion_numerica
+    (21) expresion_numerica -> . expresion_numerica DIV expresion_numerica
+    (22) expresion_numerica -> . expresion_numerica POT expresion_numerica
+    (23) expresion_numerica -> . MINUS expresion_numerica
+    (24) expresion_numerica -> . LPAR expresion_numerica RPAR
+    (25) expresion_numerica -> . NUMBER
+    (26) expresion_numerica -> . DECIMAL
+    (27) expresion_numerica -> . ID
+
+    MINUS           shift and go to state 26
+    LPAR            shift and go to state 22
+    NUMBER          shift and go to state 27
+    DECIMAL         shift and go to state 28
+    ID              shift and go to state 29
+
+    expresion_logica               shift and go to state 34
+    expresion_numerica             shift and go to state 33
+
+state 22
+
+    (24) expresion_numerica -> LPAR . expresion_numerica RPAR
+    (18) expresion_numerica -> . expresion_numerica PLUS expresion_numerica
+    (19) expresion_numerica -> . expresion_numerica MINUS expresion_numerica
+    (20) expresion_numerica -> . expresion_numerica TIMES expresion_numerica
+    (21) expresion_numerica -> . expresion_numerica DIV expresion_numerica
+    (22) expresion_numerica -> . expresion_numerica POT expresion_numerica
+    (23) expresion_numerica -> . MINUS expresion_numerica
+    (24) expresion_numerica -> . LPAR expresion_numerica RPAR
+    (25) expresion_numerica -> . NUMBER
+    (26) expresion_numerica -> . DECIMAL
+    (27) expresion_numerica -> . ID
+
+    MINUS           shift and go to state 26
+    LPAR            shift and go to state 22
+    NUMBER          shift and go to state 27
+    DECIMAL         shift and go to state 28
+    ID              shift and go to state 29
+
+    expresion_numerica             shift and go to state 35
+
+state 23
+
+    (11) print -> PRINT LPAR expresion_cadena . RPAR
+
+    RPAR            shift and go to state 36
+
+
+state 24
+
+    (28) expresion_cadena -> STRING .
+
+    RPAR            reduce using rule 28 (expresion_cadena -> STRING .)
+
+
+state 25
+
+    (29) expresion_cadena -> expresion_numerica .
+    (18) expresion_numerica -> expresion_numerica . PLUS expresion_numerica
+    (19) expresion_numerica -> expresion_numerica . MINUS expresion_numerica
+    (20) expresion_numerica -> expresion_numerica . TIMES expresion_numerica
+    (21) expresion_numerica -> expresion_numerica . DIV expresion_numerica
+    (22) expresion_numerica -> expresion_numerica . POT expresion_numerica
+
+    RPAR            reduce using rule 29 (expresion_cadena -> expresion_numerica .)
+    PLUS            shift and go to state 37
+    MINUS           shift and go to state 38
+    TIMES           shift and go to state 39
+    DIV             shift and go to state 40
+    POT             shift and go to state 41
+
+
+state 26
+
+    (23) expresion_numerica -> MINUS . expresion_numerica
+    (18) expresion_numerica -> . expresion_numerica PLUS expresion_numerica
+    (19) expresion_numerica -> . expresion_numerica MINUS expresion_numerica
+    (20) expresion_numerica -> . expresion_numerica TIMES expresion_numerica
+    (21) expresion_numerica -> . expresion_numerica DIV expresion_numerica
+    (22) expresion_numerica -> . expresion_numerica POT expresion_numerica
+    (23) expresion_numerica -> . MINUS expresion_numerica
+    (24) expresion_numerica -> . LPAR expresion_numerica RPAR
+    (25) expresion_numerica -> . NUMBER
+    (26) expresion_numerica -> . DECIMAL
+    (27) expresion_numerica -> . ID
+
+    MINUS           shift and go to state 26
+    LPAR            shift and go to state 22
+    NUMBER          shift and go to state 27
+    DECIMAL         shift and go to state 28
+    ID              shift and go to state 29
+
+    expresion_numerica             shift and go to state 42
+
+state 27
+
+    (25) expresion_numerica -> NUMBER .
+
+    PLUS            reduce using rule 25 (expresion_numerica -> NUMBER .)
+    MINUS           reduce using rule 25 (expresion_numerica -> NUMBER .)
+    TIMES           reduce using rule 25 (expresion_numerica -> NUMBER .)
+    DIV             reduce using rule 25 (expresion_numerica -> NUMBER .)
+    POT             reduce using rule 25 (expresion_numerica -> NUMBER .)
+    RPAR            reduce using rule 25 (expresion_numerica -> NUMBER .)
+    PRINT           reduce using rule 25 (expresion_numerica -> NUMBER .)
+    PRINTLN         reduce using rule 25 (expresion_numerica -> NUMBER .)
+    ID              reduce using rule 25 (expresion_numerica -> NUMBER .)
+    WHILE           reduce using rule 25 (expresion_numerica -> NUMBER .)
+    IF              reduce using rule 25 (expresion_numerica -> NUMBER .)
+    $end            reduce using rule 25 (expresion_numerica -> NUMBER .)
+    RBRACE          reduce using rule 25 (expresion_numerica -> NUMBER .)
+    LESS            reduce using rule 25 (expresion_numerica -> NUMBER .)
+    LESSEQ          reduce using rule 25 (expresion_numerica -> NUMBER .)
+    GREATHER        reduce using rule 25 (expresion_numerica -> NUMBER .)
+    GREATHEREQ      reduce using rule 25 (expresion_numerica -> NUMBER .)
+    EQUALITY        reduce using rule 25 (expresion_numerica -> NUMBER .)
+    DIFERENT        reduce using rule 25 (expresion_numerica -> NUMBER .)
+
+
+state 28
+
+    (26) expresion_numerica -> DECIMAL .
+
+    PLUS            reduce using rule 26 (expresion_numerica -> DECIMAL .)
+    MINUS           reduce using rule 26 (expresion_numerica -> DECIMAL .)
+    TIMES           reduce using rule 26 (expresion_numerica -> DECIMAL .)
+    DIV             reduce using rule 26 (expresion_numerica -> DECIMAL .)
+    POT             reduce using rule 26 (expresion_numerica -> DECIMAL .)
+    RPAR            reduce using rule 26 (expresion_numerica -> DECIMAL .)
+    PRINT           reduce using rule 26 (expresion_numerica -> DECIMAL .)
+    PRINTLN         reduce using rule 26 (expresion_numerica -> DECIMAL .)
+    ID              reduce using rule 26 (expresion_numerica -> DECIMAL .)
+    WHILE           reduce using rule 26 (expresion_numerica -> DECIMAL .)
+    IF              reduce using rule 26 (expresion_numerica -> DECIMAL .)
+    $end            reduce using rule 26 (expresion_numerica -> DECIMAL .)
+    RBRACE          reduce using rule 26 (expresion_numerica -> DECIMAL .)
+    LESS            reduce using rule 26 (expresion_numerica -> DECIMAL .)
+    LESSEQ          reduce using rule 26 (expresion_numerica -> DECIMAL .)
+    GREATHER        reduce using rule 26 (expresion_numerica -> DECIMAL .)
+    GREATHEREQ      reduce using rule 26 (expresion_numerica -> DECIMAL .)
+    EQUALITY        reduce using rule 26 (expresion_numerica -> DECIMAL .)
+    DIFERENT        reduce using rule 26 (expresion_numerica -> DECIMAL .)
+
+
+state 29
+
+    (27) expresion_numerica -> ID .
+
+    PLUS            reduce using rule 27 (expresion_numerica -> ID .)
+    MINUS           reduce using rule 27 (expresion_numerica -> ID .)
+    TIMES           reduce using rule 27 (expresion_numerica -> ID .)
+    DIV             reduce using rule 27 (expresion_numerica -> ID .)
+    POT             reduce using rule 27 (expresion_numerica -> ID .)
+    RPAR            reduce using rule 27 (expresion_numerica -> ID .)
+    PRINT           reduce using rule 27 (expresion_numerica -> ID .)
+    PRINTLN         reduce using rule 27 (expresion_numerica -> ID .)
+    ID              reduce using rule 27 (expresion_numerica -> ID .)
+    WHILE           reduce using rule 27 (expresion_numerica -> ID .)
+    IF              reduce using rule 27 (expresion_numerica -> ID .)
+    $end            reduce using rule 27 (expresion_numerica -> ID .)
+    RBRACE          reduce using rule 27 (expresion_numerica -> ID .)
+    LESS            reduce using rule 27 (expresion_numerica -> ID .)
+    LESSEQ          reduce using rule 27 (expresion_numerica -> ID .)
+    GREATHER        reduce using rule 27 (expresion_numerica -> ID .)
+    GREATHEREQ      reduce using rule 27 (expresion_numerica -> ID .)
+    EQUALITY        reduce using rule 27 (expresion_numerica -> ID .)
+    DIFERENT        reduce using rule 27 (expresion_numerica -> ID .)
+
+
+state 30
+
+    (12) println -> PRINTLN LPAR expresion_cadena . RPAR
+
+    RPAR            shift and go to state 43
+
+
+state 31
+
+    (14) asignacion -> ID EQUAL expresion_numerica .
+    (18) expresion_numerica -> expresion_numerica . PLUS expresion_numerica
+    (19) expresion_numerica -> expresion_numerica . MINUS expresion_numerica
+    (20) expresion_numerica -> expresion_numerica . TIMES expresion_numerica
+    (21) expresion_numerica -> expresion_numerica . DIV expresion_numerica
+    (22) expresion_numerica -> expresion_numerica . POT expresion_numerica
+
+    PRINT           reduce using rule 14 (asignacion -> ID EQUAL expresion_numerica .)
+    PRINTLN         reduce using rule 14 (asignacion -> ID EQUAL expresion_numerica .)
+    ID              reduce using rule 14 (asignacion -> ID EQUAL expresion_numerica .)
+    WHILE           reduce using rule 14 (asignacion -> ID EQUAL expresion_numerica .)
+    IF              reduce using rule 14 (asignacion -> ID EQUAL expresion_numerica .)
+    $end            reduce using rule 14 (asignacion -> ID EQUAL expresion_numerica .)
+    RBRACE          reduce using rule 14 (asignacion -> ID EQUAL expresion_numerica .)
+    PLUS            shift and go to state 37
+    MINUS           shift and go to state 38
+    TIMES           shift and go to state 39
+    DIV             shift and go to state 40
+    POT             shift and go to state 41
+
+
+state 32
+
+    (15) while -> WHILE LPAR expresion_logica . RPAR LBRACE instrucciones RBRACE
+
+    RPAR            shift and go to state 44
+
+
+state 33
+
+    (30) expresion_logica -> expresion_numerica . LESS expresion_numerica
+    (31) expresion_logica -> expresion_numerica . LESSEQ expresion_numerica
+    (32) expresion_logica -> expresion_numerica . GREATHER expresion_numerica
+    (33) expresion_logica -> expresion_numerica . GREATHEREQ expresion_numerica
+    (34) expresion_logica -> expresion_numerica . EQUALITY expresion_numerica
+    (35) expresion_logica -> expresion_numerica . DIFERENT expresion_numerica
+    (18) expresion_numerica -> expresion_numerica . PLUS expresion_numerica
+    (19) expresion_numerica -> expresion_numerica . MINUS expresion_numerica
+    (20) expresion_numerica -> expresion_numerica . TIMES expresion_numerica
+    (21) expresion_numerica -> expresion_numerica . DIV expresion_numerica
+    (22) expresion_numerica -> expresion_numerica . POT expresion_numerica
+
+    LESS            shift and go to state 45
+    LESSEQ          shift and go to state 46
+    GREATHER        shift and go to state 47
+    GREATHEREQ      shift and go to state 48
+    EQUALITY        shift and go to state 49
+    DIFERENT        shift and go to state 50
+    PLUS            shift and go to state 37
+    MINUS           shift and go to state 38
+    TIMES           shift and go to state 39
+    DIV             shift and go to state 40
+    POT             shift and go to state 41
+
+
+state 34
+
+    (16) if -> IF LPAR expresion_logica . RPAR LBRACE instrucciones RBRACE
+    (17) if_else -> IF LPAR expresion_logica . RPAR LBRACE instrucciones RBRACE ELSE LBRACE instrucciones RBRACE
+
+    RPAR            shift and go to state 51
+
+
+state 35
+
+    (24) expresion_numerica -> LPAR expresion_numerica . RPAR
+    (18) expresion_numerica -> expresion_numerica . PLUS expresion_numerica
+    (19) expresion_numerica -> expresion_numerica . MINUS expresion_numerica
+    (20) expresion_numerica -> expresion_numerica . TIMES expresion_numerica
+    (21) expresion_numerica -> expresion_numerica . DIV expresion_numerica
+    (22) expresion_numerica -> expresion_numerica . POT expresion_numerica
+
+    RPAR            shift and go to state 52
+    PLUS            shift and go to state 37
+    MINUS           shift and go to state 38
+    TIMES           shift and go to state 39
+    DIV             shift and go to state 40
+    POT             shift and go to state 41
+
+
+state 36
+
+    (11) print -> PRINT LPAR expresion_cadena RPAR .
+
+    PRINT           reduce using rule 11 (print -> PRINT LPAR expresion_cadena RPAR .)
+    PRINTLN         reduce using rule 11 (print -> PRINT LPAR expresion_cadena RPAR .)
+    ID              reduce using rule 11 (print -> PRINT LPAR expresion_cadena RPAR .)
+    WHILE           reduce using rule 11 (print -> PRINT LPAR expresion_cadena RPAR .)
+    IF              reduce using rule 11 (print -> PRINT LPAR expresion_cadena RPAR .)
+    $end            reduce using rule 11 (print -> PRINT LPAR expresion_cadena RPAR .)
+    RBRACE          reduce using rule 11 (print -> PRINT LPAR expresion_cadena RPAR .)
+
+
+state 37
+
+    (18) expresion_numerica -> expresion_numerica PLUS . expresion_numerica
+    (18) expresion_numerica -> . expresion_numerica PLUS expresion_numerica
+    (19) expresion_numerica -> . expresion_numerica MINUS expresion_numerica
+    (20) expresion_numerica -> . expresion_numerica TIMES expresion_numerica
+    (21) expresion_numerica -> . expresion_numerica DIV expresion_numerica
+    (22) expresion_numerica -> . expresion_numerica POT expresion_numerica
+    (23) expresion_numerica -> . MINUS expresion_numerica
+    (24) expresion_numerica -> . LPAR expresion_numerica RPAR
+    (25) expresion_numerica -> . NUMBER
+    (26) expresion_numerica -> . DECIMAL
+    (27) expresion_numerica -> . ID
+
+    MINUS           shift and go to state 26
+    LPAR            shift and go to state 22
+    NUMBER          shift and go to state 27
+    DECIMAL         shift and go to state 28
+    ID              shift and go to state 29
+
+    expresion_numerica             shift and go to state 53
+
+state 38
+
+    (19) expresion_numerica -> expresion_numerica MINUS . expresion_numerica
+    (18) expresion_numerica -> . expresion_numerica PLUS expresion_numerica
+    (19) expresion_numerica -> . expresion_numerica MINUS expresion_numerica
+    (20) expresion_numerica -> . expresion_numerica TIMES expresion_numerica
+    (21) expresion_numerica -> . expresion_numerica DIV expresion_numerica
+    (22) expresion_numerica -> . expresion_numerica POT expresion_numerica
+    (23) expresion_numerica -> . MINUS expresion_numerica
+    (24) expresion_numerica -> . LPAR expresion_numerica RPAR
+    (25) expresion_numerica -> . NUMBER
+    (26) expresion_numerica -> . DECIMAL
+    (27) expresion_numerica -> . ID
+
+    MINUS           shift and go to state 26
+    LPAR            shift and go to state 22
+    NUMBER          shift and go to state 27
+    DECIMAL         shift and go to state 28
+    ID              shift and go to state 29
+
+    expresion_numerica             shift and go to state 54
+
+state 39
+
+    (20) expresion_numerica -> expresion_numerica TIMES . expresion_numerica
+    (18) expresion_numerica -> . expresion_numerica PLUS expresion_numerica
+    (19) expresion_numerica -> . expresion_numerica MINUS expresion_numerica
+    (20) expresion_numerica -> . expresion_numerica TIMES expresion_numerica
+    (21) expresion_numerica -> . expresion_numerica DIV expresion_numerica
+    (22) expresion_numerica -> . expresion_numerica POT expresion_numerica
+    (23) expresion_numerica -> . MINUS expresion_numerica
+    (24) expresion_numerica -> . LPAR expresion_numerica RPAR
+    (25) expresion_numerica -> . NUMBER
+    (26) expresion_numerica -> . DECIMAL
+    (27) expresion_numerica -> . ID
+
+    MINUS           shift and go to state 26
+    LPAR            shift and go to state 22
+    NUMBER          shift and go to state 27
+    DECIMAL         shift and go to state 28
+    ID              shift and go to state 29
+
+    expresion_numerica             shift and go to state 55
+
+state 40
+
+    (21) expresion_numerica -> expresion_numerica DIV . expresion_numerica
+    (18) expresion_numerica -> . expresion_numerica PLUS expresion_numerica
+    (19) expresion_numerica -> . expresion_numerica MINUS expresion_numerica
+    (20) expresion_numerica -> . expresion_numerica TIMES expresion_numerica
+    (21) expresion_numerica -> . expresion_numerica DIV expresion_numerica
+    (22) expresion_numerica -> . expresion_numerica POT expresion_numerica
+    (23) expresion_numerica -> . MINUS expresion_numerica
+    (24) expresion_numerica -> . LPAR expresion_numerica RPAR
+    (25) expresion_numerica -> . NUMBER
+    (26) expresion_numerica -> . DECIMAL
+    (27) expresion_numerica -> . ID
+
+    MINUS           shift and go to state 26
+    LPAR            shift and go to state 22
+    NUMBER          shift and go to state 27
+    DECIMAL         shift and go to state 28
+    ID              shift and go to state 29
+
+    expresion_numerica             shift and go to state 56
+
+state 41
+
+    (22) expresion_numerica -> expresion_numerica POT . expresion_numerica
+    (18) expresion_numerica -> . expresion_numerica PLUS expresion_numerica
+    (19) expresion_numerica -> . expresion_numerica MINUS expresion_numerica
+    (20) expresion_numerica -> . expresion_numerica TIMES expresion_numerica
+    (21) expresion_numerica -> . expresion_numerica DIV expresion_numerica
+    (22) expresion_numerica -> . expresion_numerica POT expresion_numerica
+    (23) expresion_numerica -> . MINUS expresion_numerica
+    (24) expresion_numerica -> . LPAR expresion_numerica RPAR
+    (25) expresion_numerica -> . NUMBER
+    (26) expresion_numerica -> . DECIMAL
+    (27) expresion_numerica -> . ID
+
+    MINUS           shift and go to state 26
+    LPAR            shift and go to state 22
+    NUMBER          shift and go to state 27
+    DECIMAL         shift and go to state 28
+    ID              shift and go to state 29
+
+    expresion_numerica             shift and go to state 57
+
+state 42
+
+    (23) expresion_numerica -> MINUS expresion_numerica .
+    (18) expresion_numerica -> expresion_numerica . PLUS expresion_numerica
+    (19) expresion_numerica -> expresion_numerica . MINUS expresion_numerica
+    (20) expresion_numerica -> expresion_numerica . TIMES expresion_numerica
+    (21) expresion_numerica -> expresion_numerica . DIV expresion_numerica
+    (22) expresion_numerica -> expresion_numerica . POT expresion_numerica
+
+    PLUS            reduce using rule 23 (expresion_numerica -> MINUS expresion_numerica .)
+    MINUS           reduce using rule 23 (expresion_numerica -> MINUS expresion_numerica .)
+    TIMES           reduce using rule 23 (expresion_numerica -> MINUS expresion_numerica .)
+    DIV             reduce using rule 23 (expresion_numerica -> MINUS expresion_numerica .)
+    POT             reduce using rule 23 (expresion_numerica -> MINUS expresion_numerica .)
+    RPAR            reduce using rule 23 (expresion_numerica -> MINUS expresion_numerica .)
+    PRINT           reduce using rule 23 (expresion_numerica -> MINUS expresion_numerica .)
+    PRINTLN         reduce using rule 23 (expresion_numerica -> MINUS expresion_numerica .)
+    ID              reduce using rule 23 (expresion_numerica -> MINUS expresion_numerica .)
+    WHILE           reduce using rule 23 (expresion_numerica -> MINUS expresion_numerica .)
+    IF              reduce using rule 23 (expresion_numerica -> MINUS expresion_numerica .)
+    $end            reduce using rule 23 (expresion_numerica -> MINUS expresion_numerica .)
+    RBRACE          reduce using rule 23 (expresion_numerica -> MINUS expresion_numerica .)
+    LESS            reduce using rule 23 (expresion_numerica -> MINUS expresion_numerica .)
+    LESSEQ          reduce using rule 23 (expresion_numerica -> MINUS expresion_numerica .)
+    GREATHER        reduce using rule 23 (expresion_numerica -> MINUS expresion_numerica .)
+    GREATHEREQ      reduce using rule 23 (expresion_numerica -> MINUS expresion_numerica .)
+    EQUALITY        reduce using rule 23 (expresion_numerica -> MINUS expresion_numerica .)
+    DIFERENT        reduce using rule 23 (expresion_numerica -> MINUS expresion_numerica .)
+
+  ! PLUS            [ shift and go to state 37 ]
+  ! MINUS           [ shift and go to state 38 ]
+  ! TIMES           [ shift and go to state 39 ]
+  ! DIV             [ shift and go to state 40 ]
+  ! POT             [ shift and go to state 41 ]
+
+
+state 43
+
+    (12) println -> PRINTLN LPAR expresion_cadena RPAR .
+
+    PRINT           reduce using rule 12 (println -> PRINTLN LPAR expresion_cadena RPAR .)
+    PRINTLN         reduce using rule 12 (println -> PRINTLN LPAR expresion_cadena RPAR .)
+    ID              reduce using rule 12 (println -> PRINTLN LPAR expresion_cadena RPAR .)
+    WHILE           reduce using rule 12 (println -> PRINTLN LPAR expresion_cadena RPAR .)
+    IF              reduce using rule 12 (println -> PRINTLN LPAR expresion_cadena RPAR .)
+    $end            reduce using rule 12 (println -> PRINTLN LPAR expresion_cadena RPAR .)
+    RBRACE          reduce using rule 12 (println -> PRINTLN LPAR expresion_cadena RPAR .)
+
+
+state 44
+
+    (15) while -> WHILE LPAR expresion_logica RPAR . LBRACE instrucciones RBRACE
+
+    LBRACE          shift and go to state 58
+
+
+state 45
+
+    (30) expresion_logica -> expresion_numerica LESS . expresion_numerica
+    (18) expresion_numerica -> . expresion_numerica PLUS expresion_numerica
+    (19) expresion_numerica -> . expresion_numerica MINUS expresion_numerica
+    (20) expresion_numerica -> . expresion_numerica TIMES expresion_numerica
+    (21) expresion_numerica -> . expresion_numerica DIV expresion_numerica
+    (22) expresion_numerica -> . expresion_numerica POT expresion_numerica
+    (23) expresion_numerica -> . MINUS expresion_numerica
+    (24) expresion_numerica -> . LPAR expresion_numerica RPAR
+    (25) expresion_numerica -> . NUMBER
+    (26) expresion_numerica -> . DECIMAL
+    (27) expresion_numerica -> . ID
+
+    MINUS           shift and go to state 26
+    LPAR            shift and go to state 22
+    NUMBER          shift and go to state 27
+    DECIMAL         shift and go to state 28
+    ID              shift and go to state 29
+
+    expresion_numerica             shift and go to state 59
+
+state 46
+
+    (31) expresion_logica -> expresion_numerica LESSEQ . expresion_numerica
+    (18) expresion_numerica -> . expresion_numerica PLUS expresion_numerica
+    (19) expresion_numerica -> . expresion_numerica MINUS expresion_numerica
+    (20) expresion_numerica -> . expresion_numerica TIMES expresion_numerica
+    (21) expresion_numerica -> . expresion_numerica DIV expresion_numerica
+    (22) expresion_numerica -> . expresion_numerica POT expresion_numerica
+    (23) expresion_numerica -> . MINUS expresion_numerica
+    (24) expresion_numerica -> . LPAR expresion_numerica RPAR
+    (25) expresion_numerica -> . NUMBER
+    (26) expresion_numerica -> . DECIMAL
+    (27) expresion_numerica -> . ID
+
+    MINUS           shift and go to state 26
+    LPAR            shift and go to state 22
+    NUMBER          shift and go to state 27
+    DECIMAL         shift and go to state 28
+    ID              shift and go to state 29
+
+    expresion_numerica             shift and go to state 60
+
+state 47
+
+    (32) expresion_logica -> expresion_numerica GREATHER . expresion_numerica
+    (18) expresion_numerica -> . expresion_numerica PLUS expresion_numerica
+    (19) expresion_numerica -> . expresion_numerica MINUS expresion_numerica
+    (20) expresion_numerica -> . expresion_numerica TIMES expresion_numerica
+    (21) expresion_numerica -> . expresion_numerica DIV expresion_numerica
+    (22) expresion_numerica -> . expresion_numerica POT expresion_numerica
+    (23) expresion_numerica -> . MINUS expresion_numerica
+    (24) expresion_numerica -> . LPAR expresion_numerica RPAR
+    (25) expresion_numerica -> . NUMBER
+    (26) expresion_numerica -> . DECIMAL
+    (27) expresion_numerica -> . ID
+
+    MINUS           shift and go to state 26
+    LPAR            shift and go to state 22
+    NUMBER          shift and go to state 27
+    DECIMAL         shift and go to state 28
+    ID              shift and go to state 29
+
+    expresion_numerica             shift and go to state 61
+
+state 48
+
+    (33) expresion_logica -> expresion_numerica GREATHEREQ . expresion_numerica
+    (18) expresion_numerica -> . expresion_numerica PLUS expresion_numerica
+    (19) expresion_numerica -> . expresion_numerica MINUS expresion_numerica
+    (20) expresion_numerica -> . expresion_numerica TIMES expresion_numerica
+    (21) expresion_numerica -> . expresion_numerica DIV expresion_numerica
+    (22) expresion_numerica -> . expresion_numerica POT expresion_numerica
+    (23) expresion_numerica -> . MINUS expresion_numerica
+    (24) expresion_numerica -> . LPAR expresion_numerica RPAR
+    (25) expresion_numerica -> . NUMBER
+    (26) expresion_numerica -> . DECIMAL
+    (27) expresion_numerica -> . ID
+
+    MINUS           shift and go to state 26
+    LPAR            shift and go to state 22
+    NUMBER          shift and go to state 27
+    DECIMAL         shift and go to state 28
+    ID              shift and go to state 29
+
+    expresion_numerica             shift and go to state 62
+
+state 49
+
+    (34) expresion_logica -> expresion_numerica EQUALITY . expresion_numerica
+    (18) expresion_numerica -> . expresion_numerica PLUS expresion_numerica
+    (19) expresion_numerica -> . expresion_numerica MINUS expresion_numerica
+    (20) expresion_numerica -> . expresion_numerica TIMES expresion_numerica
+    (21) expresion_numerica -> . expresion_numerica DIV expresion_numerica
+    (22) expresion_numerica -> . expresion_numerica POT expresion_numerica
+    (23) expresion_numerica -> . MINUS expresion_numerica
+    (24) expresion_numerica -> . LPAR expresion_numerica RPAR
+    (25) expresion_numerica -> . NUMBER
+    (26) expresion_numerica -> . DECIMAL
+    (27) expresion_numerica -> . ID
+
+    MINUS           shift and go to state 26
+    LPAR            shift and go to state 22
+    NUMBER          shift and go to state 27
+    DECIMAL         shift and go to state 28
+    ID              shift and go to state 29
+
+    expresion_numerica             shift and go to state 63
+
+state 50
+
+    (35) expresion_logica -> expresion_numerica DIFERENT . expresion_numerica
+    (18) expresion_numerica -> . expresion_numerica PLUS expresion_numerica
+    (19) expresion_numerica -> . expresion_numerica MINUS expresion_numerica
+    (20) expresion_numerica -> . expresion_numerica TIMES expresion_numerica
+    (21) expresion_numerica -> . expresion_numerica DIV expresion_numerica
+    (22) expresion_numerica -> . expresion_numerica POT expresion_numerica
+    (23) expresion_numerica -> . MINUS expresion_numerica
+    (24) expresion_numerica -> . LPAR expresion_numerica RPAR
+    (25) expresion_numerica -> . NUMBER
+    (26) expresion_numerica -> . DECIMAL
+    (27) expresion_numerica -> . ID
+
+    MINUS           shift and go to state 26
+    LPAR            shift and go to state 22
+    NUMBER          shift and go to state 27
+    DECIMAL         shift and go to state 28
+    ID              shift and go to state 29
+
+    expresion_numerica             shift and go to state 64
+
+state 51
+
+    (16) if -> IF LPAR expresion_logica RPAR . LBRACE instrucciones RBRACE
+    (17) if_else -> IF LPAR expresion_logica RPAR . LBRACE instrucciones RBRACE ELSE LBRACE instrucciones RBRACE
+
+    LBRACE          shift and go to state 65
+
+
+state 52
+
+    (24) expresion_numerica -> LPAR expresion_numerica RPAR .
+
+    PLUS            reduce using rule 24 (expresion_numerica -> LPAR expresion_numerica RPAR .)
+    MINUS           reduce using rule 24 (expresion_numerica -> LPAR expresion_numerica RPAR .)
+    TIMES           reduce using rule 24 (expresion_numerica -> LPAR expresion_numerica RPAR .)
+    DIV             reduce using rule 24 (expresion_numerica -> LPAR expresion_numerica RPAR .)
+    POT             reduce using rule 24 (expresion_numerica -> LPAR expresion_numerica RPAR .)
+    RPAR            reduce using rule 24 (expresion_numerica -> LPAR expresion_numerica RPAR .)
+    PRINT           reduce using rule 24 (expresion_numerica -> LPAR expresion_numerica RPAR .)
+    PRINTLN         reduce using rule 24 (expresion_numerica -> LPAR expresion_numerica RPAR .)
+    ID              reduce using rule 24 (expresion_numerica -> LPAR expresion_numerica RPAR .)
+    WHILE           reduce using rule 24 (expresion_numerica -> LPAR expresion_numerica RPAR .)
+    IF              reduce using rule 24 (expresion_numerica -> LPAR expresion_numerica RPAR .)
+    $end            reduce using rule 24 (expresion_numerica -> LPAR expresion_numerica RPAR .)
+    RBRACE          reduce using rule 24 (expresion_numerica -> LPAR expresion_numerica RPAR .)
+    LESS            reduce using rule 24 (expresion_numerica -> LPAR expresion_numerica RPAR .)
+    LESSEQ          reduce using rule 24 (expresion_numerica -> LPAR expresion_numerica RPAR .)
+    GREATHER        reduce using rule 24 (expresion_numerica -> LPAR expresion_numerica RPAR .)
+    GREATHEREQ      reduce using rule 24 (expresion_numerica -> LPAR expresion_numerica RPAR .)
+    EQUALITY        reduce using rule 24 (expresion_numerica -> LPAR expresion_numerica RPAR .)
+    DIFERENT        reduce using rule 24 (expresion_numerica -> LPAR expresion_numerica RPAR .)
+
+
+state 53
+
+    (18) expresion_numerica -> expresion_numerica PLUS expresion_numerica .
+    (18) expresion_numerica -> expresion_numerica . PLUS expresion_numerica
+    (19) expresion_numerica -> expresion_numerica . MINUS expresion_numerica
+    (20) expresion_numerica -> expresion_numerica . TIMES expresion_numerica
+    (21) expresion_numerica -> expresion_numerica . DIV expresion_numerica
+    (22) expresion_numerica -> expresion_numerica . POT expresion_numerica
+
+    PLUS            reduce using rule 18 (expresion_numerica -> expresion_numerica PLUS expresion_numerica .)
+    MINUS           reduce using rule 18 (expresion_numerica -> expresion_numerica PLUS expresion_numerica .)
+    RPAR            reduce using rule 18 (expresion_numerica -> expresion_numerica PLUS expresion_numerica .)
+    PRINT           reduce using rule 18 (expresion_numerica -> expresion_numerica PLUS expresion_numerica .)
+    PRINTLN         reduce using rule 18 (expresion_numerica -> expresion_numerica PLUS expresion_numerica .)
+    ID              reduce using rule 18 (expresion_numerica -> expresion_numerica PLUS expresion_numerica .)
+    WHILE           reduce using rule 18 (expresion_numerica -> expresion_numerica PLUS expresion_numerica .)
+    IF              reduce using rule 18 (expresion_numerica -> expresion_numerica PLUS expresion_numerica .)
+    $end            reduce using rule 18 (expresion_numerica -> expresion_numerica PLUS expresion_numerica .)
+    RBRACE          reduce using rule 18 (expresion_numerica -> expresion_numerica PLUS expresion_numerica .)
+    LESS            reduce using rule 18 (expresion_numerica -> expresion_numerica PLUS expresion_numerica .)
+    LESSEQ          reduce using rule 18 (expresion_numerica -> expresion_numerica PLUS expresion_numerica .)
+    GREATHER        reduce using rule 18 (expresion_numerica -> expresion_numerica PLUS expresion_numerica .)
+    GREATHEREQ      reduce using rule 18 (expresion_numerica -> expresion_numerica PLUS expresion_numerica .)
+    EQUALITY        reduce using rule 18 (expresion_numerica -> expresion_numerica PLUS expresion_numerica .)
+    DIFERENT        reduce using rule 18 (expresion_numerica -> expresion_numerica PLUS expresion_numerica .)
+    TIMES           shift and go to state 39
+    DIV             shift and go to state 40
+    POT             shift and go to state 41
+
+  ! TIMES           [ reduce using rule 18 (expresion_numerica -> expresion_numerica PLUS expresion_numerica .) ]
+  ! DIV             [ reduce using rule 18 (expresion_numerica -> expresion_numerica PLUS expresion_numerica .) ]
+  ! POT             [ reduce using rule 18 (expresion_numerica -> expresion_numerica PLUS expresion_numerica .) ]
+  ! PLUS            [ shift and go to state 37 ]
+  ! MINUS           [ shift and go to state 38 ]
+
+
+state 54
+
+    (19) expresion_numerica -> expresion_numerica MINUS expresion_numerica .
+    (18) expresion_numerica -> expresion_numerica . PLUS expresion_numerica
+    (19) expresion_numerica -> expresion_numerica . MINUS expresion_numerica
+    (20) expresion_numerica -> expresion_numerica . TIMES expresion_numerica
+    (21) expresion_numerica -> expresion_numerica . DIV expresion_numerica
+    (22) expresion_numerica -> expresion_numerica . POT expresion_numerica
+
+    PLUS            reduce using rule 19 (expresion_numerica -> expresion_numerica MINUS expresion_numerica .)
+    MINUS           reduce using rule 19 (expresion_numerica -> expresion_numerica MINUS expresion_numerica .)
+    RPAR            reduce using rule 19 (expresion_numerica -> expresion_numerica MINUS expresion_numerica .)
+    PRINT           reduce using rule 19 (expresion_numerica -> expresion_numerica MINUS expresion_numerica .)
+    PRINTLN         reduce using rule 19 (expresion_numerica -> expresion_numerica MINUS expresion_numerica .)
+    ID              reduce using rule 19 (expresion_numerica -> expresion_numerica MINUS expresion_numerica .)
+    WHILE           reduce using rule 19 (expresion_numerica -> expresion_numerica MINUS expresion_numerica .)
+    IF              reduce using rule 19 (expresion_numerica -> expresion_numerica MINUS expresion_numerica .)
+    $end            reduce using rule 19 (expresion_numerica -> expresion_numerica MINUS expresion_numerica .)
+    RBRACE          reduce using rule 19 (expresion_numerica -> expresion_numerica MINUS expresion_numerica .)
+    LESS            reduce using rule 19 (expresion_numerica -> expresion_numerica MINUS expresion_numerica .)
+    LESSEQ          reduce using rule 19 (expresion_numerica -> expresion_numerica MINUS expresion_numerica .)
+    GREATHER        reduce using rule 19 (expresion_numerica -> expresion_numerica MINUS expresion_numerica .)
+    GREATHEREQ      reduce using rule 19 (expresion_numerica -> expresion_numerica MINUS expresion_numerica .)
+    EQUALITY        reduce using rule 19 (expresion_numerica -> expresion_numerica MINUS expresion_numerica .)
+    DIFERENT        reduce using rule 19 (expresion_numerica -> expresion_numerica MINUS expresion_numerica .)
+    TIMES           shift and go to state 39
+    DIV             shift and go to state 40
+    POT             shift and go to state 41
+
+  ! TIMES           [ reduce using rule 19 (expresion_numerica -> expresion_numerica MINUS expresion_numerica .) ]
+  ! DIV             [ reduce using rule 19 (expresion_numerica -> expresion_numerica MINUS expresion_numerica .) ]
+  ! POT             [ reduce using rule 19 (expresion_numerica -> expresion_numerica MINUS expresion_numerica .) ]
+  ! PLUS            [ shift and go to state 37 ]
+  ! MINUS           [ shift and go to state 38 ]
+
+
+state 55
+
+    (20) expresion_numerica -> expresion_numerica TIMES expresion_numerica .
+    (18) expresion_numerica -> expresion_numerica . PLUS expresion_numerica
+    (19) expresion_numerica -> expresion_numerica . MINUS expresion_numerica
+    (20) expresion_numerica -> expresion_numerica . TIMES expresion_numerica
+    (21) expresion_numerica -> expresion_numerica . DIV expresion_numerica
+    (22) expresion_numerica -> expresion_numerica . POT expresion_numerica
+
+    PLUS            reduce using rule 20 (expresion_numerica -> expresion_numerica TIMES expresion_numerica .)
+    MINUS           reduce using rule 20 (expresion_numerica -> expresion_numerica TIMES expresion_numerica .)
+    TIMES           reduce using rule 20 (expresion_numerica -> expresion_numerica TIMES expresion_numerica .)
+    DIV             reduce using rule 20 (expresion_numerica -> expresion_numerica TIMES expresion_numerica .)
+    RPAR            reduce using rule 20 (expresion_numerica -> expresion_numerica TIMES expresion_numerica .)
+    PRINT           reduce using rule 20 (expresion_numerica -> expresion_numerica TIMES expresion_numerica .)
+    PRINTLN         reduce using rule 20 (expresion_numerica -> expresion_numerica TIMES expresion_numerica .)
+    ID              reduce using rule 20 (expresion_numerica -> expresion_numerica TIMES expresion_numerica .)
+    WHILE           reduce using rule 20 (expresion_numerica -> expresion_numerica TIMES expresion_numerica .)
+    IF              reduce using rule 20 (expresion_numerica -> expresion_numerica TIMES expresion_numerica .)
+    $end            reduce using rule 20 (expresion_numerica -> expresion_numerica TIMES expresion_numerica .)
+    RBRACE          reduce using rule 20 (expresion_numerica -> expresion_numerica TIMES expresion_numerica .)
+    LESS            reduce using rule 20 (expresion_numerica -> expresion_numerica TIMES expresion_numerica .)
+    LESSEQ          reduce using rule 20 (expresion_numerica -> expresion_numerica TIMES expresion_numerica .)
+    GREATHER        reduce using rule 20 (expresion_numerica -> expresion_numerica TIMES expresion_numerica .)
+    GREATHEREQ      reduce using rule 20 (expresion_numerica -> expresion_numerica TIMES expresion_numerica .)
+    EQUALITY        reduce using rule 20 (expresion_numerica -> expresion_numerica TIMES expresion_numerica .)
+    DIFERENT        reduce using rule 20 (expresion_numerica -> expresion_numerica TIMES expresion_numerica .)
+    POT             shift and go to state 41
+
+  ! POT             [ reduce using rule 20 (expresion_numerica -> expresion_numerica TIMES expresion_numerica .) ]
+  ! PLUS            [ shift and go to state 37 ]
+  ! MINUS           [ shift and go to state 38 ]
+  ! TIMES           [ shift and go to state 39 ]
+  ! DIV             [ shift and go to state 40 ]
+
+
+state 56
+
+    (21) expresion_numerica -> expresion_numerica DIV expresion_numerica .
+    (18) expresion_numerica -> expresion_numerica . PLUS expresion_numerica
+    (19) expresion_numerica -> expresion_numerica . MINUS expresion_numerica
+    (20) expresion_numerica -> expresion_numerica . TIMES expresion_numerica
+    (21) expresion_numerica -> expresion_numerica . DIV expresion_numerica
+    (22) expresion_numerica -> expresion_numerica . POT expresion_numerica
+
+    PLUS            reduce using rule 21 (expresion_numerica -> expresion_numerica DIV expresion_numerica .)
+    MINUS           reduce using rule 21 (expresion_numerica -> expresion_numerica DIV expresion_numerica .)
+    TIMES           reduce using rule 21 (expresion_numerica -> expresion_numerica DIV expresion_numerica .)
+    DIV             reduce using rule 21 (expresion_numerica -> expresion_numerica DIV expresion_numerica .)
+    RPAR            reduce using rule 21 (expresion_numerica -> expresion_numerica DIV expresion_numerica .)
+    PRINT           reduce using rule 21 (expresion_numerica -> expresion_numerica DIV expresion_numerica .)
+    PRINTLN         reduce using rule 21 (expresion_numerica -> expresion_numerica DIV expresion_numerica .)
+    ID              reduce using rule 21 (expresion_numerica -> expresion_numerica DIV expresion_numerica .)
+    WHILE           reduce using rule 21 (expresion_numerica -> expresion_numerica DIV expresion_numerica .)
+    IF              reduce using rule 21 (expresion_numerica -> expresion_numerica DIV expresion_numerica .)
+    $end            reduce using rule 21 (expresion_numerica -> expresion_numerica DIV expresion_numerica .)
+    RBRACE          reduce using rule 21 (expresion_numerica -> expresion_numerica DIV expresion_numerica .)
+    LESS            reduce using rule 21 (expresion_numerica -> expresion_numerica DIV expresion_numerica .)
+    LESSEQ          reduce using rule 21 (expresion_numerica -> expresion_numerica DIV expresion_numerica .)
+    GREATHER        reduce using rule 21 (expresion_numerica -> expresion_numerica DIV expresion_numerica .)
+    GREATHEREQ      reduce using rule 21 (expresion_numerica -> expresion_numerica DIV expresion_numerica .)
+    EQUALITY        reduce using rule 21 (expresion_numerica -> expresion_numerica DIV expresion_numerica .)
+    DIFERENT        reduce using rule 21 (expresion_numerica -> expresion_numerica DIV expresion_numerica .)
+    POT             shift and go to state 41
+
+  ! POT             [ reduce using rule 21 (expresion_numerica -> expresion_numerica DIV expresion_numerica .) ]
+  ! PLUS            [ shift and go to state 37 ]
+  ! MINUS           [ shift and go to state 38 ]
+  ! TIMES           [ shift and go to state 39 ]
+  ! DIV             [ shift and go to state 40 ]
+
+
+state 57
+
+    (22) expresion_numerica -> expresion_numerica POT expresion_numerica .
+    (18) expresion_numerica -> expresion_numerica . PLUS expresion_numerica
+    (19) expresion_numerica -> expresion_numerica . MINUS expresion_numerica
+    (20) expresion_numerica -> expresion_numerica . TIMES expresion_numerica
+    (21) expresion_numerica -> expresion_numerica . DIV expresion_numerica
+    (22) expresion_numerica -> expresion_numerica . POT expresion_numerica
+
+    PLUS            reduce using rule 22 (expresion_numerica -> expresion_numerica POT expresion_numerica .)
+    MINUS           reduce using rule 22 (expresion_numerica -> expresion_numerica POT expresion_numerica .)
+    TIMES           reduce using rule 22 (expresion_numerica -> expresion_numerica POT expresion_numerica .)
+    DIV             reduce using rule 22 (expresion_numerica -> expresion_numerica POT expresion_numerica .)
+    POT             reduce using rule 22 (expresion_numerica -> expresion_numerica POT expresion_numerica .)
+    RPAR            reduce using rule 22 (expresion_numerica -> expresion_numerica POT expresion_numerica .)
+    PRINT           reduce using rule 22 (expresion_numerica -> expresion_numerica POT expresion_numerica .)
+    PRINTLN         reduce using rule 22 (expresion_numerica -> expresion_numerica POT expresion_numerica .)
+    ID              reduce using rule 22 (expresion_numerica -> expresion_numerica POT expresion_numerica .)
+    WHILE           reduce using rule 22 (expresion_numerica -> expresion_numerica POT expresion_numerica .)
+    IF              reduce using rule 22 (expresion_numerica -> expresion_numerica POT expresion_numerica .)
+    $end            reduce using rule 22 (expresion_numerica -> expresion_numerica POT expresion_numerica .)
+    RBRACE          reduce using rule 22 (expresion_numerica -> expresion_numerica POT expresion_numerica .)
+    LESS            reduce using rule 22 (expresion_numerica -> expresion_numerica POT expresion_numerica .)
+    LESSEQ          reduce using rule 22 (expresion_numerica -> expresion_numerica POT expresion_numerica .)
+    GREATHER        reduce using rule 22 (expresion_numerica -> expresion_numerica POT expresion_numerica .)
+    GREATHEREQ      reduce using rule 22 (expresion_numerica -> expresion_numerica POT expresion_numerica .)
+    EQUALITY        reduce using rule 22 (expresion_numerica -> expresion_numerica POT expresion_numerica .)
+    DIFERENT        reduce using rule 22 (expresion_numerica -> expresion_numerica POT expresion_numerica .)
+
+  ! PLUS            [ shift and go to state 37 ]
+  ! MINUS           [ shift and go to state 38 ]
+  ! TIMES           [ shift and go to state 39 ]
+  ! DIV             [ shift and go to state 40 ]
+  ! POT             [ shift and go to state 41 ]
+
+
+state 58
+
+    (15) while -> WHILE LPAR expresion_logica RPAR LBRACE . instrucciones RBRACE
+    (2) instrucciones -> . instrucciones instruccion
+    (3) instrucciones -> . instruccion
+    (4) instruccion -> . print
+    (5) instruccion -> . println
+    (6) instruccion -> . definicion
+    (7) instruccion -> . asignacion
+    (8) instruccion -> . while
+    (9) instruccion -> . if
+    (10) instruccion -> . if_else
+    (11) print -> . PRINT LPAR expresion_cadena RPAR
+    (12) println -> . PRINTLN LPAR expresion_cadena RPAR
+    (13) definicion -> . ID
+    (14) asignacion -> . ID EQUAL expresion_numerica
+    (15) while -> . WHILE LPAR expresion_logica RPAR LBRACE instrucciones RBRACE
+    (16) if -> . IF LPAR expresion_logica RPAR LBRACE instrucciones RBRACE
+    (17) if_else -> . IF LPAR expresion_logica RPAR LBRACE instrucciones RBRACE ELSE LBRACE instrucciones RBRACE
+
+    PRINT           shift and go to state 11
+    PRINTLN         shift and go to state 12
+    ID              shift and go to state 13
+    WHILE           shift and go to state 14
+    IF              shift and go to state 15
+
+    instrucciones                  shift and go to state 66
+    instruccion                    shift and go to state 3
+    print                          shift and go to state 4
+    println                        shift and go to state 5
+    definicion                     shift and go to state 6
+    asignacion                     shift and go to state 7
+    while                          shift and go to state 8
+    if                             shift and go to state 9
+    if_else                        shift and go to state 10
+
+state 59
+
+    (30) expresion_logica -> expresion_numerica LESS expresion_numerica .
+    (18) expresion_numerica -> expresion_numerica . PLUS expresion_numerica
+    (19) expresion_numerica -> expresion_numerica . MINUS expresion_numerica
+    (20) expresion_numerica -> expresion_numerica . TIMES expresion_numerica
+    (21) expresion_numerica -> expresion_numerica . DIV expresion_numerica
+    (22) expresion_numerica -> expresion_numerica . POT expresion_numerica
+
+    RPAR            reduce using rule 30 (expresion_logica -> expresion_numerica LESS expresion_numerica .)
+    PLUS            shift and go to state 37
+    MINUS           shift and go to state 38
+    TIMES           shift and go to state 39
+    DIV             shift and go to state 40
+    POT             shift and go to state 41
+
+
+state 60
+
+    (31) expresion_logica -> expresion_numerica LESSEQ expresion_numerica .
+    (18) expresion_numerica -> expresion_numerica . PLUS expresion_numerica
+    (19) expresion_numerica -> expresion_numerica . MINUS expresion_numerica
+    (20) expresion_numerica -> expresion_numerica . TIMES expresion_numerica
+    (21) expresion_numerica -> expresion_numerica . DIV expresion_numerica
+    (22) expresion_numerica -> expresion_numerica . POT expresion_numerica
+
+    RPAR            reduce using rule 31 (expresion_logica -> expresion_numerica LESSEQ expresion_numerica .)
+    PLUS            shift and go to state 37
+    MINUS           shift and go to state 38
+    TIMES           shift and go to state 39
+    DIV             shift and go to state 40
+    POT             shift and go to state 41
+
+
+state 61
+
+    (32) expresion_logica -> expresion_numerica GREATHER expresion_numerica .
+    (18) expresion_numerica -> expresion_numerica . PLUS expresion_numerica
+    (19) expresion_numerica -> expresion_numerica . MINUS expresion_numerica
+    (20) expresion_numerica -> expresion_numerica . TIMES expresion_numerica
+    (21) expresion_numerica -> expresion_numerica . DIV expresion_numerica
+    (22) expresion_numerica -> expresion_numerica . POT expresion_numerica
+
+    RPAR            reduce using rule 32 (expresion_logica -> expresion_numerica GREATHER expresion_numerica .)
+    PLUS            shift and go to state 37
+    MINUS           shift and go to state 38
+    TIMES           shift and go to state 39
+    DIV             shift and go to state 40
+    POT             shift and go to state 41
+
+
+state 62
+
+    (33) expresion_logica -> expresion_numerica GREATHEREQ expresion_numerica .
+    (18) expresion_numerica -> expresion_numerica . PLUS expresion_numerica
+    (19) expresion_numerica -> expresion_numerica . MINUS expresion_numerica
+    (20) expresion_numerica -> expresion_numerica . TIMES expresion_numerica
+    (21) expresion_numerica -> expresion_numerica . DIV expresion_numerica
+    (22) expresion_numerica -> expresion_numerica . POT expresion_numerica
+
+    RPAR            reduce using rule 33 (expresion_logica -> expresion_numerica GREATHEREQ expresion_numerica .)
+    PLUS            shift and go to state 37
+    MINUS           shift and go to state 38
+    TIMES           shift and go to state 39
+    DIV             shift and go to state 40
+    POT             shift and go to state 41
+
+
+state 63
+
+    (34) expresion_logica -> expresion_numerica EQUALITY expresion_numerica .
+    (18) expresion_numerica -> expresion_numerica . PLUS expresion_numerica
+    (19) expresion_numerica -> expresion_numerica . MINUS expresion_numerica
+    (20) expresion_numerica -> expresion_numerica . TIMES expresion_numerica
+    (21) expresion_numerica -> expresion_numerica . DIV expresion_numerica
+    (22) expresion_numerica -> expresion_numerica . POT expresion_numerica
+
+    RPAR            reduce using rule 34 (expresion_logica -> expresion_numerica EQUALITY expresion_numerica .)
+    PLUS            shift and go to state 37
+    MINUS           shift and go to state 38
+    TIMES           shift and go to state 39
+    DIV             shift and go to state 40
+    POT             shift and go to state 41
+
+
+state 64
+
+    (35) expresion_logica -> expresion_numerica DIFERENT expresion_numerica .
+    (18) expresion_numerica -> expresion_numerica . PLUS expresion_numerica
+    (19) expresion_numerica -> expresion_numerica . MINUS expresion_numerica
+    (20) expresion_numerica -> expresion_numerica . TIMES expresion_numerica
+    (21) expresion_numerica -> expresion_numerica . DIV expresion_numerica
+    (22) expresion_numerica -> expresion_numerica . POT expresion_numerica
+
+    RPAR            reduce using rule 35 (expresion_logica -> expresion_numerica DIFERENT expresion_numerica .)
+    PLUS            shift and go to state 37
+    MINUS           shift and go to state 38
+    TIMES           shift and go to state 39
+    DIV             shift and go to state 40
+    POT             shift and go to state 41
+
+
+state 65
+
+    (16) if -> IF LPAR expresion_logica RPAR LBRACE . instrucciones RBRACE
+    (17) if_else -> IF LPAR expresion_logica RPAR LBRACE . instrucciones RBRACE ELSE LBRACE instrucciones RBRACE
+    (2) instrucciones -> . instrucciones instruccion
+    (3) instrucciones -> . instruccion
+    (4) instruccion -> . print
+    (5) instruccion -> . println
+    (6) instruccion -> . definicion
+    (7) instruccion -> . asignacion
+    (8) instruccion -> . while
+    (9) instruccion -> . if
+    (10) instruccion -> . if_else
+    (11) print -> . PRINT LPAR expresion_cadena RPAR
+    (12) println -> . PRINTLN LPAR expresion_cadena RPAR
+    (13) definicion -> . ID
+    (14) asignacion -> . ID EQUAL expresion_numerica
+    (15) while -> . WHILE LPAR expresion_logica RPAR LBRACE instrucciones RBRACE
+    (16) if -> . IF LPAR expresion_logica RPAR LBRACE instrucciones RBRACE
+    (17) if_else -> . IF LPAR expresion_logica RPAR LBRACE instrucciones RBRACE ELSE LBRACE instrucciones RBRACE
+
+    PRINT           shift and go to state 11
+    PRINTLN         shift and go to state 12
+    ID              shift and go to state 13
+    WHILE           shift and go to state 14
+    IF              shift and go to state 15
+
+    instrucciones                  shift and go to state 67
+    instruccion                    shift and go to state 3
+    print                          shift and go to state 4
+    println                        shift and go to state 5
+    definicion                     shift and go to state 6
+    asignacion                     shift and go to state 7
+    while                          shift and go to state 8
+    if                             shift and go to state 9
+    if_else                        shift and go to state 10
+
+state 66
+
+    (15) while -> WHILE LPAR expresion_logica RPAR LBRACE instrucciones . RBRACE
+    (2) instrucciones -> instrucciones . instruccion
+    (4) instruccion -> . print
+    (5) instruccion -> . println
+    (6) instruccion -> . definicion
+    (7) instruccion -> . asignacion
+    (8) instruccion -> . while
+    (9) instruccion -> . if
+    (10) instruccion -> . if_else
+    (11) print -> . PRINT LPAR expresion_cadena RPAR
+    (12) println -> . PRINTLN LPAR expresion_cadena RPAR
+    (13) definicion -> . ID
+    (14) asignacion -> . ID EQUAL expresion_numerica
+    (15) while -> . WHILE LPAR expresion_logica RPAR LBRACE instrucciones RBRACE
+    (16) if -> . IF LPAR expresion_logica RPAR LBRACE instrucciones RBRACE
+    (17) if_else -> . IF LPAR expresion_logica RPAR LBRACE instrucciones RBRACE ELSE LBRACE instrucciones RBRACE
+
+    RBRACE          shift and go to state 68
+    PRINT           shift and go to state 11
+    PRINTLN         shift and go to state 12
+    ID              shift and go to state 13
+    WHILE           shift and go to state 14
+    IF              shift and go to state 15
+
+    instruccion                    shift and go to state 16
+    print                          shift and go to state 4
+    println                        shift and go to state 5
+    definicion                     shift and go to state 6
+    asignacion                     shift and go to state 7
+    while                          shift and go to state 8
+    if                             shift and go to state 9
+    if_else                        shift and go to state 10
+
+state 67
+
+    (16) if -> IF LPAR expresion_logica RPAR LBRACE instrucciones . RBRACE
+    (17) if_else -> IF LPAR expresion_logica RPAR LBRACE instrucciones . RBRACE ELSE LBRACE instrucciones RBRACE
+    (2) instrucciones -> instrucciones . instruccion
+    (4) instruccion -> . print
+    (5) instruccion -> . println
+    (6) instruccion -> . definicion
+    (7) instruccion -> . asignacion
+    (8) instruccion -> . while
+    (9) instruccion -> . if
+    (10) instruccion -> . if_else
+    (11) print -> . PRINT LPAR expresion_cadena RPAR
+    (12) println -> . PRINTLN LPAR expresion_cadena RPAR
+    (13) definicion -> . ID
+    (14) asignacion -> . ID EQUAL expresion_numerica
+    (15) while -> . WHILE LPAR expresion_logica RPAR LBRACE instrucciones RBRACE
+    (16) if -> . IF LPAR expresion_logica RPAR LBRACE instrucciones RBRACE
+    (17) if_else -> . IF LPAR expresion_logica RPAR LBRACE instrucciones RBRACE ELSE LBRACE instrucciones RBRACE
+
+    RBRACE          shift and go to state 69
+    PRINT           shift and go to state 11
+    PRINTLN         shift and go to state 12
+    ID              shift and go to state 13
+    WHILE           shift and go to state 14
+    IF              shift and go to state 15
+
+    instruccion                    shift and go to state 16
+    print                          shift and go to state 4
+    println                        shift and go to state 5
+    definicion                     shift and go to state 6
+    asignacion                     shift and go to state 7
+    while                          shift and go to state 8
+    if                             shift and go to state 9
+    if_else                        shift and go to state 10
+
+state 68
+
+    (15) while -> WHILE LPAR expresion_logica RPAR LBRACE instrucciones RBRACE .
+
+    PRINT           reduce using rule 15 (while -> WHILE LPAR expresion_logica RPAR LBRACE instrucciones RBRACE .)
+    PRINTLN         reduce using rule 15 (while -> WHILE LPAR expresion_logica RPAR LBRACE instrucciones RBRACE .)
+    ID              reduce using rule 15 (while -> WHILE LPAR expresion_logica RPAR LBRACE instrucciones RBRACE .)
+    WHILE           reduce using rule 15 (while -> WHILE LPAR expresion_logica RPAR LBRACE instrucciones RBRACE .)
+    IF              reduce using rule 15 (while -> WHILE LPAR expresion_logica RPAR LBRACE instrucciones RBRACE .)
+    $end            reduce using rule 15 (while -> WHILE LPAR expresion_logica RPAR LBRACE instrucciones RBRACE .)
+    RBRACE          reduce using rule 15 (while -> WHILE LPAR expresion_logica RPAR LBRACE instrucciones RBRACE .)
+
+
+state 69
+
+    (16) if -> IF LPAR expresion_logica RPAR LBRACE instrucciones RBRACE .
+    (17) if_else -> IF LPAR expresion_logica RPAR LBRACE instrucciones RBRACE . ELSE LBRACE instrucciones RBRACE
+
+    PRINT           reduce using rule 16 (if -> IF LPAR expresion_logica RPAR LBRACE instrucciones RBRACE .)
+    PRINTLN         reduce using rule 16 (if -> IF LPAR expresion_logica RPAR LBRACE instrucciones RBRACE .)
+    ID              reduce using rule 16 (if -> IF LPAR expresion_logica RPAR LBRACE instrucciones RBRACE .)
+    WHILE           reduce using rule 16 (if -> IF LPAR expresion_logica RPAR LBRACE instrucciones RBRACE .)
+    IF              reduce using rule 16 (if -> IF LPAR expresion_logica RPAR LBRACE instrucciones RBRACE .)
+    $end            reduce using rule 16 (if -> IF LPAR expresion_logica RPAR LBRACE instrucciones RBRACE .)
+    RBRACE          reduce using rule 16 (if -> IF LPAR expresion_logica RPAR LBRACE instrucciones RBRACE .)
+    ELSE            shift and go to state 70
+
+
+state 70
+
+    (17) if_else -> IF LPAR expresion_logica RPAR LBRACE instrucciones RBRACE ELSE . LBRACE instrucciones RBRACE
+
+    LBRACE          shift and go to state 71
+
+
+state 71
+
+    (17) if_else -> IF LPAR expresion_logica RPAR LBRACE instrucciones RBRACE ELSE LBRACE . instrucciones RBRACE
+    (2) instrucciones -> . instrucciones instruccion
+    (3) instrucciones -> . instruccion
+    (4) instruccion -> . print
+    (5) instruccion -> . println
+    (6) instruccion -> . definicion
+    (7) instruccion -> . asignacion
+    (8) instruccion -> . while
+    (9) instruccion -> . if
+    (10) instruccion -> . if_else
+    (11) print -> . PRINT LPAR expresion_cadena RPAR
+    (12) println -> . PRINTLN LPAR expresion_cadena RPAR
+    (13) definicion -> . ID
+    (14) asignacion -> . ID EQUAL expresion_numerica
+    (15) while -> . WHILE LPAR expresion_logica RPAR LBRACE instrucciones RBRACE
+    (16) if -> . IF LPAR expresion_logica RPAR LBRACE instrucciones RBRACE
+    (17) if_else -> . IF LPAR expresion_logica RPAR LBRACE instrucciones RBRACE ELSE LBRACE instrucciones RBRACE
+
+    PRINT           shift and go to state 11
+    PRINTLN         shift and go to state 12
+    ID              shift and go to state 13
+    WHILE           shift and go to state 14
+    IF              shift and go to state 15
+
+    instrucciones                  shift and go to state 72
+    instruccion                    shift and go to state 3
+    print                          shift and go to state 4
+    println                        shift and go to state 5
+    definicion                     shift and go to state 6
+    asignacion                     shift and go to state 7
+    while                          shift and go to state 8
+    if                             shift and go to state 9
+    if_else                        shift and go to state 10
+
+state 72
+
+    (17) if_else -> IF LPAR expresion_logica RPAR LBRACE instrucciones RBRACE ELSE LBRACE instrucciones . RBRACE
+    (2) instrucciones -> instrucciones . instruccion
+    (4) instruccion -> . print
+    (5) instruccion -> . println
+    (6) instruccion -> . definicion
+    (7) instruccion -> . asignacion
+    (8) instruccion -> . while
+    (9) instruccion -> . if
+    (10) instruccion -> . if_else
+    (11) print -> . PRINT LPAR expresion_cadena RPAR
+    (12) println -> . PRINTLN LPAR expresion_cadena RPAR
+    (13) definicion -> . ID
+    (14) asignacion -> . ID EQUAL expresion_numerica
+    (15) while -> . WHILE LPAR expresion_logica RPAR LBRACE instrucciones RBRACE
+    (16) if -> . IF LPAR expresion_logica RPAR LBRACE instrucciones RBRACE
+    (17) if_else -> . IF LPAR expresion_logica RPAR LBRACE instrucciones RBRACE ELSE LBRACE instrucciones RBRACE
+
+    RBRACE          shift and go to state 73
+    PRINT           shift and go to state 11
+    PRINTLN         shift and go to state 12
+    ID              shift and go to state 13
+    WHILE           shift and go to state 14
+    IF              shift and go to state 15
+
+    instruccion                    shift and go to state 16
+    print                          shift and go to state 4
+    println                        shift and go to state 5
+    definicion                     shift and go to state 6
+    asignacion                     shift and go to state 7
+    while                          shift and go to state 8
+    if                             shift and go to state 9
+    if_else                        shift and go to state 10
+
+state 73
+
+    (17) if_else -> IF LPAR expresion_logica RPAR LBRACE instrucciones RBRACE ELSE LBRACE instrucciones RBRACE .
+
+    PRINT           reduce using rule 17 (if_else -> IF LPAR expresion_logica RPAR LBRACE instrucciones RBRACE ELSE LBRACE instrucciones RBRACE .)
+    PRINTLN         reduce using rule 17 (if_else -> IF LPAR expresion_logica RPAR LBRACE instrucciones RBRACE ELSE LBRACE instrucciones RBRACE .)
+    ID              reduce using rule 17 (if_else -> IF LPAR expresion_logica RPAR LBRACE instrucciones RBRACE ELSE LBRACE instrucciones RBRACE .)
+    WHILE           reduce using rule 17 (if_else -> IF LPAR expresion_logica RPAR LBRACE instrucciones RBRACE ELSE LBRACE instrucciones RBRACE .)
+    IF              reduce using rule 17 (if_else -> IF LPAR expresion_logica RPAR LBRACE instrucciones RBRACE ELSE LBRACE instrucciones RBRACE .)
+    $end            reduce using rule 17 (if_else -> IF LPAR expresion_logica RPAR LBRACE instrucciones RBRACE ELSE LBRACE instrucciones RBRACE .)
+    RBRACE          reduce using rule 17 (if_else -> IF LPAR expresion_logica RPAR LBRACE instrucciones RBRACE ELSE LBRACE instrucciones RBRACE .)
+

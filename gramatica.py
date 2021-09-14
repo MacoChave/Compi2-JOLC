@@ -84,8 +84,13 @@ def t_NUMBER(t) :
     return t
 
 def t_CHAR(t) :
-    r'\'.\''
-    t.value = t.value[1]
+    r'\'([^\\\n]|(\\.))\''
+    char = t.value[1:-1]
+    if len(char) == 1 : t.value = char[0]
+    elif char[1] == 'n' : t.value = '\n'
+    elif char[1] == 't' : t.value = '\t'
+    elif char[1] == 'r' : t.value = '\r'
+
     return t
 
 def t_STRING(t) :
@@ -114,16 +119,22 @@ def t_newline(t) :
 
 def t_error(t) :
     print(f'Error léxico: Caracter {t.value[0]} no reconocido')
+    error = Error('Error léxico', f'Caracter {t.value[0]} no reconocido', t.lexer.lineno)
+    global lista_errores
+    lista_errores.agregar(error)
     t.lexer.skip(1)
 
+from te import Error, TablaError
 import ply.lex as lex
 lexer = lex.lex()
+
+lista_errores = TablaError()
 
 precedence = (
     ('left', 'AND'),
     ('left', 'OR'),
     ('right', 'NOT'),
-    ('left', 'LESS', 'GREATHER', 'LESSEQ', 'GREATHEREQ', 'EQUALITY', 'DIFERENT'),
+    ('nonassoc', 'LESS', 'GREATHER', 'LESSEQ', 'GREATHEREQ', 'EQUALITY', 'DIFERENT'),
     ('left', 'PLUS', 'MINUS'),
     ('left', 'TIMES', 'DIV'),
     ('left', 'POT'),
@@ -187,12 +198,12 @@ def p_if_else(t) :
 def p_logica_binaria(t) :
     '''exp_logica    : exp_logica AND exp_logica
                     | exp_logica OR exp_logica'''
-    if t[2] == '&&'      : t[0] = ExpresionLogica(t[1], t[3], OP_LOGICA.AND)
-    elif t[2] == '||'    : t[0] = ExpresionLogica(t[1], t[3], OP_LOGICA.OR)
+    if t[2] == '&&'      : t[0] = LogicaBinaria(t[1], t[3], OP_LOGICA.AND)
+    elif t[2] == '||'    : t[0] = LogicaBinaria(t[1], t[3], OP_LOGICA.OR)
 
 def p_logica_not(t) :
     'exp_logica : NOT exp_logica'
-    t[0] = ExpresionLogica(t[2], OP_LOGICA.NOT)
+    t[0] = Negado(t[2], OP_LOGICA.NOT)
 
 def p_logica_to_relacional(t) :
     'exp_logica : exp_relacional'
@@ -246,11 +257,11 @@ def p_aritmetica_basico_dec(t) :
 
 def p_aritmetica_basico_char(t) :
     'exp_aritmetica : CHAR'
-    t[0] = Cadena(t[1])
+    t[0] = Caracter(t[1])
 
 def p_aritmetica_basico_str(t) :
     'exp_aritmetica : STRING'
-    t[0] = Caracter(t[1])
+    t[0] = Cadena(t[1])
 
 def p_aritmetica_basico_true(t) :
     'exp_aritmetica : TRUE'
@@ -265,8 +276,11 @@ def p_aritmetica_basico_id(t) :
     t[0] = Identificador(t[1])
 
 def p_error(t) :
+    global lista_errores
     print(t)
     print(f'Error sintáctico: {t.value} no esperado')
+    error = Error('Error sintáctico', f'{t.value} no se esperaba', t.lexer.lineno)
+    lista_errores.agregar(error)
 
 import ply.yacc as yacc
 parser = yacc.yacc()

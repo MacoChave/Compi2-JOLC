@@ -3,13 +3,23 @@ from expresiones import *
 from instrucciones import *
 
 def ejecutar_print(instruccion, ts) :
-    str = ejecutar_logica(instruccion.exp, ts)
-    return str
+    res = ejecutar_logica(instruccion.exp, ts)
+    if res is None : return ''
+
+    if isinstance(res, bool) :
+        if res : res = 'True'
+        else : res = 'False'
+    return res
 
 def ejecutar_println(instruccion, ts) :
-    str = ejecutar_logica(instruccion.exp, ts)
-    str += '\n'
-    return str
+    res = ejecutar_logica(instruccion.exp, ts)
+    if res is None : return ''
+
+    if isinstance(res, bool) :
+        if res : res = 'True'
+        else : res = 'False'
+    res += '\n'
+    return res
 
 def ejecutar_definicion(instruccion, ts) :
     print(instruccion)

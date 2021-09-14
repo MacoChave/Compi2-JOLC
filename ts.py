@@ -4,9 +4,8 @@ class TIPO_DATO(Enum) :
     NUMERO = 1
 
 class Simbolo() :
-    def __init__(self, id, tipo, valor) -> None:
+    def __init__(self, id, valor = None) -> None:
         self.id = id
-        self.tipo = tipo
         self.valor = valor
 
 class TablaSimbolo() :
@@ -18,11 +17,11 @@ class TablaSimbolo() :
     
     def obtener(self, id) :
         if not id in self.simbolos :
-            return None
+            simbolo = Simbolo(id)
+            self.agregar(simbolo)
+            return simbolo
+
         return self.simbolos[id]
     
     def actualizar(self, simbolo) :
-        if not simbolo.id in self.simbolos :
-            return None
-        else :
-            self.simbolo[simbolo.id] = simbolo
+        self.simbolos[simbolo.id] = simbolo

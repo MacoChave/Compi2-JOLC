@@ -3,81 +3,125 @@ from expresiones import *
 from instrucciones import *
 
 def ejecutar_print(instruccion, ts) :
-    print(ejecutar_cadena(instruccion.exp, ts))
+    str = ejecutar_logica(instruccion.exp, ts)
+    return str
 
 def ejecutar_println(instruccion, ts) :
-    print(ejecutar_cadena(instruccion.exp, ts), '\n')
+    str = ejecutar_logica(instruccion.exp, ts)
+    str += '\n'
+    return str
 
 def ejecutar_definicion(instruccion, ts) :
-    if instruccion.exp == 0 :
-        simbolo = TS.Simbolo(instruccion, TS.TIPO_DATO.NUMERO, 0)
-        ts.agregar(simbolo)
-    else :
-        val = ejecutar_aritmetica(instruccion.exp, ts)
-        simbolo = TS.Simbolo(instruccion.id, TS.TIPO_DATO.NUMERO, val)
+    print(instruccion)
+    simbolo = ts.obtener(instruccion.id)
+
+    if not instruccion.exp is None :
+        value = ejecutar_logica(instruccion.exp, ts)
+        simbolo.valor = value
         ts.actualizar(simbolo)
 
 def ejecutar_mientras(instruccion, ts) :
-    while ejecutar_logica(instruccion.condicion, ts) :
+    cond = ejecutar_logica(instruccion.condicion, ts)
+    while cond :
         ts_local = TS.TablaSimbolo(ts.simbolos)
         ejecutar_instrucciones(instruccion.instrucciones, ts_local)
 
 def ejecutar_if(instruccion, ts) :
-    val = ejecutar_logica(instruccion.condicion, ts)
-    if val :
+    cond = ejecutar_logica(instruccion.condicion, ts)
+    if cond :
         ts_local = TS.TablaSimbolo(ts.simbolos)
         ejecutar_instrucciones(instruccion.instrucciones, ts_local)
 
 def ejecutar_if_else(instruccion, ts) :
-    val = ejecutar_logica(instruccion.condicion, ts)
+    cond = ejecutar_logica(instruccion.condicion, ts)
     ts_local = TS.TablaSimbolo(ts.simbolos)
-    if val :
+    if cond :
         ejecutar_instrucciones(instruccion.instrucciones_v, ts_local)
     else :
         ejecutar_instrucciones(instruccion.instrucciones_f, ts_local)
 
-def ejecutar_cadena(expresion, ts) :
-    if isinstance(expresion, ExpresionCadenaSimple) :
-        return expresion.val
-    elif isinstance(expresion, ExpresionCadenaNumero) :
-        return ejecutar_aritmetica(expresion.exp, ts)
-    else :
-        print('Error: Expresion cadena no válida')
-
 def ejecutar_logica(expresion, ts) :
-    exp1 = ejecutar_aritmetica(expresion.exp1, ts)
-    exp2 = ejecutar_aritmetica(expresion.exp2, ts)
-    if expresion.operador == OP_LOGIC.MENOR : return exp1 < exp2
-    elif expresion.operador == OP_LOGIC.MENOR_IGUAL : return exp1 <= exp2
-    elif expresion.operador == OP_LOGIC.MAYOR : return exp1 > exp2
-    elif expresion.operador == OP_LOGIC.MAYOR_IGUAL : return exp1 >= exp2
-    elif expresion.operador == OP_LOGIC.IGUAL : return exp1 == exp2
-    elif expresion.operador == OP_LOGIC.DIFERENTE : return exp1 != exp2
+    if isinstance(expresion, LogicaBinaria) : 
+        exp1 = ejecutar_logica(expresion.exp1, ts)
+        exp2 = ejecutar_logica(expresion.exp2, ts)
+        if expresion.operador == OP_LOGICA.AND : exp1 and exp2
+        if expresion.operador == OP_LOGICA.OR : exp1 and exp2
+    elif isinstance(expresion, Negado) : 
+        exp1 = ejecutar_logica(expresion.exp1, ts)
+        return not exp1
+    elif isinstance(expresion, ExpresionRelacional) : return ejecutar_relacional(expresion, ts)
+    elif isinstance(expresion, ExpresionAritmetica) : return ejecutar_aritmetica(expresion, ts)
+    
+def ejecutar_relacional(expresion, ts) :
+    if isinstance(expresion, ExpresionAritmetica) : return ejecutar_aritmetica(expresion, ts)
+    
+    exp1 = ejecutar_relacional(expresion.exp1, ts)
+    exp2 = ejecutar_relacional(expresion.exp2, ts)
+    if expresion.operador == OP_RELACIONAL.MENOR : return exp1 < exp2
+    elif expresion.operador == OP_RELACIONAL.MENOR_IGUAL : return exp1 <= exp2
+    elif expresion.operador == OP_RELACIONAL.MAYOR : return exp1 > exp2
+    elif expresion.operador == OP_RELACIONAL.MAYOR_IGUAL : return exp1 >= exp2
+    elif expresion.operador == OP_RELACIONAL.IGUAL : return exp1 == exp2
+    elif expresion.operador == OP_RELACIONAL.DIFERENTE : return exp1 != exp2
 
 def ejecutar_aritmetica(expresion, ts) :
-    if isinstance(expresion, ExpresionBinaria) :
+    if isinstance(expresion, AritmeticaBinaria) :
         exp1 = ejecutar_aritmetica(expresion.exp1, ts)
         exp2 = ejecutar_aritmetica(expresion.exp2, ts)
-        if expresion.operador == OP_ARITHMETIC.MAS : return exp1 + exp2
-        elif expresion.operador == OP_ARITHMETIC.MENOS : return exp1 - exp2
-        elif expresion.operador == OP_ARITHMETIC.POR : return exp1 * exp2
-        elif expresion.operador == OP_ARITHMETIC.DIVIDIDO : return exp1 / exp2
-        elif expresion.operador == OP_ARITHMETIC.POTENCIA : return exp1 ** exp2
-    elif isinstance(expresion, ExpresionNegativo) :
+        # VALIDAR TIPO DE DATO
+        if expresion.operador == OP_ARITMETICA.MAS : 
+            if isinstance(exp1, str) or isinstance(exp2, str) : 
+                # ERROR SEMANTICO: OPERACION NO SOPORTADA POR STRING
+                return None
+            return exp1 + exp2
+        elif expresion.operador == OP_ARITMETICA.MENOS : 
+            if isinstance(exp1, str) or isinstance(exp2, str) : 
+                # ERROR SEMANTICO: OPERACION NO SOPORTADA POR STRING
+                return None
+            return exp1 - exp2
+        elif expresion.operador == OP_ARITMETICA.POR : 
+            if isinstance(exp1, str) or isinstance(exp2, str) : return exp1 + exp2
+            return exp1 * exp2
+        elif expresion.operador == OP_ARITMETICA.DIVIDIDO : 
+            if isinstance(exp1, str) or isinstance(exp2, str) : 
+                # ERROR SEMANTICO: OPERACION NO SOPORTADA POR STRING
+                return None
+            return exp1 / exp2
+        elif expresion.operador == OP_ARITMETICA.POTENCIA : 
+            if isinstance(exp1, str) :
+                if isinstance(exp2, int) :
+                    return exp1 * exp2
+                else :
+                    # ERROR SEMANTICO: SE ESPERABA UN INT
+                    return None
+            return exp1 ** exp2
+    elif isinstance(expresion, Negativo) :
         exp1 = ejecutar_aritmetica(expresion.exp1, ts)
         return exp1 * -1
-    elif isinstance(expresion, ExpresionNumero) :
+    elif isinstance(expresion, Numero) :
         return expresion.val
-    elif isinstance(expresion, ExpresionIdentificador) :
+    elif isinstance(expresion, Caracter) :
+        return expresion.val
+    elif isinstance(expresion, Cadena) :
+        return expresion.val
+    elif isinstance(expresion, BoolTrue) :
+        return True
+    elif isinstance(expresion, BoolFalse) :
+        return False
+    elif isinstance(expresion, Identificador) :
         return ts.obtener(expresion.id).valor
 
 def ejecutar_instrucciones(instrucciones, ts = TS.TablaSimbolo()) :
+    response = ''
     for instruccion in instrucciones :
-        if isinstance(instruccion, Print) : ejecutar_print(instruccion, ts)
-        elif isinstance(instruccion, Print) : ejecutar_println(instruccion, ts)
+        if isinstance(instruccion, Print) : 
+            response = f'{response}{ejecutar_print(instruccion, ts)}'
+        elif isinstance(instruccion, Println) : 
+            response = f'{response}{ejecutar_println(instruccion, ts)}'
         elif isinstance(instruccion, Definicion) : ejecutar_definicion(instruccion, ts)
         elif isinstance(instruccion, Mientras) : ejecutar_mientras(instruccion, ts)
         elif isinstance(instruccion, If) : ejecutar_if(instruccion, ts)
         elif isinstance(instruccion, IfElse) : ejecutar_if_else(instruccion, ts)
         else : 
             print('Error semantico: Instrucción no válida')
+    return response

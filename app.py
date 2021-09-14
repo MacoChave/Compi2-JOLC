@@ -17,8 +17,8 @@ def analize():
     if request.method == 'POST' :
         source = request.form['code']
         instrucciones = parse(source)
-        ejecutar_instrucciones(instrucciones)
-    return 'Analize works!'
+        result = ejecutar_instrucciones(instrucciones)
+    return render_template('editor.html', source = source, result = result)
 
 @app.route('/reports')
 def reports():

@@ -24,12 +24,12 @@ class Mientras(Instruccion) :
         return 'Instancia mientras'
 
 class Definicion(Instruccion) :
-    def __init__(self, id, exp = 0) :
+    def __init__(self, id, exp = None) :
         self.id = id
         self.exp = exp
 
     def __str__(self) -> str:
-        return 'Instancia definicion'
+        return f'id: {self.id} exp: {self.exp}'
 
 class If(Instruccion) :
     def __init__(self, condicion, instrucciones = []) :

@@ -3,9 +3,11 @@ Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 Unused terminals:
 
     BOOL
+    CHR
     FLOAT
     INT
     LOWERCASE
+    NOTHING
     PARSE
     SEMICOL
     STR
@@ -47,56 +49,60 @@ Rule 29    exp_aritmetica -> exp_aritmetica PLUS exp_aritmetica
 Rule 30    exp_aritmetica -> exp_aritmetica MINUS exp_aritmetica
 Rule 31    exp_aritmetica -> exp_aritmetica TIMES exp_aritmetica
 Rule 32    exp_aritmetica -> exp_aritmetica DIV exp_aritmetica
-Rule 33    exp_aritmetica -> exp_aritmetica POT exp_aritmetica
-Rule 34    exp_aritmetica -> MINUS exp_aritmetica
-Rule 35    exp_aritmetica -> LPAR exp_logica RPAR
-Rule 36    exp_aritmetica -> NUMBER
-Rule 37    exp_aritmetica -> DECIMAL
-Rule 38    exp_aritmetica -> CHAR
-Rule 39    exp_aritmetica -> STRING
-Rule 40    exp_aritmetica -> TRUE
-Rule 41    exp_aritmetica -> FALSE
-Rule 42    exp_aritmetica -> ID
+Rule 33    exp_aritmetica -> exp_aritmetica MOD exp_aritmetica
+Rule 34    exp_aritmetica -> exp_aritmetica POT exp_aritmetica
+Rule 35    exp_aritmetica -> MINUS exp_aritmetica
+Rule 36    exp_aritmetica -> LPAR exp_logica RPAR
+Rule 37    exp_aritmetica -> NUMBER
+Rule 38    exp_aritmetica -> DECIMAL
+Rule 39    exp_aritmetica -> CARACTER
+Rule 40    exp_aritmetica -> STRING
+Rule 41    exp_aritmetica -> TRUE
+Rule 42    exp_aritmetica -> FALSE
+Rule 43    exp_aritmetica -> ID
 
 Terminals, with rules where they appear
 
 AND                  : 18
 BOOL                 : 
-CHAR                 : 38
-DECIMAL              : 37
+CARACTER             : 39
+CHR                  : 
+DECIMAL              : 38
 DIFERENT             : 27
 DIV                  : 32
 ELSE                 : 17
 EQUAL                : 14
 EQUALITY             : 26
-FALSE                : 41
+FALSE                : 42
 FLOAT                : 
 GREATHER             : 24
 GREATHEREQ           : 25
-ID                   : 13 14 42
+ID                   : 13 14 43
 IF                   : 16 17
 INT                  : 
 LBRACE               : 15 16 17 17
 LESS                 : 22
 LESSEQ               : 23
 LOWERCASE            : 
-LPAR                 : 11 12 15 16 17 35
-MINUS                : 30 34
+LPAR                 : 11 12 15 16 17 36
+MINUS                : 30 35
+MOD                  : 33
 NOT                  : 20
-NUMBER               : 36
+NOTHING              : 
+NUMBER               : 37
 OR                   : 19
 PARSE                : 
 PLUS                 : 29
-POT                  : 33
+POT                  : 34
 PRINT                : 11
 PRINTLN              : 12
 RBRACE               : 15 16 17 17
-RPAR                 : 11 12 15 16 17 35
+RPAR                 : 11 12 15 16 17 36
 SEMICOL              : 
 STR                  : 
-STRING               : 39
+STRING               : 40
 TIMES                : 31
-TRUE                 : 40
+TRUE                 : 41
 TYPEOF               : 
 UPPERCASE            : 
 WHILE                : 15
@@ -106,8 +112,8 @@ Nonterminals, with rules where they appear
 
 asignacion           : 7
 definicion           : 6
-exp_aritmetica       : 28 29 29 30 30 31 31 32 32 33 33 34
-exp_logica           : 11 12 14 15 16 17 18 18 19 19 20 35
+exp_aritmetica       : 28 29 29 30 30 31 31 32 32 33 33 34 34 35
+exp_logica           : 11 12 14 15 16 17 18 18 19 19 20 36
 exp_relacional       : 21 22 22 23 23 24 24 25 25 26 26 27 27
 if                   : 9
 if_else              : 10
@@ -378,23 +384,24 @@ state 17
     (30) exp_aritmetica -> . exp_aritmetica MINUS exp_aritmetica
     (31) exp_aritmetica -> . exp_aritmetica TIMES exp_aritmetica
     (32) exp_aritmetica -> . exp_aritmetica DIV exp_aritmetica
-    (33) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
-    (34) exp_aritmetica -> . MINUS exp_aritmetica
-    (35) exp_aritmetica -> . LPAR exp_logica RPAR
-    (36) exp_aritmetica -> . NUMBER
-    (37) exp_aritmetica -> . DECIMAL
-    (38) exp_aritmetica -> . CHAR
-    (39) exp_aritmetica -> . STRING
-    (40) exp_aritmetica -> . TRUE
-    (41) exp_aritmetica -> . FALSE
-    (42) exp_aritmetica -> . ID
+    (33) exp_aritmetica -> . exp_aritmetica MOD exp_aritmetica
+    (34) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
+    (35) exp_aritmetica -> . MINUS exp_aritmetica
+    (36) exp_aritmetica -> . LPAR exp_logica RPAR
+    (37) exp_aritmetica -> . NUMBER
+    (38) exp_aritmetica -> . DECIMAL
+    (39) exp_aritmetica -> . CARACTER
+    (40) exp_aritmetica -> . STRING
+    (41) exp_aritmetica -> . TRUE
+    (42) exp_aritmetica -> . FALSE
+    (43) exp_aritmetica -> . ID
 
     NOT             shift and go to state 24
     MINUS           shift and go to state 27
     LPAR            shift and go to state 22
     NUMBER          shift and go to state 28
     DECIMAL         shift and go to state 29
-    CHAR            shift and go to state 30
+    CARACTER        shift and go to state 30
     STRING          shift and go to state 31
     TRUE            shift and go to state 32
     FALSE           shift and go to state 33
@@ -422,23 +429,24 @@ state 18
     (30) exp_aritmetica -> . exp_aritmetica MINUS exp_aritmetica
     (31) exp_aritmetica -> . exp_aritmetica TIMES exp_aritmetica
     (32) exp_aritmetica -> . exp_aritmetica DIV exp_aritmetica
-    (33) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
-    (34) exp_aritmetica -> . MINUS exp_aritmetica
-    (35) exp_aritmetica -> . LPAR exp_logica RPAR
-    (36) exp_aritmetica -> . NUMBER
-    (37) exp_aritmetica -> . DECIMAL
-    (38) exp_aritmetica -> . CHAR
-    (39) exp_aritmetica -> . STRING
-    (40) exp_aritmetica -> . TRUE
-    (41) exp_aritmetica -> . FALSE
-    (42) exp_aritmetica -> . ID
+    (33) exp_aritmetica -> . exp_aritmetica MOD exp_aritmetica
+    (34) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
+    (35) exp_aritmetica -> . MINUS exp_aritmetica
+    (36) exp_aritmetica -> . LPAR exp_logica RPAR
+    (37) exp_aritmetica -> . NUMBER
+    (38) exp_aritmetica -> . DECIMAL
+    (39) exp_aritmetica -> . CARACTER
+    (40) exp_aritmetica -> . STRING
+    (41) exp_aritmetica -> . TRUE
+    (42) exp_aritmetica -> . FALSE
+    (43) exp_aritmetica -> . ID
 
     NOT             shift and go to state 24
     MINUS           shift and go to state 27
     LPAR            shift and go to state 22
     NUMBER          shift and go to state 28
     DECIMAL         shift and go to state 29
-    CHAR            shift and go to state 30
+    CARACTER        shift and go to state 30
     STRING          shift and go to state 31
     TRUE            shift and go to state 32
     FALSE           shift and go to state 33
@@ -466,23 +474,24 @@ state 19
     (30) exp_aritmetica -> . exp_aritmetica MINUS exp_aritmetica
     (31) exp_aritmetica -> . exp_aritmetica TIMES exp_aritmetica
     (32) exp_aritmetica -> . exp_aritmetica DIV exp_aritmetica
-    (33) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
-    (34) exp_aritmetica -> . MINUS exp_aritmetica
-    (35) exp_aritmetica -> . LPAR exp_logica RPAR
-    (36) exp_aritmetica -> . NUMBER
-    (37) exp_aritmetica -> . DECIMAL
-    (38) exp_aritmetica -> . CHAR
-    (39) exp_aritmetica -> . STRING
-    (40) exp_aritmetica -> . TRUE
-    (41) exp_aritmetica -> . FALSE
-    (42) exp_aritmetica -> . ID
+    (33) exp_aritmetica -> . exp_aritmetica MOD exp_aritmetica
+    (34) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
+    (35) exp_aritmetica -> . MINUS exp_aritmetica
+    (36) exp_aritmetica -> . LPAR exp_logica RPAR
+    (37) exp_aritmetica -> . NUMBER
+    (38) exp_aritmetica -> . DECIMAL
+    (39) exp_aritmetica -> . CARACTER
+    (40) exp_aritmetica -> . STRING
+    (41) exp_aritmetica -> . TRUE
+    (42) exp_aritmetica -> . FALSE
+    (43) exp_aritmetica -> . ID
 
     NOT             shift and go to state 24
     MINUS           shift and go to state 27
     LPAR            shift and go to state 22
     NUMBER          shift and go to state 28
     DECIMAL         shift and go to state 29
-    CHAR            shift and go to state 30
+    CARACTER        shift and go to state 30
     STRING          shift and go to state 31
     TRUE            shift and go to state 32
     FALSE           shift and go to state 33
@@ -510,23 +519,24 @@ state 20
     (30) exp_aritmetica -> . exp_aritmetica MINUS exp_aritmetica
     (31) exp_aritmetica -> . exp_aritmetica TIMES exp_aritmetica
     (32) exp_aritmetica -> . exp_aritmetica DIV exp_aritmetica
-    (33) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
-    (34) exp_aritmetica -> . MINUS exp_aritmetica
-    (35) exp_aritmetica -> . LPAR exp_logica RPAR
-    (36) exp_aritmetica -> . NUMBER
-    (37) exp_aritmetica -> . DECIMAL
-    (38) exp_aritmetica -> . CHAR
-    (39) exp_aritmetica -> . STRING
-    (40) exp_aritmetica -> . TRUE
-    (41) exp_aritmetica -> . FALSE
-    (42) exp_aritmetica -> . ID
+    (33) exp_aritmetica -> . exp_aritmetica MOD exp_aritmetica
+    (34) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
+    (35) exp_aritmetica -> . MINUS exp_aritmetica
+    (36) exp_aritmetica -> . LPAR exp_logica RPAR
+    (37) exp_aritmetica -> . NUMBER
+    (38) exp_aritmetica -> . DECIMAL
+    (39) exp_aritmetica -> . CARACTER
+    (40) exp_aritmetica -> . STRING
+    (41) exp_aritmetica -> . TRUE
+    (42) exp_aritmetica -> . FALSE
+    (43) exp_aritmetica -> . ID
 
     NOT             shift and go to state 24
     MINUS           shift and go to state 27
     LPAR            shift and go to state 22
     NUMBER          shift and go to state 28
     DECIMAL         shift and go to state 29
-    CHAR            shift and go to state 30
+    CARACTER        shift and go to state 30
     STRING          shift and go to state 31
     TRUE            shift and go to state 32
     FALSE           shift and go to state 33
@@ -555,23 +565,24 @@ state 21
     (30) exp_aritmetica -> . exp_aritmetica MINUS exp_aritmetica
     (31) exp_aritmetica -> . exp_aritmetica TIMES exp_aritmetica
     (32) exp_aritmetica -> . exp_aritmetica DIV exp_aritmetica
-    (33) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
-    (34) exp_aritmetica -> . MINUS exp_aritmetica
-    (35) exp_aritmetica -> . LPAR exp_logica RPAR
-    (36) exp_aritmetica -> . NUMBER
-    (37) exp_aritmetica -> . DECIMAL
-    (38) exp_aritmetica -> . CHAR
-    (39) exp_aritmetica -> . STRING
-    (40) exp_aritmetica -> . TRUE
-    (41) exp_aritmetica -> . FALSE
-    (42) exp_aritmetica -> . ID
+    (33) exp_aritmetica -> . exp_aritmetica MOD exp_aritmetica
+    (34) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
+    (35) exp_aritmetica -> . MINUS exp_aritmetica
+    (36) exp_aritmetica -> . LPAR exp_logica RPAR
+    (37) exp_aritmetica -> . NUMBER
+    (38) exp_aritmetica -> . DECIMAL
+    (39) exp_aritmetica -> . CARACTER
+    (40) exp_aritmetica -> . STRING
+    (41) exp_aritmetica -> . TRUE
+    (42) exp_aritmetica -> . FALSE
+    (43) exp_aritmetica -> . ID
 
     NOT             shift and go to state 24
     MINUS           shift and go to state 27
     LPAR            shift and go to state 22
     NUMBER          shift and go to state 28
     DECIMAL         shift and go to state 29
-    CHAR            shift and go to state 30
+    CARACTER        shift and go to state 30
     STRING          shift and go to state 31
     TRUE            shift and go to state 32
     FALSE           shift and go to state 33
@@ -583,7 +594,7 @@ state 21
 
 state 22
 
-    (35) exp_aritmetica -> LPAR . exp_logica RPAR
+    (36) exp_aritmetica -> LPAR . exp_logica RPAR
     (18) exp_logica -> . exp_logica AND exp_logica
     (19) exp_logica -> . exp_logica OR exp_logica
     (20) exp_logica -> . NOT exp_logica
@@ -599,23 +610,24 @@ state 22
     (30) exp_aritmetica -> . exp_aritmetica MINUS exp_aritmetica
     (31) exp_aritmetica -> . exp_aritmetica TIMES exp_aritmetica
     (32) exp_aritmetica -> . exp_aritmetica DIV exp_aritmetica
-    (33) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
-    (34) exp_aritmetica -> . MINUS exp_aritmetica
-    (35) exp_aritmetica -> . LPAR exp_logica RPAR
-    (36) exp_aritmetica -> . NUMBER
-    (37) exp_aritmetica -> . DECIMAL
-    (38) exp_aritmetica -> . CHAR
-    (39) exp_aritmetica -> . STRING
-    (40) exp_aritmetica -> . TRUE
-    (41) exp_aritmetica -> . FALSE
-    (42) exp_aritmetica -> . ID
+    (33) exp_aritmetica -> . exp_aritmetica MOD exp_aritmetica
+    (34) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
+    (35) exp_aritmetica -> . MINUS exp_aritmetica
+    (36) exp_aritmetica -> . LPAR exp_logica RPAR
+    (37) exp_aritmetica -> . NUMBER
+    (38) exp_aritmetica -> . DECIMAL
+    (39) exp_aritmetica -> . CARACTER
+    (40) exp_aritmetica -> . STRING
+    (41) exp_aritmetica -> . TRUE
+    (42) exp_aritmetica -> . FALSE
+    (43) exp_aritmetica -> . ID
 
     NOT             shift and go to state 24
     MINUS           shift and go to state 27
     LPAR            shift and go to state 22
     NUMBER          shift and go to state 28
     DECIMAL         shift and go to state 29
-    CHAR            shift and go to state 30
+    CARACTER        shift and go to state 30
     STRING          shift and go to state 31
     TRUE            shift and go to state 32
     FALSE           shift and go to state 33
@@ -654,23 +666,24 @@ state 24
     (30) exp_aritmetica -> . exp_aritmetica MINUS exp_aritmetica
     (31) exp_aritmetica -> . exp_aritmetica TIMES exp_aritmetica
     (32) exp_aritmetica -> . exp_aritmetica DIV exp_aritmetica
-    (33) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
-    (34) exp_aritmetica -> . MINUS exp_aritmetica
-    (35) exp_aritmetica -> . LPAR exp_logica RPAR
-    (36) exp_aritmetica -> . NUMBER
-    (37) exp_aritmetica -> . DECIMAL
-    (38) exp_aritmetica -> . CHAR
-    (39) exp_aritmetica -> . STRING
-    (40) exp_aritmetica -> . TRUE
-    (41) exp_aritmetica -> . FALSE
-    (42) exp_aritmetica -> . ID
+    (33) exp_aritmetica -> . exp_aritmetica MOD exp_aritmetica
+    (34) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
+    (35) exp_aritmetica -> . MINUS exp_aritmetica
+    (36) exp_aritmetica -> . LPAR exp_logica RPAR
+    (37) exp_aritmetica -> . NUMBER
+    (38) exp_aritmetica -> . DECIMAL
+    (39) exp_aritmetica -> . CARACTER
+    (40) exp_aritmetica -> . STRING
+    (41) exp_aritmetica -> . TRUE
+    (42) exp_aritmetica -> . FALSE
+    (43) exp_aritmetica -> . ID
 
     NOT             shift and go to state 24
     MINUS           shift and go to state 27
     LPAR            shift and go to state 22
     NUMBER          shift and go to state 28
     DECIMAL         shift and go to state 29
-    CHAR            shift and go to state 30
+    CARACTER        shift and go to state 30
     STRING          shift and go to state 31
     TRUE            shift and go to state 32
     FALSE           shift and go to state 33
@@ -715,7 +728,8 @@ state 26
     (30) exp_aritmetica -> exp_aritmetica . MINUS exp_aritmetica
     (31) exp_aritmetica -> exp_aritmetica . TIMES exp_aritmetica
     (32) exp_aritmetica -> exp_aritmetica . DIV exp_aritmetica
-    (33) exp_aritmetica -> exp_aritmetica . POT exp_aritmetica
+    (33) exp_aritmetica -> exp_aritmetica . MOD exp_aritmetica
+    (34) exp_aritmetica -> exp_aritmetica . POT exp_aritmetica
 
     LESS            reduce using rule 28 (exp_relacional -> exp_aritmetica .)
     LESSEQ          reduce using rule 28 (exp_relacional -> exp_aritmetica .)
@@ -737,226 +751,235 @@ state 26
     MINUS           shift and go to state 51
     TIMES           shift and go to state 52
     DIV             shift and go to state 53
-    POT             shift and go to state 54
+    MOD             shift and go to state 54
+    POT             shift and go to state 55
 
 
 state 27
 
-    (34) exp_aritmetica -> MINUS . exp_aritmetica
+    (35) exp_aritmetica -> MINUS . exp_aritmetica
     (29) exp_aritmetica -> . exp_aritmetica PLUS exp_aritmetica
     (30) exp_aritmetica -> . exp_aritmetica MINUS exp_aritmetica
     (31) exp_aritmetica -> . exp_aritmetica TIMES exp_aritmetica
     (32) exp_aritmetica -> . exp_aritmetica DIV exp_aritmetica
-    (33) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
-    (34) exp_aritmetica -> . MINUS exp_aritmetica
-    (35) exp_aritmetica -> . LPAR exp_logica RPAR
-    (36) exp_aritmetica -> . NUMBER
-    (37) exp_aritmetica -> . DECIMAL
-    (38) exp_aritmetica -> . CHAR
-    (39) exp_aritmetica -> . STRING
-    (40) exp_aritmetica -> . TRUE
-    (41) exp_aritmetica -> . FALSE
-    (42) exp_aritmetica -> . ID
+    (33) exp_aritmetica -> . exp_aritmetica MOD exp_aritmetica
+    (34) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
+    (35) exp_aritmetica -> . MINUS exp_aritmetica
+    (36) exp_aritmetica -> . LPAR exp_logica RPAR
+    (37) exp_aritmetica -> . NUMBER
+    (38) exp_aritmetica -> . DECIMAL
+    (39) exp_aritmetica -> . CARACTER
+    (40) exp_aritmetica -> . STRING
+    (41) exp_aritmetica -> . TRUE
+    (42) exp_aritmetica -> . FALSE
+    (43) exp_aritmetica -> . ID
 
     MINUS           shift and go to state 27
     LPAR            shift and go to state 22
     NUMBER          shift and go to state 28
     DECIMAL         shift and go to state 29
-    CHAR            shift and go to state 30
+    CARACTER        shift and go to state 30
     STRING          shift and go to state 31
     TRUE            shift and go to state 32
     FALSE           shift and go to state 33
     ID              shift and go to state 34
 
-    exp_aritmetica                 shift and go to state 55
+    exp_aritmetica                 shift and go to state 56
 
 state 28
 
-    (36) exp_aritmetica -> NUMBER .
+    (37) exp_aritmetica -> NUMBER .
 
-    PLUS            reduce using rule 36 (exp_aritmetica -> NUMBER .)
-    MINUS           reduce using rule 36 (exp_aritmetica -> NUMBER .)
-    TIMES           reduce using rule 36 (exp_aritmetica -> NUMBER .)
-    DIV             reduce using rule 36 (exp_aritmetica -> NUMBER .)
-    POT             reduce using rule 36 (exp_aritmetica -> NUMBER .)
-    LESS            reduce using rule 36 (exp_aritmetica -> NUMBER .)
-    LESSEQ          reduce using rule 36 (exp_aritmetica -> NUMBER .)
-    GREATHER        reduce using rule 36 (exp_aritmetica -> NUMBER .)
-    GREATHEREQ      reduce using rule 36 (exp_aritmetica -> NUMBER .)
-    EQUALITY        reduce using rule 36 (exp_aritmetica -> NUMBER .)
-    DIFERENT        reduce using rule 36 (exp_aritmetica -> NUMBER .)
-    RPAR            reduce using rule 36 (exp_aritmetica -> NUMBER .)
-    AND             reduce using rule 36 (exp_aritmetica -> NUMBER .)
-    OR              reduce using rule 36 (exp_aritmetica -> NUMBER .)
-    PRINT           reduce using rule 36 (exp_aritmetica -> NUMBER .)
-    PRINTLN         reduce using rule 36 (exp_aritmetica -> NUMBER .)
-    ID              reduce using rule 36 (exp_aritmetica -> NUMBER .)
-    WHILE           reduce using rule 36 (exp_aritmetica -> NUMBER .)
-    IF              reduce using rule 36 (exp_aritmetica -> NUMBER .)
-    $end            reduce using rule 36 (exp_aritmetica -> NUMBER .)
-    RBRACE          reduce using rule 36 (exp_aritmetica -> NUMBER .)
+    PLUS            reduce using rule 37 (exp_aritmetica -> NUMBER .)
+    MINUS           reduce using rule 37 (exp_aritmetica -> NUMBER .)
+    TIMES           reduce using rule 37 (exp_aritmetica -> NUMBER .)
+    DIV             reduce using rule 37 (exp_aritmetica -> NUMBER .)
+    MOD             reduce using rule 37 (exp_aritmetica -> NUMBER .)
+    POT             reduce using rule 37 (exp_aritmetica -> NUMBER .)
+    LESS            reduce using rule 37 (exp_aritmetica -> NUMBER .)
+    LESSEQ          reduce using rule 37 (exp_aritmetica -> NUMBER .)
+    GREATHER        reduce using rule 37 (exp_aritmetica -> NUMBER .)
+    GREATHEREQ      reduce using rule 37 (exp_aritmetica -> NUMBER .)
+    EQUALITY        reduce using rule 37 (exp_aritmetica -> NUMBER .)
+    DIFERENT        reduce using rule 37 (exp_aritmetica -> NUMBER .)
+    RPAR            reduce using rule 37 (exp_aritmetica -> NUMBER .)
+    AND             reduce using rule 37 (exp_aritmetica -> NUMBER .)
+    OR              reduce using rule 37 (exp_aritmetica -> NUMBER .)
+    PRINT           reduce using rule 37 (exp_aritmetica -> NUMBER .)
+    PRINTLN         reduce using rule 37 (exp_aritmetica -> NUMBER .)
+    ID              reduce using rule 37 (exp_aritmetica -> NUMBER .)
+    WHILE           reduce using rule 37 (exp_aritmetica -> NUMBER .)
+    IF              reduce using rule 37 (exp_aritmetica -> NUMBER .)
+    $end            reduce using rule 37 (exp_aritmetica -> NUMBER .)
+    RBRACE          reduce using rule 37 (exp_aritmetica -> NUMBER .)
 
 
 state 29
 
-    (37) exp_aritmetica -> DECIMAL .
+    (38) exp_aritmetica -> DECIMAL .
 
-    PLUS            reduce using rule 37 (exp_aritmetica -> DECIMAL .)
-    MINUS           reduce using rule 37 (exp_aritmetica -> DECIMAL .)
-    TIMES           reduce using rule 37 (exp_aritmetica -> DECIMAL .)
-    DIV             reduce using rule 37 (exp_aritmetica -> DECIMAL .)
-    POT             reduce using rule 37 (exp_aritmetica -> DECIMAL .)
-    LESS            reduce using rule 37 (exp_aritmetica -> DECIMAL .)
-    LESSEQ          reduce using rule 37 (exp_aritmetica -> DECIMAL .)
-    GREATHER        reduce using rule 37 (exp_aritmetica -> DECIMAL .)
-    GREATHEREQ      reduce using rule 37 (exp_aritmetica -> DECIMAL .)
-    EQUALITY        reduce using rule 37 (exp_aritmetica -> DECIMAL .)
-    DIFERENT        reduce using rule 37 (exp_aritmetica -> DECIMAL .)
-    RPAR            reduce using rule 37 (exp_aritmetica -> DECIMAL .)
-    AND             reduce using rule 37 (exp_aritmetica -> DECIMAL .)
-    OR              reduce using rule 37 (exp_aritmetica -> DECIMAL .)
-    PRINT           reduce using rule 37 (exp_aritmetica -> DECIMAL .)
-    PRINTLN         reduce using rule 37 (exp_aritmetica -> DECIMAL .)
-    ID              reduce using rule 37 (exp_aritmetica -> DECIMAL .)
-    WHILE           reduce using rule 37 (exp_aritmetica -> DECIMAL .)
-    IF              reduce using rule 37 (exp_aritmetica -> DECIMAL .)
-    $end            reduce using rule 37 (exp_aritmetica -> DECIMAL .)
-    RBRACE          reduce using rule 37 (exp_aritmetica -> DECIMAL .)
+    PLUS            reduce using rule 38 (exp_aritmetica -> DECIMAL .)
+    MINUS           reduce using rule 38 (exp_aritmetica -> DECIMAL .)
+    TIMES           reduce using rule 38 (exp_aritmetica -> DECIMAL .)
+    DIV             reduce using rule 38 (exp_aritmetica -> DECIMAL .)
+    MOD             reduce using rule 38 (exp_aritmetica -> DECIMAL .)
+    POT             reduce using rule 38 (exp_aritmetica -> DECIMAL .)
+    LESS            reduce using rule 38 (exp_aritmetica -> DECIMAL .)
+    LESSEQ          reduce using rule 38 (exp_aritmetica -> DECIMAL .)
+    GREATHER        reduce using rule 38 (exp_aritmetica -> DECIMAL .)
+    GREATHEREQ      reduce using rule 38 (exp_aritmetica -> DECIMAL .)
+    EQUALITY        reduce using rule 38 (exp_aritmetica -> DECIMAL .)
+    DIFERENT        reduce using rule 38 (exp_aritmetica -> DECIMAL .)
+    RPAR            reduce using rule 38 (exp_aritmetica -> DECIMAL .)
+    AND             reduce using rule 38 (exp_aritmetica -> DECIMAL .)
+    OR              reduce using rule 38 (exp_aritmetica -> DECIMAL .)
+    PRINT           reduce using rule 38 (exp_aritmetica -> DECIMAL .)
+    PRINTLN         reduce using rule 38 (exp_aritmetica -> DECIMAL .)
+    ID              reduce using rule 38 (exp_aritmetica -> DECIMAL .)
+    WHILE           reduce using rule 38 (exp_aritmetica -> DECIMAL .)
+    IF              reduce using rule 38 (exp_aritmetica -> DECIMAL .)
+    $end            reduce using rule 38 (exp_aritmetica -> DECIMAL .)
+    RBRACE          reduce using rule 38 (exp_aritmetica -> DECIMAL .)
 
 
 state 30
 
-    (38) exp_aritmetica -> CHAR .
+    (39) exp_aritmetica -> CARACTER .
 
-    PLUS            reduce using rule 38 (exp_aritmetica -> CHAR .)
-    MINUS           reduce using rule 38 (exp_aritmetica -> CHAR .)
-    TIMES           reduce using rule 38 (exp_aritmetica -> CHAR .)
-    DIV             reduce using rule 38 (exp_aritmetica -> CHAR .)
-    POT             reduce using rule 38 (exp_aritmetica -> CHAR .)
-    LESS            reduce using rule 38 (exp_aritmetica -> CHAR .)
-    LESSEQ          reduce using rule 38 (exp_aritmetica -> CHAR .)
-    GREATHER        reduce using rule 38 (exp_aritmetica -> CHAR .)
-    GREATHEREQ      reduce using rule 38 (exp_aritmetica -> CHAR .)
-    EQUALITY        reduce using rule 38 (exp_aritmetica -> CHAR .)
-    DIFERENT        reduce using rule 38 (exp_aritmetica -> CHAR .)
-    RPAR            reduce using rule 38 (exp_aritmetica -> CHAR .)
-    AND             reduce using rule 38 (exp_aritmetica -> CHAR .)
-    OR              reduce using rule 38 (exp_aritmetica -> CHAR .)
-    PRINT           reduce using rule 38 (exp_aritmetica -> CHAR .)
-    PRINTLN         reduce using rule 38 (exp_aritmetica -> CHAR .)
-    ID              reduce using rule 38 (exp_aritmetica -> CHAR .)
-    WHILE           reduce using rule 38 (exp_aritmetica -> CHAR .)
-    IF              reduce using rule 38 (exp_aritmetica -> CHAR .)
-    $end            reduce using rule 38 (exp_aritmetica -> CHAR .)
-    RBRACE          reduce using rule 38 (exp_aritmetica -> CHAR .)
+    PLUS            reduce using rule 39 (exp_aritmetica -> CARACTER .)
+    MINUS           reduce using rule 39 (exp_aritmetica -> CARACTER .)
+    TIMES           reduce using rule 39 (exp_aritmetica -> CARACTER .)
+    DIV             reduce using rule 39 (exp_aritmetica -> CARACTER .)
+    MOD             reduce using rule 39 (exp_aritmetica -> CARACTER .)
+    POT             reduce using rule 39 (exp_aritmetica -> CARACTER .)
+    LESS            reduce using rule 39 (exp_aritmetica -> CARACTER .)
+    LESSEQ          reduce using rule 39 (exp_aritmetica -> CARACTER .)
+    GREATHER        reduce using rule 39 (exp_aritmetica -> CARACTER .)
+    GREATHEREQ      reduce using rule 39 (exp_aritmetica -> CARACTER .)
+    EQUALITY        reduce using rule 39 (exp_aritmetica -> CARACTER .)
+    DIFERENT        reduce using rule 39 (exp_aritmetica -> CARACTER .)
+    RPAR            reduce using rule 39 (exp_aritmetica -> CARACTER .)
+    AND             reduce using rule 39 (exp_aritmetica -> CARACTER .)
+    OR              reduce using rule 39 (exp_aritmetica -> CARACTER .)
+    PRINT           reduce using rule 39 (exp_aritmetica -> CARACTER .)
+    PRINTLN         reduce using rule 39 (exp_aritmetica -> CARACTER .)
+    ID              reduce using rule 39 (exp_aritmetica -> CARACTER .)
+    WHILE           reduce using rule 39 (exp_aritmetica -> CARACTER .)
+    IF              reduce using rule 39 (exp_aritmetica -> CARACTER .)
+    $end            reduce using rule 39 (exp_aritmetica -> CARACTER .)
+    RBRACE          reduce using rule 39 (exp_aritmetica -> CARACTER .)
 
 
 state 31
 
-    (39) exp_aritmetica -> STRING .
+    (40) exp_aritmetica -> STRING .
 
-    PLUS            reduce using rule 39 (exp_aritmetica -> STRING .)
-    MINUS           reduce using rule 39 (exp_aritmetica -> STRING .)
-    TIMES           reduce using rule 39 (exp_aritmetica -> STRING .)
-    DIV             reduce using rule 39 (exp_aritmetica -> STRING .)
-    POT             reduce using rule 39 (exp_aritmetica -> STRING .)
-    LESS            reduce using rule 39 (exp_aritmetica -> STRING .)
-    LESSEQ          reduce using rule 39 (exp_aritmetica -> STRING .)
-    GREATHER        reduce using rule 39 (exp_aritmetica -> STRING .)
-    GREATHEREQ      reduce using rule 39 (exp_aritmetica -> STRING .)
-    EQUALITY        reduce using rule 39 (exp_aritmetica -> STRING .)
-    DIFERENT        reduce using rule 39 (exp_aritmetica -> STRING .)
-    RPAR            reduce using rule 39 (exp_aritmetica -> STRING .)
-    AND             reduce using rule 39 (exp_aritmetica -> STRING .)
-    OR              reduce using rule 39 (exp_aritmetica -> STRING .)
-    PRINT           reduce using rule 39 (exp_aritmetica -> STRING .)
-    PRINTLN         reduce using rule 39 (exp_aritmetica -> STRING .)
-    ID              reduce using rule 39 (exp_aritmetica -> STRING .)
-    WHILE           reduce using rule 39 (exp_aritmetica -> STRING .)
-    IF              reduce using rule 39 (exp_aritmetica -> STRING .)
-    $end            reduce using rule 39 (exp_aritmetica -> STRING .)
-    RBRACE          reduce using rule 39 (exp_aritmetica -> STRING .)
+    PLUS            reduce using rule 40 (exp_aritmetica -> STRING .)
+    MINUS           reduce using rule 40 (exp_aritmetica -> STRING .)
+    TIMES           reduce using rule 40 (exp_aritmetica -> STRING .)
+    DIV             reduce using rule 40 (exp_aritmetica -> STRING .)
+    MOD             reduce using rule 40 (exp_aritmetica -> STRING .)
+    POT             reduce using rule 40 (exp_aritmetica -> STRING .)
+    LESS            reduce using rule 40 (exp_aritmetica -> STRING .)
+    LESSEQ          reduce using rule 40 (exp_aritmetica -> STRING .)
+    GREATHER        reduce using rule 40 (exp_aritmetica -> STRING .)
+    GREATHEREQ      reduce using rule 40 (exp_aritmetica -> STRING .)
+    EQUALITY        reduce using rule 40 (exp_aritmetica -> STRING .)
+    DIFERENT        reduce using rule 40 (exp_aritmetica -> STRING .)
+    RPAR            reduce using rule 40 (exp_aritmetica -> STRING .)
+    AND             reduce using rule 40 (exp_aritmetica -> STRING .)
+    OR              reduce using rule 40 (exp_aritmetica -> STRING .)
+    PRINT           reduce using rule 40 (exp_aritmetica -> STRING .)
+    PRINTLN         reduce using rule 40 (exp_aritmetica -> STRING .)
+    ID              reduce using rule 40 (exp_aritmetica -> STRING .)
+    WHILE           reduce using rule 40 (exp_aritmetica -> STRING .)
+    IF              reduce using rule 40 (exp_aritmetica -> STRING .)
+    $end            reduce using rule 40 (exp_aritmetica -> STRING .)
+    RBRACE          reduce using rule 40 (exp_aritmetica -> STRING .)
 
 
 state 32
 
-    (40) exp_aritmetica -> TRUE .
+    (41) exp_aritmetica -> TRUE .
 
-    PLUS            reduce using rule 40 (exp_aritmetica -> TRUE .)
-    MINUS           reduce using rule 40 (exp_aritmetica -> TRUE .)
-    TIMES           reduce using rule 40 (exp_aritmetica -> TRUE .)
-    DIV             reduce using rule 40 (exp_aritmetica -> TRUE .)
-    POT             reduce using rule 40 (exp_aritmetica -> TRUE .)
-    LESS            reduce using rule 40 (exp_aritmetica -> TRUE .)
-    LESSEQ          reduce using rule 40 (exp_aritmetica -> TRUE .)
-    GREATHER        reduce using rule 40 (exp_aritmetica -> TRUE .)
-    GREATHEREQ      reduce using rule 40 (exp_aritmetica -> TRUE .)
-    EQUALITY        reduce using rule 40 (exp_aritmetica -> TRUE .)
-    DIFERENT        reduce using rule 40 (exp_aritmetica -> TRUE .)
-    RPAR            reduce using rule 40 (exp_aritmetica -> TRUE .)
-    AND             reduce using rule 40 (exp_aritmetica -> TRUE .)
-    OR              reduce using rule 40 (exp_aritmetica -> TRUE .)
-    PRINT           reduce using rule 40 (exp_aritmetica -> TRUE .)
-    PRINTLN         reduce using rule 40 (exp_aritmetica -> TRUE .)
-    ID              reduce using rule 40 (exp_aritmetica -> TRUE .)
-    WHILE           reduce using rule 40 (exp_aritmetica -> TRUE .)
-    IF              reduce using rule 40 (exp_aritmetica -> TRUE .)
-    $end            reduce using rule 40 (exp_aritmetica -> TRUE .)
-    RBRACE          reduce using rule 40 (exp_aritmetica -> TRUE .)
+    PLUS            reduce using rule 41 (exp_aritmetica -> TRUE .)
+    MINUS           reduce using rule 41 (exp_aritmetica -> TRUE .)
+    TIMES           reduce using rule 41 (exp_aritmetica -> TRUE .)
+    DIV             reduce using rule 41 (exp_aritmetica -> TRUE .)
+    MOD             reduce using rule 41 (exp_aritmetica -> TRUE .)
+    POT             reduce using rule 41 (exp_aritmetica -> TRUE .)
+    LESS            reduce using rule 41 (exp_aritmetica -> TRUE .)
+    LESSEQ          reduce using rule 41 (exp_aritmetica -> TRUE .)
+    GREATHER        reduce using rule 41 (exp_aritmetica -> TRUE .)
+    GREATHEREQ      reduce using rule 41 (exp_aritmetica -> TRUE .)
+    EQUALITY        reduce using rule 41 (exp_aritmetica -> TRUE .)
+    DIFERENT        reduce using rule 41 (exp_aritmetica -> TRUE .)
+    RPAR            reduce using rule 41 (exp_aritmetica -> TRUE .)
+    AND             reduce using rule 41 (exp_aritmetica -> TRUE .)
+    OR              reduce using rule 41 (exp_aritmetica -> TRUE .)
+    PRINT           reduce using rule 41 (exp_aritmetica -> TRUE .)
+    PRINTLN         reduce using rule 41 (exp_aritmetica -> TRUE .)
+    ID              reduce using rule 41 (exp_aritmetica -> TRUE .)
+    WHILE           reduce using rule 41 (exp_aritmetica -> TRUE .)
+    IF              reduce using rule 41 (exp_aritmetica -> TRUE .)
+    $end            reduce using rule 41 (exp_aritmetica -> TRUE .)
+    RBRACE          reduce using rule 41 (exp_aritmetica -> TRUE .)
 
 
 state 33
 
-    (41) exp_aritmetica -> FALSE .
+    (42) exp_aritmetica -> FALSE .
 
-    PLUS            reduce using rule 41 (exp_aritmetica -> FALSE .)
-    MINUS           reduce using rule 41 (exp_aritmetica -> FALSE .)
-    TIMES           reduce using rule 41 (exp_aritmetica -> FALSE .)
-    DIV             reduce using rule 41 (exp_aritmetica -> FALSE .)
-    POT             reduce using rule 41 (exp_aritmetica -> FALSE .)
-    LESS            reduce using rule 41 (exp_aritmetica -> FALSE .)
-    LESSEQ          reduce using rule 41 (exp_aritmetica -> FALSE .)
-    GREATHER        reduce using rule 41 (exp_aritmetica -> FALSE .)
-    GREATHEREQ      reduce using rule 41 (exp_aritmetica -> FALSE .)
-    EQUALITY        reduce using rule 41 (exp_aritmetica -> FALSE .)
-    DIFERENT        reduce using rule 41 (exp_aritmetica -> FALSE .)
-    RPAR            reduce using rule 41 (exp_aritmetica -> FALSE .)
-    AND             reduce using rule 41 (exp_aritmetica -> FALSE .)
-    OR              reduce using rule 41 (exp_aritmetica -> FALSE .)
-    PRINT           reduce using rule 41 (exp_aritmetica -> FALSE .)
-    PRINTLN         reduce using rule 41 (exp_aritmetica -> FALSE .)
-    ID              reduce using rule 41 (exp_aritmetica -> FALSE .)
-    WHILE           reduce using rule 41 (exp_aritmetica -> FALSE .)
-    IF              reduce using rule 41 (exp_aritmetica -> FALSE .)
-    $end            reduce using rule 41 (exp_aritmetica -> FALSE .)
-    RBRACE          reduce using rule 41 (exp_aritmetica -> FALSE .)
+    PLUS            reduce using rule 42 (exp_aritmetica -> FALSE .)
+    MINUS           reduce using rule 42 (exp_aritmetica -> FALSE .)
+    TIMES           reduce using rule 42 (exp_aritmetica -> FALSE .)
+    DIV             reduce using rule 42 (exp_aritmetica -> FALSE .)
+    MOD             reduce using rule 42 (exp_aritmetica -> FALSE .)
+    POT             reduce using rule 42 (exp_aritmetica -> FALSE .)
+    LESS            reduce using rule 42 (exp_aritmetica -> FALSE .)
+    LESSEQ          reduce using rule 42 (exp_aritmetica -> FALSE .)
+    GREATHER        reduce using rule 42 (exp_aritmetica -> FALSE .)
+    GREATHEREQ      reduce using rule 42 (exp_aritmetica -> FALSE .)
+    EQUALITY        reduce using rule 42 (exp_aritmetica -> FALSE .)
+    DIFERENT        reduce using rule 42 (exp_aritmetica -> FALSE .)
+    RPAR            reduce using rule 42 (exp_aritmetica -> FALSE .)
+    AND             reduce using rule 42 (exp_aritmetica -> FALSE .)
+    OR              reduce using rule 42 (exp_aritmetica -> FALSE .)
+    PRINT           reduce using rule 42 (exp_aritmetica -> FALSE .)
+    PRINTLN         reduce using rule 42 (exp_aritmetica -> FALSE .)
+    ID              reduce using rule 42 (exp_aritmetica -> FALSE .)
+    WHILE           reduce using rule 42 (exp_aritmetica -> FALSE .)
+    IF              reduce using rule 42 (exp_aritmetica -> FALSE .)
+    $end            reduce using rule 42 (exp_aritmetica -> FALSE .)
+    RBRACE          reduce using rule 42 (exp_aritmetica -> FALSE .)
 
 
 state 34
 
-    (42) exp_aritmetica -> ID .
+    (43) exp_aritmetica -> ID .
 
-    PLUS            reduce using rule 42 (exp_aritmetica -> ID .)
-    MINUS           reduce using rule 42 (exp_aritmetica -> ID .)
-    TIMES           reduce using rule 42 (exp_aritmetica -> ID .)
-    DIV             reduce using rule 42 (exp_aritmetica -> ID .)
-    POT             reduce using rule 42 (exp_aritmetica -> ID .)
-    LESS            reduce using rule 42 (exp_aritmetica -> ID .)
-    LESSEQ          reduce using rule 42 (exp_aritmetica -> ID .)
-    GREATHER        reduce using rule 42 (exp_aritmetica -> ID .)
-    GREATHEREQ      reduce using rule 42 (exp_aritmetica -> ID .)
-    EQUALITY        reduce using rule 42 (exp_aritmetica -> ID .)
-    DIFERENT        reduce using rule 42 (exp_aritmetica -> ID .)
-    RPAR            reduce using rule 42 (exp_aritmetica -> ID .)
-    AND             reduce using rule 42 (exp_aritmetica -> ID .)
-    OR              reduce using rule 42 (exp_aritmetica -> ID .)
-    PRINT           reduce using rule 42 (exp_aritmetica -> ID .)
-    PRINTLN         reduce using rule 42 (exp_aritmetica -> ID .)
-    ID              reduce using rule 42 (exp_aritmetica -> ID .)
-    WHILE           reduce using rule 42 (exp_aritmetica -> ID .)
-    IF              reduce using rule 42 (exp_aritmetica -> ID .)
-    $end            reduce using rule 42 (exp_aritmetica -> ID .)
-    RBRACE          reduce using rule 42 (exp_aritmetica -> ID .)
+    PLUS            reduce using rule 43 (exp_aritmetica -> ID .)
+    MINUS           reduce using rule 43 (exp_aritmetica -> ID .)
+    TIMES           reduce using rule 43 (exp_aritmetica -> ID .)
+    DIV             reduce using rule 43 (exp_aritmetica -> ID .)
+    MOD             reduce using rule 43 (exp_aritmetica -> ID .)
+    POT             reduce using rule 43 (exp_aritmetica -> ID .)
+    LESS            reduce using rule 43 (exp_aritmetica -> ID .)
+    LESSEQ          reduce using rule 43 (exp_aritmetica -> ID .)
+    GREATHER        reduce using rule 43 (exp_aritmetica -> ID .)
+    GREATHEREQ      reduce using rule 43 (exp_aritmetica -> ID .)
+    EQUALITY        reduce using rule 43 (exp_aritmetica -> ID .)
+    DIFERENT        reduce using rule 43 (exp_aritmetica -> ID .)
+    RPAR            reduce using rule 43 (exp_aritmetica -> ID .)
+    AND             reduce using rule 43 (exp_aritmetica -> ID .)
+    OR              reduce using rule 43 (exp_aritmetica -> ID .)
+    PRINT           reduce using rule 43 (exp_aritmetica -> ID .)
+    PRINTLN         reduce using rule 43 (exp_aritmetica -> ID .)
+    ID              reduce using rule 43 (exp_aritmetica -> ID .)
+    WHILE           reduce using rule 43 (exp_aritmetica -> ID .)
+    IF              reduce using rule 43 (exp_aritmetica -> ID .)
+    $end            reduce using rule 43 (exp_aritmetica -> ID .)
+    RBRACE          reduce using rule 43 (exp_aritmetica -> ID .)
 
 
 state 35
@@ -965,7 +988,7 @@ state 35
     (18) exp_logica -> exp_logica . AND exp_logica
     (19) exp_logica -> exp_logica . OR exp_logica
 
-    RPAR            shift and go to state 56
+    RPAR            shift and go to state 57
     AND             shift and go to state 41
     OR              shift and go to state 42
 
@@ -993,7 +1016,7 @@ state 37
     (18) exp_logica -> exp_logica . AND exp_logica
     (19) exp_logica -> exp_logica . OR exp_logica
 
-    RPAR            shift and go to state 57
+    RPAR            shift and go to state 58
     AND             shift and go to state 41
     OR              shift and go to state 42
 
@@ -1005,18 +1028,18 @@ state 38
     (18) exp_logica -> exp_logica . AND exp_logica
     (19) exp_logica -> exp_logica . OR exp_logica
 
-    RPAR            shift and go to state 58
+    RPAR            shift and go to state 59
     AND             shift and go to state 41
     OR              shift and go to state 42
 
 
 state 39
 
-    (35) exp_aritmetica -> LPAR exp_logica . RPAR
+    (36) exp_aritmetica -> LPAR exp_logica . RPAR
     (18) exp_logica -> exp_logica . AND exp_logica
     (19) exp_logica -> exp_logica . OR exp_logica
 
-    RPAR            shift and go to state 59
+    RPAR            shift and go to state 60
     AND             shift and go to state 41
     OR              shift and go to state 42
 
@@ -1052,29 +1075,30 @@ state 41
     (30) exp_aritmetica -> . exp_aritmetica MINUS exp_aritmetica
     (31) exp_aritmetica -> . exp_aritmetica TIMES exp_aritmetica
     (32) exp_aritmetica -> . exp_aritmetica DIV exp_aritmetica
-    (33) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
-    (34) exp_aritmetica -> . MINUS exp_aritmetica
-    (35) exp_aritmetica -> . LPAR exp_logica RPAR
-    (36) exp_aritmetica -> . NUMBER
-    (37) exp_aritmetica -> . DECIMAL
-    (38) exp_aritmetica -> . CHAR
-    (39) exp_aritmetica -> . STRING
-    (40) exp_aritmetica -> . TRUE
-    (41) exp_aritmetica -> . FALSE
-    (42) exp_aritmetica -> . ID
+    (33) exp_aritmetica -> . exp_aritmetica MOD exp_aritmetica
+    (34) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
+    (35) exp_aritmetica -> . MINUS exp_aritmetica
+    (36) exp_aritmetica -> . LPAR exp_logica RPAR
+    (37) exp_aritmetica -> . NUMBER
+    (38) exp_aritmetica -> . DECIMAL
+    (39) exp_aritmetica -> . CARACTER
+    (40) exp_aritmetica -> . STRING
+    (41) exp_aritmetica -> . TRUE
+    (42) exp_aritmetica -> . FALSE
+    (43) exp_aritmetica -> . ID
 
     NOT             shift and go to state 24
     MINUS           shift and go to state 27
     LPAR            shift and go to state 22
     NUMBER          shift and go to state 28
     DECIMAL         shift and go to state 29
-    CHAR            shift and go to state 30
+    CARACTER        shift and go to state 30
     STRING          shift and go to state 31
     TRUE            shift and go to state 32
     FALSE           shift and go to state 33
     ID              shift and go to state 34
 
-    exp_logica                     shift and go to state 60
+    exp_logica                     shift and go to state 61
     exp_relacional                 shift and go to state 25
     exp_aritmetica                 shift and go to state 26
 
@@ -1096,29 +1120,30 @@ state 42
     (30) exp_aritmetica -> . exp_aritmetica MINUS exp_aritmetica
     (31) exp_aritmetica -> . exp_aritmetica TIMES exp_aritmetica
     (32) exp_aritmetica -> . exp_aritmetica DIV exp_aritmetica
-    (33) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
-    (34) exp_aritmetica -> . MINUS exp_aritmetica
-    (35) exp_aritmetica -> . LPAR exp_logica RPAR
-    (36) exp_aritmetica -> . NUMBER
-    (37) exp_aritmetica -> . DECIMAL
-    (38) exp_aritmetica -> . CHAR
-    (39) exp_aritmetica -> . STRING
-    (40) exp_aritmetica -> . TRUE
-    (41) exp_aritmetica -> . FALSE
-    (42) exp_aritmetica -> . ID
+    (33) exp_aritmetica -> . exp_aritmetica MOD exp_aritmetica
+    (34) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
+    (35) exp_aritmetica -> . MINUS exp_aritmetica
+    (36) exp_aritmetica -> . LPAR exp_logica RPAR
+    (37) exp_aritmetica -> . NUMBER
+    (38) exp_aritmetica -> . DECIMAL
+    (39) exp_aritmetica -> . CARACTER
+    (40) exp_aritmetica -> . STRING
+    (41) exp_aritmetica -> . TRUE
+    (42) exp_aritmetica -> . FALSE
+    (43) exp_aritmetica -> . ID
 
     NOT             shift and go to state 24
     MINUS           shift and go to state 27
     LPAR            shift and go to state 22
     NUMBER          shift and go to state 28
     DECIMAL         shift and go to state 29
-    CHAR            shift and go to state 30
+    CARACTER        shift and go to state 30
     STRING          shift and go to state 31
     TRUE            shift and go to state 32
     FALSE           shift and go to state 33
     ID              shift and go to state 34
 
-    exp_logica                     shift and go to state 61
+    exp_logica                     shift and go to state 62
     exp_relacional                 shift and go to state 25
     exp_aritmetica                 shift and go to state 26
 
@@ -1157,28 +1182,29 @@ state 44
     (30) exp_aritmetica -> . exp_aritmetica MINUS exp_aritmetica
     (31) exp_aritmetica -> . exp_aritmetica TIMES exp_aritmetica
     (32) exp_aritmetica -> . exp_aritmetica DIV exp_aritmetica
-    (33) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
-    (34) exp_aritmetica -> . MINUS exp_aritmetica
-    (35) exp_aritmetica -> . LPAR exp_logica RPAR
-    (36) exp_aritmetica -> . NUMBER
-    (37) exp_aritmetica -> . DECIMAL
-    (38) exp_aritmetica -> . CHAR
-    (39) exp_aritmetica -> . STRING
-    (40) exp_aritmetica -> . TRUE
-    (41) exp_aritmetica -> . FALSE
-    (42) exp_aritmetica -> . ID
+    (33) exp_aritmetica -> . exp_aritmetica MOD exp_aritmetica
+    (34) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
+    (35) exp_aritmetica -> . MINUS exp_aritmetica
+    (36) exp_aritmetica -> . LPAR exp_logica RPAR
+    (37) exp_aritmetica -> . NUMBER
+    (38) exp_aritmetica -> . DECIMAL
+    (39) exp_aritmetica -> . CARACTER
+    (40) exp_aritmetica -> . STRING
+    (41) exp_aritmetica -> . TRUE
+    (42) exp_aritmetica -> . FALSE
+    (43) exp_aritmetica -> . ID
 
     MINUS           shift and go to state 27
     LPAR            shift and go to state 22
     NUMBER          shift and go to state 28
     DECIMAL         shift and go to state 29
-    CHAR            shift and go to state 30
+    CARACTER        shift and go to state 30
     STRING          shift and go to state 31
     TRUE            shift and go to state 32
     FALSE           shift and go to state 33
     ID              shift and go to state 34
 
-    exp_relacional                 shift and go to state 62
+    exp_relacional                 shift and go to state 63
     exp_aritmetica                 shift and go to state 26
 
 state 45
@@ -1195,28 +1221,29 @@ state 45
     (30) exp_aritmetica -> . exp_aritmetica MINUS exp_aritmetica
     (31) exp_aritmetica -> . exp_aritmetica TIMES exp_aritmetica
     (32) exp_aritmetica -> . exp_aritmetica DIV exp_aritmetica
-    (33) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
-    (34) exp_aritmetica -> . MINUS exp_aritmetica
-    (35) exp_aritmetica -> . LPAR exp_logica RPAR
-    (36) exp_aritmetica -> . NUMBER
-    (37) exp_aritmetica -> . DECIMAL
-    (38) exp_aritmetica -> . CHAR
-    (39) exp_aritmetica -> . STRING
-    (40) exp_aritmetica -> . TRUE
-    (41) exp_aritmetica -> . FALSE
-    (42) exp_aritmetica -> . ID
+    (33) exp_aritmetica -> . exp_aritmetica MOD exp_aritmetica
+    (34) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
+    (35) exp_aritmetica -> . MINUS exp_aritmetica
+    (36) exp_aritmetica -> . LPAR exp_logica RPAR
+    (37) exp_aritmetica -> . NUMBER
+    (38) exp_aritmetica -> . DECIMAL
+    (39) exp_aritmetica -> . CARACTER
+    (40) exp_aritmetica -> . STRING
+    (41) exp_aritmetica -> . TRUE
+    (42) exp_aritmetica -> . FALSE
+    (43) exp_aritmetica -> . ID
 
     MINUS           shift and go to state 27
     LPAR            shift and go to state 22
     NUMBER          shift and go to state 28
     DECIMAL         shift and go to state 29
-    CHAR            shift and go to state 30
+    CARACTER        shift and go to state 30
     STRING          shift and go to state 31
     TRUE            shift and go to state 32
     FALSE           shift and go to state 33
     ID              shift and go to state 34
 
-    exp_relacional                 shift and go to state 63
+    exp_relacional                 shift and go to state 64
     exp_aritmetica                 shift and go to state 26
 
 state 46
@@ -1233,28 +1260,29 @@ state 46
     (30) exp_aritmetica -> . exp_aritmetica MINUS exp_aritmetica
     (31) exp_aritmetica -> . exp_aritmetica TIMES exp_aritmetica
     (32) exp_aritmetica -> . exp_aritmetica DIV exp_aritmetica
-    (33) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
-    (34) exp_aritmetica -> . MINUS exp_aritmetica
-    (35) exp_aritmetica -> . LPAR exp_logica RPAR
-    (36) exp_aritmetica -> . NUMBER
-    (37) exp_aritmetica -> . DECIMAL
-    (38) exp_aritmetica -> . CHAR
-    (39) exp_aritmetica -> . STRING
-    (40) exp_aritmetica -> . TRUE
-    (41) exp_aritmetica -> . FALSE
-    (42) exp_aritmetica -> . ID
+    (33) exp_aritmetica -> . exp_aritmetica MOD exp_aritmetica
+    (34) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
+    (35) exp_aritmetica -> . MINUS exp_aritmetica
+    (36) exp_aritmetica -> . LPAR exp_logica RPAR
+    (37) exp_aritmetica -> . NUMBER
+    (38) exp_aritmetica -> . DECIMAL
+    (39) exp_aritmetica -> . CARACTER
+    (40) exp_aritmetica -> . STRING
+    (41) exp_aritmetica -> . TRUE
+    (42) exp_aritmetica -> . FALSE
+    (43) exp_aritmetica -> . ID
 
     MINUS           shift and go to state 27
     LPAR            shift and go to state 22
     NUMBER          shift and go to state 28
     DECIMAL         shift and go to state 29
-    CHAR            shift and go to state 30
+    CARACTER        shift and go to state 30
     STRING          shift and go to state 31
     TRUE            shift and go to state 32
     FALSE           shift and go to state 33
     ID              shift and go to state 34
 
-    exp_relacional                 shift and go to state 64
+    exp_relacional                 shift and go to state 65
     exp_aritmetica                 shift and go to state 26
 
 state 47
@@ -1271,28 +1299,29 @@ state 47
     (30) exp_aritmetica -> . exp_aritmetica MINUS exp_aritmetica
     (31) exp_aritmetica -> . exp_aritmetica TIMES exp_aritmetica
     (32) exp_aritmetica -> . exp_aritmetica DIV exp_aritmetica
-    (33) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
-    (34) exp_aritmetica -> . MINUS exp_aritmetica
-    (35) exp_aritmetica -> . LPAR exp_logica RPAR
-    (36) exp_aritmetica -> . NUMBER
-    (37) exp_aritmetica -> . DECIMAL
-    (38) exp_aritmetica -> . CHAR
-    (39) exp_aritmetica -> . STRING
-    (40) exp_aritmetica -> . TRUE
-    (41) exp_aritmetica -> . FALSE
-    (42) exp_aritmetica -> . ID
+    (33) exp_aritmetica -> . exp_aritmetica MOD exp_aritmetica
+    (34) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
+    (35) exp_aritmetica -> . MINUS exp_aritmetica
+    (36) exp_aritmetica -> . LPAR exp_logica RPAR
+    (37) exp_aritmetica -> . NUMBER
+    (38) exp_aritmetica -> . DECIMAL
+    (39) exp_aritmetica -> . CARACTER
+    (40) exp_aritmetica -> . STRING
+    (41) exp_aritmetica -> . TRUE
+    (42) exp_aritmetica -> . FALSE
+    (43) exp_aritmetica -> . ID
 
     MINUS           shift and go to state 27
     LPAR            shift and go to state 22
     NUMBER          shift and go to state 28
     DECIMAL         shift and go to state 29
-    CHAR            shift and go to state 30
+    CARACTER        shift and go to state 30
     STRING          shift and go to state 31
     TRUE            shift and go to state 32
     FALSE           shift and go to state 33
     ID              shift and go to state 34
 
-    exp_relacional                 shift and go to state 65
+    exp_relacional                 shift and go to state 66
     exp_aritmetica                 shift and go to state 26
 
 state 48
@@ -1309,28 +1338,29 @@ state 48
     (30) exp_aritmetica -> . exp_aritmetica MINUS exp_aritmetica
     (31) exp_aritmetica -> . exp_aritmetica TIMES exp_aritmetica
     (32) exp_aritmetica -> . exp_aritmetica DIV exp_aritmetica
-    (33) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
-    (34) exp_aritmetica -> . MINUS exp_aritmetica
-    (35) exp_aritmetica -> . LPAR exp_logica RPAR
-    (36) exp_aritmetica -> . NUMBER
-    (37) exp_aritmetica -> . DECIMAL
-    (38) exp_aritmetica -> . CHAR
-    (39) exp_aritmetica -> . STRING
-    (40) exp_aritmetica -> . TRUE
-    (41) exp_aritmetica -> . FALSE
-    (42) exp_aritmetica -> . ID
+    (33) exp_aritmetica -> . exp_aritmetica MOD exp_aritmetica
+    (34) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
+    (35) exp_aritmetica -> . MINUS exp_aritmetica
+    (36) exp_aritmetica -> . LPAR exp_logica RPAR
+    (37) exp_aritmetica -> . NUMBER
+    (38) exp_aritmetica -> . DECIMAL
+    (39) exp_aritmetica -> . CARACTER
+    (40) exp_aritmetica -> . STRING
+    (41) exp_aritmetica -> . TRUE
+    (42) exp_aritmetica -> . FALSE
+    (43) exp_aritmetica -> . ID
 
     MINUS           shift and go to state 27
     LPAR            shift and go to state 22
     NUMBER          shift and go to state 28
     DECIMAL         shift and go to state 29
-    CHAR            shift and go to state 30
+    CARACTER        shift and go to state 30
     STRING          shift and go to state 31
     TRUE            shift and go to state 32
     FALSE           shift and go to state 33
     ID              shift and go to state 34
 
-    exp_relacional                 shift and go to state 66
+    exp_relacional                 shift and go to state 67
     exp_aritmetica                 shift and go to state 26
 
 state 49
@@ -1347,28 +1377,29 @@ state 49
     (30) exp_aritmetica -> . exp_aritmetica MINUS exp_aritmetica
     (31) exp_aritmetica -> . exp_aritmetica TIMES exp_aritmetica
     (32) exp_aritmetica -> . exp_aritmetica DIV exp_aritmetica
-    (33) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
-    (34) exp_aritmetica -> . MINUS exp_aritmetica
-    (35) exp_aritmetica -> . LPAR exp_logica RPAR
-    (36) exp_aritmetica -> . NUMBER
-    (37) exp_aritmetica -> . DECIMAL
-    (38) exp_aritmetica -> . CHAR
-    (39) exp_aritmetica -> . STRING
-    (40) exp_aritmetica -> . TRUE
-    (41) exp_aritmetica -> . FALSE
-    (42) exp_aritmetica -> . ID
+    (33) exp_aritmetica -> . exp_aritmetica MOD exp_aritmetica
+    (34) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
+    (35) exp_aritmetica -> . MINUS exp_aritmetica
+    (36) exp_aritmetica -> . LPAR exp_logica RPAR
+    (37) exp_aritmetica -> . NUMBER
+    (38) exp_aritmetica -> . DECIMAL
+    (39) exp_aritmetica -> . CARACTER
+    (40) exp_aritmetica -> . STRING
+    (41) exp_aritmetica -> . TRUE
+    (42) exp_aritmetica -> . FALSE
+    (43) exp_aritmetica -> . ID
 
     MINUS           shift and go to state 27
     LPAR            shift and go to state 22
     NUMBER          shift and go to state 28
     DECIMAL         shift and go to state 29
-    CHAR            shift and go to state 30
+    CARACTER        shift and go to state 30
     STRING          shift and go to state 31
     TRUE            shift and go to state 32
     FALSE           shift and go to state 33
     ID              shift and go to state 34
 
-    exp_relacional                 shift and go to state 67
+    exp_relacional                 shift and go to state 68
     exp_aritmetica                 shift and go to state 26
 
 state 50
@@ -1378,28 +1409,29 @@ state 50
     (30) exp_aritmetica -> . exp_aritmetica MINUS exp_aritmetica
     (31) exp_aritmetica -> . exp_aritmetica TIMES exp_aritmetica
     (32) exp_aritmetica -> . exp_aritmetica DIV exp_aritmetica
-    (33) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
-    (34) exp_aritmetica -> . MINUS exp_aritmetica
-    (35) exp_aritmetica -> . LPAR exp_logica RPAR
-    (36) exp_aritmetica -> . NUMBER
-    (37) exp_aritmetica -> . DECIMAL
-    (38) exp_aritmetica -> . CHAR
-    (39) exp_aritmetica -> . STRING
-    (40) exp_aritmetica -> . TRUE
-    (41) exp_aritmetica -> . FALSE
-    (42) exp_aritmetica -> . ID
+    (33) exp_aritmetica -> . exp_aritmetica MOD exp_aritmetica
+    (34) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
+    (35) exp_aritmetica -> . MINUS exp_aritmetica
+    (36) exp_aritmetica -> . LPAR exp_logica RPAR
+    (37) exp_aritmetica -> . NUMBER
+    (38) exp_aritmetica -> . DECIMAL
+    (39) exp_aritmetica -> . CARACTER
+    (40) exp_aritmetica -> . STRING
+    (41) exp_aritmetica -> . TRUE
+    (42) exp_aritmetica -> . FALSE
+    (43) exp_aritmetica -> . ID
 
     MINUS           shift and go to state 27
     LPAR            shift and go to state 22
     NUMBER          shift and go to state 28
     DECIMAL         shift and go to state 29
-    CHAR            shift and go to state 30
+    CARACTER        shift and go to state 30
     STRING          shift and go to state 31
     TRUE            shift and go to state 32
     FALSE           shift and go to state 33
     ID              shift and go to state 34
 
-    exp_aritmetica                 shift and go to state 68
+    exp_aritmetica                 shift and go to state 69
 
 state 51
 
@@ -1408,28 +1440,29 @@ state 51
     (30) exp_aritmetica -> . exp_aritmetica MINUS exp_aritmetica
     (31) exp_aritmetica -> . exp_aritmetica TIMES exp_aritmetica
     (32) exp_aritmetica -> . exp_aritmetica DIV exp_aritmetica
-    (33) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
-    (34) exp_aritmetica -> . MINUS exp_aritmetica
-    (35) exp_aritmetica -> . LPAR exp_logica RPAR
-    (36) exp_aritmetica -> . NUMBER
-    (37) exp_aritmetica -> . DECIMAL
-    (38) exp_aritmetica -> . CHAR
-    (39) exp_aritmetica -> . STRING
-    (40) exp_aritmetica -> . TRUE
-    (41) exp_aritmetica -> . FALSE
-    (42) exp_aritmetica -> . ID
+    (33) exp_aritmetica -> . exp_aritmetica MOD exp_aritmetica
+    (34) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
+    (35) exp_aritmetica -> . MINUS exp_aritmetica
+    (36) exp_aritmetica -> . LPAR exp_logica RPAR
+    (37) exp_aritmetica -> . NUMBER
+    (38) exp_aritmetica -> . DECIMAL
+    (39) exp_aritmetica -> . CARACTER
+    (40) exp_aritmetica -> . STRING
+    (41) exp_aritmetica -> . TRUE
+    (42) exp_aritmetica -> . FALSE
+    (43) exp_aritmetica -> . ID
 
     MINUS           shift and go to state 27
     LPAR            shift and go to state 22
     NUMBER          shift and go to state 28
     DECIMAL         shift and go to state 29
-    CHAR            shift and go to state 30
+    CARACTER        shift and go to state 30
     STRING          shift and go to state 31
     TRUE            shift and go to state 32
     FALSE           shift and go to state 33
     ID              shift and go to state 34
 
-    exp_aritmetica                 shift and go to state 69
+    exp_aritmetica                 shift and go to state 70
 
 state 52
 
@@ -1438,28 +1471,29 @@ state 52
     (30) exp_aritmetica -> . exp_aritmetica MINUS exp_aritmetica
     (31) exp_aritmetica -> . exp_aritmetica TIMES exp_aritmetica
     (32) exp_aritmetica -> . exp_aritmetica DIV exp_aritmetica
-    (33) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
-    (34) exp_aritmetica -> . MINUS exp_aritmetica
-    (35) exp_aritmetica -> . LPAR exp_logica RPAR
-    (36) exp_aritmetica -> . NUMBER
-    (37) exp_aritmetica -> . DECIMAL
-    (38) exp_aritmetica -> . CHAR
-    (39) exp_aritmetica -> . STRING
-    (40) exp_aritmetica -> . TRUE
-    (41) exp_aritmetica -> . FALSE
-    (42) exp_aritmetica -> . ID
+    (33) exp_aritmetica -> . exp_aritmetica MOD exp_aritmetica
+    (34) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
+    (35) exp_aritmetica -> . MINUS exp_aritmetica
+    (36) exp_aritmetica -> . LPAR exp_logica RPAR
+    (37) exp_aritmetica -> . NUMBER
+    (38) exp_aritmetica -> . DECIMAL
+    (39) exp_aritmetica -> . CARACTER
+    (40) exp_aritmetica -> . STRING
+    (41) exp_aritmetica -> . TRUE
+    (42) exp_aritmetica -> . FALSE
+    (43) exp_aritmetica -> . ID
 
     MINUS           shift and go to state 27
     LPAR            shift and go to state 22
     NUMBER          shift and go to state 28
     DECIMAL         shift and go to state 29
-    CHAR            shift and go to state 30
+    CARACTER        shift and go to state 30
     STRING          shift and go to state 31
     TRUE            shift and go to state 32
     FALSE           shift and go to state 33
     ID              shift and go to state 34
 
-    exp_aritmetica                 shift and go to state 70
+    exp_aritmetica                 shift and go to state 71
 
 state 53
 
@@ -1468,52 +1502,23 @@ state 53
     (30) exp_aritmetica -> . exp_aritmetica MINUS exp_aritmetica
     (31) exp_aritmetica -> . exp_aritmetica TIMES exp_aritmetica
     (32) exp_aritmetica -> . exp_aritmetica DIV exp_aritmetica
-    (33) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
-    (34) exp_aritmetica -> . MINUS exp_aritmetica
-    (35) exp_aritmetica -> . LPAR exp_logica RPAR
-    (36) exp_aritmetica -> . NUMBER
-    (37) exp_aritmetica -> . DECIMAL
-    (38) exp_aritmetica -> . CHAR
-    (39) exp_aritmetica -> . STRING
-    (40) exp_aritmetica -> . TRUE
-    (41) exp_aritmetica -> . FALSE
-    (42) exp_aritmetica -> . ID
+    (33) exp_aritmetica -> . exp_aritmetica MOD exp_aritmetica
+    (34) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
+    (35) exp_aritmetica -> . MINUS exp_aritmetica
+    (36) exp_aritmetica -> . LPAR exp_logica RPAR
+    (37) exp_aritmetica -> . NUMBER
+    (38) exp_aritmetica -> . DECIMAL
+    (39) exp_aritmetica -> . CARACTER
+    (40) exp_aritmetica -> . STRING
+    (41) exp_aritmetica -> . TRUE
+    (42) exp_aritmetica -> . FALSE
+    (43) exp_aritmetica -> . ID
 
     MINUS           shift and go to state 27
     LPAR            shift and go to state 22
     NUMBER          shift and go to state 28
     DECIMAL         shift and go to state 29
-    CHAR            shift and go to state 30
-    STRING          shift and go to state 31
-    TRUE            shift and go to state 32
-    FALSE           shift and go to state 33
-    ID              shift and go to state 34
-
-    exp_aritmetica                 shift and go to state 71
-
-state 54
-
-    (33) exp_aritmetica -> exp_aritmetica POT . exp_aritmetica
-    (29) exp_aritmetica -> . exp_aritmetica PLUS exp_aritmetica
-    (30) exp_aritmetica -> . exp_aritmetica MINUS exp_aritmetica
-    (31) exp_aritmetica -> . exp_aritmetica TIMES exp_aritmetica
-    (32) exp_aritmetica -> . exp_aritmetica DIV exp_aritmetica
-    (33) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
-    (34) exp_aritmetica -> . MINUS exp_aritmetica
-    (35) exp_aritmetica -> . LPAR exp_logica RPAR
-    (36) exp_aritmetica -> . NUMBER
-    (37) exp_aritmetica -> . DECIMAL
-    (38) exp_aritmetica -> . CHAR
-    (39) exp_aritmetica -> . STRING
-    (40) exp_aritmetica -> . TRUE
-    (41) exp_aritmetica -> . FALSE
-    (42) exp_aritmetica -> . ID
-
-    MINUS           shift and go to state 27
-    LPAR            shift and go to state 22
-    NUMBER          shift and go to state 28
-    DECIMAL         shift and go to state 29
-    CHAR            shift and go to state 30
+    CARACTER        shift and go to state 30
     STRING          shift and go to state 31
     TRUE            shift and go to state 32
     FALSE           shift and go to state 33
@@ -1521,45 +1526,110 @@ state 54
 
     exp_aritmetica                 shift and go to state 72
 
+state 54
+
+    (33) exp_aritmetica -> exp_aritmetica MOD . exp_aritmetica
+    (29) exp_aritmetica -> . exp_aritmetica PLUS exp_aritmetica
+    (30) exp_aritmetica -> . exp_aritmetica MINUS exp_aritmetica
+    (31) exp_aritmetica -> . exp_aritmetica TIMES exp_aritmetica
+    (32) exp_aritmetica -> . exp_aritmetica DIV exp_aritmetica
+    (33) exp_aritmetica -> . exp_aritmetica MOD exp_aritmetica
+    (34) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
+    (35) exp_aritmetica -> . MINUS exp_aritmetica
+    (36) exp_aritmetica -> . LPAR exp_logica RPAR
+    (37) exp_aritmetica -> . NUMBER
+    (38) exp_aritmetica -> . DECIMAL
+    (39) exp_aritmetica -> . CARACTER
+    (40) exp_aritmetica -> . STRING
+    (41) exp_aritmetica -> . TRUE
+    (42) exp_aritmetica -> . FALSE
+    (43) exp_aritmetica -> . ID
+
+    MINUS           shift and go to state 27
+    LPAR            shift and go to state 22
+    NUMBER          shift and go to state 28
+    DECIMAL         shift and go to state 29
+    CARACTER        shift and go to state 30
+    STRING          shift and go to state 31
+    TRUE            shift and go to state 32
+    FALSE           shift and go to state 33
+    ID              shift and go to state 34
+
+    exp_aritmetica                 shift and go to state 73
+
 state 55
 
-    (34) exp_aritmetica -> MINUS exp_aritmetica .
+    (34) exp_aritmetica -> exp_aritmetica POT . exp_aritmetica
+    (29) exp_aritmetica -> . exp_aritmetica PLUS exp_aritmetica
+    (30) exp_aritmetica -> . exp_aritmetica MINUS exp_aritmetica
+    (31) exp_aritmetica -> . exp_aritmetica TIMES exp_aritmetica
+    (32) exp_aritmetica -> . exp_aritmetica DIV exp_aritmetica
+    (33) exp_aritmetica -> . exp_aritmetica MOD exp_aritmetica
+    (34) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
+    (35) exp_aritmetica -> . MINUS exp_aritmetica
+    (36) exp_aritmetica -> . LPAR exp_logica RPAR
+    (37) exp_aritmetica -> . NUMBER
+    (38) exp_aritmetica -> . DECIMAL
+    (39) exp_aritmetica -> . CARACTER
+    (40) exp_aritmetica -> . STRING
+    (41) exp_aritmetica -> . TRUE
+    (42) exp_aritmetica -> . FALSE
+    (43) exp_aritmetica -> . ID
+
+    MINUS           shift and go to state 27
+    LPAR            shift and go to state 22
+    NUMBER          shift and go to state 28
+    DECIMAL         shift and go to state 29
+    CARACTER        shift and go to state 30
+    STRING          shift and go to state 31
+    TRUE            shift and go to state 32
+    FALSE           shift and go to state 33
+    ID              shift and go to state 34
+
+    exp_aritmetica                 shift and go to state 74
+
+state 56
+
+    (35) exp_aritmetica -> MINUS exp_aritmetica .
     (29) exp_aritmetica -> exp_aritmetica . PLUS exp_aritmetica
     (30) exp_aritmetica -> exp_aritmetica . MINUS exp_aritmetica
     (31) exp_aritmetica -> exp_aritmetica . TIMES exp_aritmetica
     (32) exp_aritmetica -> exp_aritmetica . DIV exp_aritmetica
-    (33) exp_aritmetica -> exp_aritmetica . POT exp_aritmetica
+    (33) exp_aritmetica -> exp_aritmetica . MOD exp_aritmetica
+    (34) exp_aritmetica -> exp_aritmetica . POT exp_aritmetica
 
-    PLUS            reduce using rule 34 (exp_aritmetica -> MINUS exp_aritmetica .)
-    MINUS           reduce using rule 34 (exp_aritmetica -> MINUS exp_aritmetica .)
-    TIMES           reduce using rule 34 (exp_aritmetica -> MINUS exp_aritmetica .)
-    DIV             reduce using rule 34 (exp_aritmetica -> MINUS exp_aritmetica .)
-    POT             reduce using rule 34 (exp_aritmetica -> MINUS exp_aritmetica .)
-    LESS            reduce using rule 34 (exp_aritmetica -> MINUS exp_aritmetica .)
-    LESSEQ          reduce using rule 34 (exp_aritmetica -> MINUS exp_aritmetica .)
-    GREATHER        reduce using rule 34 (exp_aritmetica -> MINUS exp_aritmetica .)
-    GREATHEREQ      reduce using rule 34 (exp_aritmetica -> MINUS exp_aritmetica .)
-    EQUALITY        reduce using rule 34 (exp_aritmetica -> MINUS exp_aritmetica .)
-    DIFERENT        reduce using rule 34 (exp_aritmetica -> MINUS exp_aritmetica .)
-    RPAR            reduce using rule 34 (exp_aritmetica -> MINUS exp_aritmetica .)
-    AND             reduce using rule 34 (exp_aritmetica -> MINUS exp_aritmetica .)
-    OR              reduce using rule 34 (exp_aritmetica -> MINUS exp_aritmetica .)
-    PRINT           reduce using rule 34 (exp_aritmetica -> MINUS exp_aritmetica .)
-    PRINTLN         reduce using rule 34 (exp_aritmetica -> MINUS exp_aritmetica .)
-    ID              reduce using rule 34 (exp_aritmetica -> MINUS exp_aritmetica .)
-    WHILE           reduce using rule 34 (exp_aritmetica -> MINUS exp_aritmetica .)
-    IF              reduce using rule 34 (exp_aritmetica -> MINUS exp_aritmetica .)
-    $end            reduce using rule 34 (exp_aritmetica -> MINUS exp_aritmetica .)
-    RBRACE          reduce using rule 34 (exp_aritmetica -> MINUS exp_aritmetica .)
+    PLUS            reduce using rule 35 (exp_aritmetica -> MINUS exp_aritmetica .)
+    MINUS           reduce using rule 35 (exp_aritmetica -> MINUS exp_aritmetica .)
+    TIMES           reduce using rule 35 (exp_aritmetica -> MINUS exp_aritmetica .)
+    DIV             reduce using rule 35 (exp_aritmetica -> MINUS exp_aritmetica .)
+    MOD             reduce using rule 35 (exp_aritmetica -> MINUS exp_aritmetica .)
+    POT             reduce using rule 35 (exp_aritmetica -> MINUS exp_aritmetica .)
+    LESS            reduce using rule 35 (exp_aritmetica -> MINUS exp_aritmetica .)
+    LESSEQ          reduce using rule 35 (exp_aritmetica -> MINUS exp_aritmetica .)
+    GREATHER        reduce using rule 35 (exp_aritmetica -> MINUS exp_aritmetica .)
+    GREATHEREQ      reduce using rule 35 (exp_aritmetica -> MINUS exp_aritmetica .)
+    EQUALITY        reduce using rule 35 (exp_aritmetica -> MINUS exp_aritmetica .)
+    DIFERENT        reduce using rule 35 (exp_aritmetica -> MINUS exp_aritmetica .)
+    RPAR            reduce using rule 35 (exp_aritmetica -> MINUS exp_aritmetica .)
+    AND             reduce using rule 35 (exp_aritmetica -> MINUS exp_aritmetica .)
+    OR              reduce using rule 35 (exp_aritmetica -> MINUS exp_aritmetica .)
+    PRINT           reduce using rule 35 (exp_aritmetica -> MINUS exp_aritmetica .)
+    PRINTLN         reduce using rule 35 (exp_aritmetica -> MINUS exp_aritmetica .)
+    ID              reduce using rule 35 (exp_aritmetica -> MINUS exp_aritmetica .)
+    WHILE           reduce using rule 35 (exp_aritmetica -> MINUS exp_aritmetica .)
+    IF              reduce using rule 35 (exp_aritmetica -> MINUS exp_aritmetica .)
+    $end            reduce using rule 35 (exp_aritmetica -> MINUS exp_aritmetica .)
+    RBRACE          reduce using rule 35 (exp_aritmetica -> MINUS exp_aritmetica .)
 
   ! PLUS            [ shift and go to state 50 ]
   ! MINUS           [ shift and go to state 51 ]
   ! TIMES           [ shift and go to state 52 ]
   ! DIV             [ shift and go to state 53 ]
-  ! POT             [ shift and go to state 54 ]
+  ! MOD             [ shift and go to state 54 ]
+  ! POT             [ shift and go to state 55 ]
 
 
-state 56
+state 57
 
     (12) println -> PRINTLN LPAR exp_logica RPAR .
 
@@ -1572,49 +1642,50 @@ state 56
     RBRACE          reduce using rule 12 (println -> PRINTLN LPAR exp_logica RPAR .)
 
 
-state 57
+state 58
 
     (15) while -> WHILE LPAR exp_logica RPAR . LBRACE instrucciones RBRACE
 
-    LBRACE          shift and go to state 73
-
-
-state 58
-
-    (16) if -> IF LPAR exp_logica RPAR . LBRACE instrucciones RBRACE
-    (17) if_else -> IF LPAR exp_logica RPAR . LBRACE instrucciones RBRACE ELSE LBRACE instrucciones RBRACE
-
-    LBRACE          shift and go to state 74
+    LBRACE          shift and go to state 75
 
 
 state 59
 
-    (35) exp_aritmetica -> LPAR exp_logica RPAR .
+    (16) if -> IF LPAR exp_logica RPAR . LBRACE instrucciones RBRACE
+    (17) if_else -> IF LPAR exp_logica RPAR . LBRACE instrucciones RBRACE ELSE LBRACE instrucciones RBRACE
 
-    PLUS            reduce using rule 35 (exp_aritmetica -> LPAR exp_logica RPAR .)
-    MINUS           reduce using rule 35 (exp_aritmetica -> LPAR exp_logica RPAR .)
-    TIMES           reduce using rule 35 (exp_aritmetica -> LPAR exp_logica RPAR .)
-    DIV             reduce using rule 35 (exp_aritmetica -> LPAR exp_logica RPAR .)
-    POT             reduce using rule 35 (exp_aritmetica -> LPAR exp_logica RPAR .)
-    LESS            reduce using rule 35 (exp_aritmetica -> LPAR exp_logica RPAR .)
-    LESSEQ          reduce using rule 35 (exp_aritmetica -> LPAR exp_logica RPAR .)
-    GREATHER        reduce using rule 35 (exp_aritmetica -> LPAR exp_logica RPAR .)
-    GREATHEREQ      reduce using rule 35 (exp_aritmetica -> LPAR exp_logica RPAR .)
-    EQUALITY        reduce using rule 35 (exp_aritmetica -> LPAR exp_logica RPAR .)
-    DIFERENT        reduce using rule 35 (exp_aritmetica -> LPAR exp_logica RPAR .)
-    RPAR            reduce using rule 35 (exp_aritmetica -> LPAR exp_logica RPAR .)
-    AND             reduce using rule 35 (exp_aritmetica -> LPAR exp_logica RPAR .)
-    OR              reduce using rule 35 (exp_aritmetica -> LPAR exp_logica RPAR .)
-    PRINT           reduce using rule 35 (exp_aritmetica -> LPAR exp_logica RPAR .)
-    PRINTLN         reduce using rule 35 (exp_aritmetica -> LPAR exp_logica RPAR .)
-    ID              reduce using rule 35 (exp_aritmetica -> LPAR exp_logica RPAR .)
-    WHILE           reduce using rule 35 (exp_aritmetica -> LPAR exp_logica RPAR .)
-    IF              reduce using rule 35 (exp_aritmetica -> LPAR exp_logica RPAR .)
-    $end            reduce using rule 35 (exp_aritmetica -> LPAR exp_logica RPAR .)
-    RBRACE          reduce using rule 35 (exp_aritmetica -> LPAR exp_logica RPAR .)
+    LBRACE          shift and go to state 76
 
 
 state 60
+
+    (36) exp_aritmetica -> LPAR exp_logica RPAR .
+
+    PLUS            reduce using rule 36 (exp_aritmetica -> LPAR exp_logica RPAR .)
+    MINUS           reduce using rule 36 (exp_aritmetica -> LPAR exp_logica RPAR .)
+    TIMES           reduce using rule 36 (exp_aritmetica -> LPAR exp_logica RPAR .)
+    DIV             reduce using rule 36 (exp_aritmetica -> LPAR exp_logica RPAR .)
+    MOD             reduce using rule 36 (exp_aritmetica -> LPAR exp_logica RPAR .)
+    POT             reduce using rule 36 (exp_aritmetica -> LPAR exp_logica RPAR .)
+    LESS            reduce using rule 36 (exp_aritmetica -> LPAR exp_logica RPAR .)
+    LESSEQ          reduce using rule 36 (exp_aritmetica -> LPAR exp_logica RPAR .)
+    GREATHER        reduce using rule 36 (exp_aritmetica -> LPAR exp_logica RPAR .)
+    GREATHEREQ      reduce using rule 36 (exp_aritmetica -> LPAR exp_logica RPAR .)
+    EQUALITY        reduce using rule 36 (exp_aritmetica -> LPAR exp_logica RPAR .)
+    DIFERENT        reduce using rule 36 (exp_aritmetica -> LPAR exp_logica RPAR .)
+    RPAR            reduce using rule 36 (exp_aritmetica -> LPAR exp_logica RPAR .)
+    AND             reduce using rule 36 (exp_aritmetica -> LPAR exp_logica RPAR .)
+    OR              reduce using rule 36 (exp_aritmetica -> LPAR exp_logica RPAR .)
+    PRINT           reduce using rule 36 (exp_aritmetica -> LPAR exp_logica RPAR .)
+    PRINTLN         reduce using rule 36 (exp_aritmetica -> LPAR exp_logica RPAR .)
+    ID              reduce using rule 36 (exp_aritmetica -> LPAR exp_logica RPAR .)
+    WHILE           reduce using rule 36 (exp_aritmetica -> LPAR exp_logica RPAR .)
+    IF              reduce using rule 36 (exp_aritmetica -> LPAR exp_logica RPAR .)
+    $end            reduce using rule 36 (exp_aritmetica -> LPAR exp_logica RPAR .)
+    RBRACE          reduce using rule 36 (exp_aritmetica -> LPAR exp_logica RPAR .)
+
+
+state 61
 
     (18) exp_logica -> exp_logica AND exp_logica .
     (18) exp_logica -> exp_logica . AND exp_logica
@@ -1635,7 +1706,7 @@ state 60
   ! AND             [ shift and go to state 41 ]
 
 
-state 61
+state 62
 
     (19) exp_logica -> exp_logica OR exp_logica .
     (18) exp_logica -> exp_logica . AND exp_logica
@@ -1656,7 +1727,7 @@ state 61
   ! OR              [ shift and go to state 42 ]
 
 
-state 62
+state 63
 
     (22) exp_relacional -> exp_relacional LESS exp_relacional .
     (22) exp_relacional -> exp_relacional . LESS exp_relacional
@@ -1691,7 +1762,7 @@ state 62
   ! DIFERENT        [ shift and go to state 49 ]
 
 
-state 63
+state 64
 
     (23) exp_relacional -> exp_relacional LESSEQ exp_relacional .
     (22) exp_relacional -> exp_relacional . LESS exp_relacional
@@ -1726,7 +1797,7 @@ state 63
   ! DIFERENT        [ shift and go to state 49 ]
 
 
-state 64
+state 65
 
     (24) exp_relacional -> exp_relacional GREATHER exp_relacional .
     (22) exp_relacional -> exp_relacional . LESS exp_relacional
@@ -1761,7 +1832,7 @@ state 64
   ! DIFERENT        [ shift and go to state 49 ]
 
 
-state 65
+state 66
 
     (25) exp_relacional -> exp_relacional GREATHEREQ exp_relacional .
     (22) exp_relacional -> exp_relacional . LESS exp_relacional
@@ -1796,7 +1867,7 @@ state 65
   ! DIFERENT        [ shift and go to state 49 ]
 
 
-state 66
+state 67
 
     (26) exp_relacional -> exp_relacional EQUALITY exp_relacional .
     (22) exp_relacional -> exp_relacional . LESS exp_relacional
@@ -1831,7 +1902,7 @@ state 66
   ! DIFERENT        [ shift and go to state 49 ]
 
 
-state 67
+state 68
 
     (27) exp_relacional -> exp_relacional DIFERENT exp_relacional .
     (22) exp_relacional -> exp_relacional . LESS exp_relacional
@@ -1866,14 +1937,15 @@ state 67
   ! DIFERENT        [ shift and go to state 49 ]
 
 
-state 68
+state 69
 
     (29) exp_aritmetica -> exp_aritmetica PLUS exp_aritmetica .
     (29) exp_aritmetica -> exp_aritmetica . PLUS exp_aritmetica
     (30) exp_aritmetica -> exp_aritmetica . MINUS exp_aritmetica
     (31) exp_aritmetica -> exp_aritmetica . TIMES exp_aritmetica
     (32) exp_aritmetica -> exp_aritmetica . DIV exp_aritmetica
-    (33) exp_aritmetica -> exp_aritmetica . POT exp_aritmetica
+    (33) exp_aritmetica -> exp_aritmetica . MOD exp_aritmetica
+    (34) exp_aritmetica -> exp_aritmetica . POT exp_aritmetica
 
     PLUS            reduce using rule 29 (exp_aritmetica -> exp_aritmetica PLUS exp_aritmetica .)
     MINUS           reduce using rule 29 (exp_aritmetica -> exp_aritmetica PLUS exp_aritmetica .)
@@ -1895,23 +1967,26 @@ state 68
     RBRACE          reduce using rule 29 (exp_aritmetica -> exp_aritmetica PLUS exp_aritmetica .)
     TIMES           shift and go to state 52
     DIV             shift and go to state 53
-    POT             shift and go to state 54
+    MOD             shift and go to state 54
+    POT             shift and go to state 55
 
   ! TIMES           [ reduce using rule 29 (exp_aritmetica -> exp_aritmetica PLUS exp_aritmetica .) ]
   ! DIV             [ reduce using rule 29 (exp_aritmetica -> exp_aritmetica PLUS exp_aritmetica .) ]
+  ! MOD             [ reduce using rule 29 (exp_aritmetica -> exp_aritmetica PLUS exp_aritmetica .) ]
   ! POT             [ reduce using rule 29 (exp_aritmetica -> exp_aritmetica PLUS exp_aritmetica .) ]
   ! PLUS            [ shift and go to state 50 ]
   ! MINUS           [ shift and go to state 51 ]
 
 
-state 69
+state 70
 
     (30) exp_aritmetica -> exp_aritmetica MINUS exp_aritmetica .
     (29) exp_aritmetica -> exp_aritmetica . PLUS exp_aritmetica
     (30) exp_aritmetica -> exp_aritmetica . MINUS exp_aritmetica
     (31) exp_aritmetica -> exp_aritmetica . TIMES exp_aritmetica
     (32) exp_aritmetica -> exp_aritmetica . DIV exp_aritmetica
-    (33) exp_aritmetica -> exp_aritmetica . POT exp_aritmetica
+    (33) exp_aritmetica -> exp_aritmetica . MOD exp_aritmetica
+    (34) exp_aritmetica -> exp_aritmetica . POT exp_aritmetica
 
     PLUS            reduce using rule 30 (exp_aritmetica -> exp_aritmetica MINUS exp_aritmetica .)
     MINUS           reduce using rule 30 (exp_aritmetica -> exp_aritmetica MINUS exp_aritmetica .)
@@ -1933,23 +2008,26 @@ state 69
     RBRACE          reduce using rule 30 (exp_aritmetica -> exp_aritmetica MINUS exp_aritmetica .)
     TIMES           shift and go to state 52
     DIV             shift and go to state 53
-    POT             shift and go to state 54
+    MOD             shift and go to state 54
+    POT             shift and go to state 55
 
   ! TIMES           [ reduce using rule 30 (exp_aritmetica -> exp_aritmetica MINUS exp_aritmetica .) ]
   ! DIV             [ reduce using rule 30 (exp_aritmetica -> exp_aritmetica MINUS exp_aritmetica .) ]
+  ! MOD             [ reduce using rule 30 (exp_aritmetica -> exp_aritmetica MINUS exp_aritmetica .) ]
   ! POT             [ reduce using rule 30 (exp_aritmetica -> exp_aritmetica MINUS exp_aritmetica .) ]
   ! PLUS            [ shift and go to state 50 ]
   ! MINUS           [ shift and go to state 51 ]
 
 
-state 70
+state 71
 
     (31) exp_aritmetica -> exp_aritmetica TIMES exp_aritmetica .
     (29) exp_aritmetica -> exp_aritmetica . PLUS exp_aritmetica
     (30) exp_aritmetica -> exp_aritmetica . MINUS exp_aritmetica
     (31) exp_aritmetica -> exp_aritmetica . TIMES exp_aritmetica
     (32) exp_aritmetica -> exp_aritmetica . DIV exp_aritmetica
-    (33) exp_aritmetica -> exp_aritmetica . POT exp_aritmetica
+    (33) exp_aritmetica -> exp_aritmetica . MOD exp_aritmetica
+    (34) exp_aritmetica -> exp_aritmetica . POT exp_aritmetica
 
     PLUS            reduce using rule 31 (exp_aritmetica -> exp_aritmetica TIMES exp_aritmetica .)
     MINUS           reduce using rule 31 (exp_aritmetica -> exp_aritmetica TIMES exp_aritmetica .)
@@ -1971,8 +2049,10 @@ state 70
     IF              reduce using rule 31 (exp_aritmetica -> exp_aritmetica TIMES exp_aritmetica .)
     $end            reduce using rule 31 (exp_aritmetica -> exp_aritmetica TIMES exp_aritmetica .)
     RBRACE          reduce using rule 31 (exp_aritmetica -> exp_aritmetica TIMES exp_aritmetica .)
-    POT             shift and go to state 54
+    MOD             shift and go to state 54
+    POT             shift and go to state 55
 
+  ! MOD             [ reduce using rule 31 (exp_aritmetica -> exp_aritmetica TIMES exp_aritmetica .) ]
   ! POT             [ reduce using rule 31 (exp_aritmetica -> exp_aritmetica TIMES exp_aritmetica .) ]
   ! PLUS            [ shift and go to state 50 ]
   ! MINUS           [ shift and go to state 51 ]
@@ -1980,14 +2060,15 @@ state 70
   ! DIV             [ shift and go to state 53 ]
 
 
-state 71
+state 72
 
     (32) exp_aritmetica -> exp_aritmetica DIV exp_aritmetica .
     (29) exp_aritmetica -> exp_aritmetica . PLUS exp_aritmetica
     (30) exp_aritmetica -> exp_aritmetica . MINUS exp_aritmetica
     (31) exp_aritmetica -> exp_aritmetica . TIMES exp_aritmetica
     (32) exp_aritmetica -> exp_aritmetica . DIV exp_aritmetica
-    (33) exp_aritmetica -> exp_aritmetica . POT exp_aritmetica
+    (33) exp_aritmetica -> exp_aritmetica . MOD exp_aritmetica
+    (34) exp_aritmetica -> exp_aritmetica . POT exp_aritmetica
 
     PLUS            reduce using rule 32 (exp_aritmetica -> exp_aritmetica DIV exp_aritmetica .)
     MINUS           reduce using rule 32 (exp_aritmetica -> exp_aritmetica DIV exp_aritmetica .)
@@ -2009,8 +2090,10 @@ state 71
     IF              reduce using rule 32 (exp_aritmetica -> exp_aritmetica DIV exp_aritmetica .)
     $end            reduce using rule 32 (exp_aritmetica -> exp_aritmetica DIV exp_aritmetica .)
     RBRACE          reduce using rule 32 (exp_aritmetica -> exp_aritmetica DIV exp_aritmetica .)
-    POT             shift and go to state 54
+    MOD             shift and go to state 54
+    POT             shift and go to state 55
 
+  ! MOD             [ reduce using rule 32 (exp_aritmetica -> exp_aritmetica DIV exp_aritmetica .) ]
   ! POT             [ reduce using rule 32 (exp_aritmetica -> exp_aritmetica DIV exp_aritmetica .) ]
   ! PLUS            [ shift and go to state 50 ]
   ! MINUS           [ shift and go to state 51 ]
@@ -2018,45 +2101,89 @@ state 71
   ! DIV             [ shift and go to state 53 ]
 
 
-state 72
+state 73
 
-    (33) exp_aritmetica -> exp_aritmetica POT exp_aritmetica .
+    (33) exp_aritmetica -> exp_aritmetica MOD exp_aritmetica .
     (29) exp_aritmetica -> exp_aritmetica . PLUS exp_aritmetica
     (30) exp_aritmetica -> exp_aritmetica . MINUS exp_aritmetica
     (31) exp_aritmetica -> exp_aritmetica . TIMES exp_aritmetica
     (32) exp_aritmetica -> exp_aritmetica . DIV exp_aritmetica
-    (33) exp_aritmetica -> exp_aritmetica . POT exp_aritmetica
+    (33) exp_aritmetica -> exp_aritmetica . MOD exp_aritmetica
+    (34) exp_aritmetica -> exp_aritmetica . POT exp_aritmetica
 
-    PLUS            reduce using rule 33 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
-    MINUS           reduce using rule 33 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
-    TIMES           reduce using rule 33 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
-    DIV             reduce using rule 33 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
-    POT             reduce using rule 33 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
-    LESS            reduce using rule 33 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
-    LESSEQ          reduce using rule 33 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
-    GREATHER        reduce using rule 33 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
-    GREATHEREQ      reduce using rule 33 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
-    EQUALITY        reduce using rule 33 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
-    DIFERENT        reduce using rule 33 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
-    RPAR            reduce using rule 33 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
-    AND             reduce using rule 33 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
-    OR              reduce using rule 33 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
-    PRINT           reduce using rule 33 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
-    PRINTLN         reduce using rule 33 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
-    ID              reduce using rule 33 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
-    WHILE           reduce using rule 33 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
-    IF              reduce using rule 33 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
-    $end            reduce using rule 33 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
-    RBRACE          reduce using rule 33 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
+    PLUS            reduce using rule 33 (exp_aritmetica -> exp_aritmetica MOD exp_aritmetica .)
+    MINUS           reduce using rule 33 (exp_aritmetica -> exp_aritmetica MOD exp_aritmetica .)
+    TIMES           reduce using rule 33 (exp_aritmetica -> exp_aritmetica MOD exp_aritmetica .)
+    DIV             reduce using rule 33 (exp_aritmetica -> exp_aritmetica MOD exp_aritmetica .)
+    MOD             reduce using rule 33 (exp_aritmetica -> exp_aritmetica MOD exp_aritmetica .)
+    LESS            reduce using rule 33 (exp_aritmetica -> exp_aritmetica MOD exp_aritmetica .)
+    LESSEQ          reduce using rule 33 (exp_aritmetica -> exp_aritmetica MOD exp_aritmetica .)
+    GREATHER        reduce using rule 33 (exp_aritmetica -> exp_aritmetica MOD exp_aritmetica .)
+    GREATHEREQ      reduce using rule 33 (exp_aritmetica -> exp_aritmetica MOD exp_aritmetica .)
+    EQUALITY        reduce using rule 33 (exp_aritmetica -> exp_aritmetica MOD exp_aritmetica .)
+    DIFERENT        reduce using rule 33 (exp_aritmetica -> exp_aritmetica MOD exp_aritmetica .)
+    RPAR            reduce using rule 33 (exp_aritmetica -> exp_aritmetica MOD exp_aritmetica .)
+    AND             reduce using rule 33 (exp_aritmetica -> exp_aritmetica MOD exp_aritmetica .)
+    OR              reduce using rule 33 (exp_aritmetica -> exp_aritmetica MOD exp_aritmetica .)
+    PRINT           reduce using rule 33 (exp_aritmetica -> exp_aritmetica MOD exp_aritmetica .)
+    PRINTLN         reduce using rule 33 (exp_aritmetica -> exp_aritmetica MOD exp_aritmetica .)
+    ID              reduce using rule 33 (exp_aritmetica -> exp_aritmetica MOD exp_aritmetica .)
+    WHILE           reduce using rule 33 (exp_aritmetica -> exp_aritmetica MOD exp_aritmetica .)
+    IF              reduce using rule 33 (exp_aritmetica -> exp_aritmetica MOD exp_aritmetica .)
+    $end            reduce using rule 33 (exp_aritmetica -> exp_aritmetica MOD exp_aritmetica .)
+    RBRACE          reduce using rule 33 (exp_aritmetica -> exp_aritmetica MOD exp_aritmetica .)
+    POT             shift and go to state 55
+
+  ! POT             [ reduce using rule 33 (exp_aritmetica -> exp_aritmetica MOD exp_aritmetica .) ]
+  ! PLUS            [ shift and go to state 50 ]
+  ! MINUS           [ shift and go to state 51 ]
+  ! TIMES           [ shift and go to state 52 ]
+  ! DIV             [ shift and go to state 53 ]
+  ! MOD             [ shift and go to state 54 ]
+
+
+state 74
+
+    (34) exp_aritmetica -> exp_aritmetica POT exp_aritmetica .
+    (29) exp_aritmetica -> exp_aritmetica . PLUS exp_aritmetica
+    (30) exp_aritmetica -> exp_aritmetica . MINUS exp_aritmetica
+    (31) exp_aritmetica -> exp_aritmetica . TIMES exp_aritmetica
+    (32) exp_aritmetica -> exp_aritmetica . DIV exp_aritmetica
+    (33) exp_aritmetica -> exp_aritmetica . MOD exp_aritmetica
+    (34) exp_aritmetica -> exp_aritmetica . POT exp_aritmetica
+
+    PLUS            reduce using rule 34 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
+    MINUS           reduce using rule 34 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
+    TIMES           reduce using rule 34 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
+    DIV             reduce using rule 34 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
+    MOD             reduce using rule 34 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
+    POT             reduce using rule 34 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
+    LESS            reduce using rule 34 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
+    LESSEQ          reduce using rule 34 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
+    GREATHER        reduce using rule 34 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
+    GREATHEREQ      reduce using rule 34 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
+    EQUALITY        reduce using rule 34 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
+    DIFERENT        reduce using rule 34 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
+    RPAR            reduce using rule 34 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
+    AND             reduce using rule 34 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
+    OR              reduce using rule 34 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
+    PRINT           reduce using rule 34 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
+    PRINTLN         reduce using rule 34 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
+    ID              reduce using rule 34 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
+    WHILE           reduce using rule 34 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
+    IF              reduce using rule 34 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
+    $end            reduce using rule 34 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
+    RBRACE          reduce using rule 34 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
 
   ! PLUS            [ shift and go to state 50 ]
   ! MINUS           [ shift and go to state 51 ]
   ! TIMES           [ shift and go to state 52 ]
   ! DIV             [ shift and go to state 53 ]
-  ! POT             [ shift and go to state 54 ]
+  ! MOD             [ shift and go to state 54 ]
+  ! POT             [ shift and go to state 55 ]
 
 
-state 73
+state 75
 
     (15) while -> WHILE LPAR exp_logica RPAR LBRACE . instrucciones RBRACE
     (2) instrucciones -> . instrucciones instruccion
@@ -2082,7 +2209,7 @@ state 73
     WHILE           shift and go to state 14
     IF              shift and go to state 15
 
-    instrucciones                  shift and go to state 75
+    instrucciones                  shift and go to state 77
     instruccion                    shift and go to state 3
     print                          shift and go to state 4
     println                        shift and go to state 5
@@ -2092,7 +2219,7 @@ state 73
     if                             shift and go to state 9
     if_else                        shift and go to state 10
 
-state 74
+state 76
 
     (16) if -> IF LPAR exp_logica RPAR LBRACE . instrucciones RBRACE
     (17) if_else -> IF LPAR exp_logica RPAR LBRACE . instrucciones RBRACE ELSE LBRACE instrucciones RBRACE
@@ -2119,7 +2246,7 @@ state 74
     WHILE           shift and go to state 14
     IF              shift and go to state 15
 
-    instrucciones                  shift and go to state 76
+    instrucciones                  shift and go to state 78
     instruccion                    shift and go to state 3
     print                          shift and go to state 4
     println                        shift and go to state 5
@@ -2129,7 +2256,7 @@ state 74
     if                             shift and go to state 9
     if_else                        shift and go to state 10
 
-state 75
+state 77
 
     (15) while -> WHILE LPAR exp_logica RPAR LBRACE instrucciones . RBRACE
     (2) instrucciones -> instrucciones . instruccion
@@ -2148,7 +2275,7 @@ state 75
     (16) if -> . IF LPAR exp_logica RPAR LBRACE instrucciones RBRACE
     (17) if_else -> . IF LPAR exp_logica RPAR LBRACE instrucciones RBRACE ELSE LBRACE instrucciones RBRACE
 
-    RBRACE          shift and go to state 77
+    RBRACE          shift and go to state 79
     PRINT           shift and go to state 11
     PRINTLN         shift and go to state 12
     ID              shift and go to state 13
@@ -2164,7 +2291,7 @@ state 75
     if                             shift and go to state 9
     if_else                        shift and go to state 10
 
-state 76
+state 78
 
     (16) if -> IF LPAR exp_logica RPAR LBRACE instrucciones . RBRACE
     (17) if_else -> IF LPAR exp_logica RPAR LBRACE instrucciones . RBRACE ELSE LBRACE instrucciones RBRACE
@@ -2184,7 +2311,7 @@ state 76
     (16) if -> . IF LPAR exp_logica RPAR LBRACE instrucciones RBRACE
     (17) if_else -> . IF LPAR exp_logica RPAR LBRACE instrucciones RBRACE ELSE LBRACE instrucciones RBRACE
 
-    RBRACE          shift and go to state 78
+    RBRACE          shift and go to state 80
     PRINT           shift and go to state 11
     PRINTLN         shift and go to state 12
     ID              shift and go to state 13
@@ -2200,7 +2327,7 @@ state 76
     if                             shift and go to state 9
     if_else                        shift and go to state 10
 
-state 77
+state 79
 
     (15) while -> WHILE LPAR exp_logica RPAR LBRACE instrucciones RBRACE .
 
@@ -2213,7 +2340,7 @@ state 77
     RBRACE          reduce using rule 15 (while -> WHILE LPAR exp_logica RPAR LBRACE instrucciones RBRACE .)
 
 
-state 78
+state 80
 
     (16) if -> IF LPAR exp_logica RPAR LBRACE instrucciones RBRACE .
     (17) if_else -> IF LPAR exp_logica RPAR LBRACE instrucciones RBRACE . ELSE LBRACE instrucciones RBRACE
@@ -2225,17 +2352,17 @@ state 78
     IF              reduce using rule 16 (if -> IF LPAR exp_logica RPAR LBRACE instrucciones RBRACE .)
     $end            reduce using rule 16 (if -> IF LPAR exp_logica RPAR LBRACE instrucciones RBRACE .)
     RBRACE          reduce using rule 16 (if -> IF LPAR exp_logica RPAR LBRACE instrucciones RBRACE .)
-    ELSE            shift and go to state 79
+    ELSE            shift and go to state 81
 
 
-state 79
+state 81
 
     (17) if_else -> IF LPAR exp_logica RPAR LBRACE instrucciones RBRACE ELSE . LBRACE instrucciones RBRACE
 
-    LBRACE          shift and go to state 80
+    LBRACE          shift and go to state 82
 
 
-state 80
+state 82
 
     (17) if_else -> IF LPAR exp_logica RPAR LBRACE instrucciones RBRACE ELSE LBRACE . instrucciones RBRACE
     (2) instrucciones -> . instrucciones instruccion
@@ -2261,7 +2388,7 @@ state 80
     WHILE           shift and go to state 14
     IF              shift and go to state 15
 
-    instrucciones                  shift and go to state 81
+    instrucciones                  shift and go to state 83
     instruccion                    shift and go to state 3
     print                          shift and go to state 4
     println                        shift and go to state 5
@@ -2271,7 +2398,7 @@ state 80
     if                             shift and go to state 9
     if_else                        shift and go to state 10
 
-state 81
+state 83
 
     (17) if_else -> IF LPAR exp_logica RPAR LBRACE instrucciones RBRACE ELSE LBRACE instrucciones . RBRACE
     (2) instrucciones -> instrucciones . instruccion
@@ -2290,7 +2417,7 @@ state 81
     (16) if -> . IF LPAR exp_logica RPAR LBRACE instrucciones RBRACE
     (17) if_else -> . IF LPAR exp_logica RPAR LBRACE instrucciones RBRACE ELSE LBRACE instrucciones RBRACE
 
-    RBRACE          shift and go to state 82
+    RBRACE          shift and go to state 84
     PRINT           shift and go to state 11
     PRINTLN         shift and go to state 12
     ID              shift and go to state 13
@@ -2306,7 +2433,7 @@ state 81
     if                             shift and go to state 9
     if_else                        shift and go to state 10
 
-state 82
+state 84
 
     (17) if_else -> IF LPAR exp_logica RPAR LBRACE instrucciones RBRACE ELSE LBRACE instrucciones RBRACE .
 

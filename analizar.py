@@ -4,7 +4,9 @@ from instrucciones import *
 
 def ejecutar_print(instruccion, ts) :
     res = ejecutar_logica(instruccion.exp, ts)
-    if res is None : return ''
+    if res is None : 
+        # TODO: Error semántico, Se esperaba una expresión
+        return ''
 
     if isinstance(res, bool) :
         if res : res = 'True'
@@ -13,12 +15,14 @@ def ejecutar_print(instruccion, ts) :
 
 def ejecutar_println(instruccion, ts) :
     res = ejecutar_logica(instruccion.exp, ts)
-    if res is None : return ''
+    if res is None : 
+        # TODO: Error semántico, Se esperaba una expresión
+        return ''
 
     if isinstance(res, bool) :
         if res : res = 'True'
         else : res = 'False'
-    res += '\n'
+    res = f'{res}\n'
     return res
 
 def ejecutar_definicion(instruccion, ts) :
@@ -54,10 +58,20 @@ def ejecutar_logica(expresion, ts) :
     if isinstance(expresion, LogicaBinaria) : 
         exp1 = ejecutar_logica(expresion.exp1, ts)
         exp2 = ejecutar_logica(expresion.exp2, ts)
+        if not isinstance(exp1, bool) and not isinstance(exp2, bool) :
+            # TODO: Error semántico, Se esperaban instancias de bool
+            print('Error semántico, Se esperaban instancias de bool')
+            return None
+
         if expresion.operador == OP_LOGICA.AND : exp1 and exp2
-        if expresion.operador == OP_LOGICA.OR : exp1 and exp2
+        if expresion.operador == OP_LOGICA.OR : exp1 or exp2
     elif isinstance(expresion, Negado) : 
         exp1 = ejecutar_logica(expresion.exp1, ts)
+        if not isinstance(exp1, bool) :
+            # TODO: Error semántico, Se esperaba instancia de bool
+            print('Error semántico, Se esperaba instancia de bool')
+            return None
+        
         return not exp1
     elif isinstance(expresion, ExpresionRelacional) : return ejecutar_relacional(expresion, ts)
     elif isinstance(expresion, ExpresionAritmetica) : return ejecutar_aritmetica(expresion, ts)
@@ -67,6 +81,12 @@ def ejecutar_relacional(expresion, ts) :
     
     exp1 = ejecutar_relacional(expresion.exp1, ts)
     exp2 = ejecutar_relacional(expresion.exp2, ts)
+
+    if not ((isinstance(exp1, int) or isinstance(exp1, float)) and (isinstance(exp2, int) or isinstance(exp2, float))) : 
+        # TODO: Error semántico, Se esperaban instancias de Int64 o Float64
+        print('Error semántico, Se esperaban instancias de Int64 o Float64')
+        return None
+
     if expresion.operador == OP_RELACIONAL.MENOR : return exp1 < exp2
     elif expresion.operador == OP_RELACIONAL.MENOR_IGUAL : return exp1 <= exp2
     elif expresion.operador == OP_RELACIONAL.MAYOR : return exp1 > exp2
@@ -78,35 +98,64 @@ def ejecutar_aritmetica(expresion, ts) :
     if isinstance(expresion, AritmeticaBinaria) :
         exp1 = ejecutar_aritmetica(expresion.exp1, ts)
         exp2 = ejecutar_aritmetica(expresion.exp2, ts)
-        # VALIDAR TIPO DE DATO
-        if expresion.operador == OP_ARITMETICA.MAS : 
-            if isinstance(exp1, str) or isinstance(exp2, str) : 
-                # ERROR SEMANTICO: OPERACION NO SOPORTADA POR STRING
-                return None
-            return exp1 + exp2
-        elif expresion.operador == OP_ARITMETICA.MENOS : 
-            if isinstance(exp1, str) or isinstance(exp2, str) : 
-                # ERROR SEMANTICO: OPERACION NO SOPORTADA POR STRING
-                return None
-            return exp1 - exp2
-        elif expresion.operador == OP_ARITMETICA.POR : 
-            if isinstance(exp1, str) or isinstance(exp2, str) : return exp1 + exp2
-            return exp1 * exp2
-        elif expresion.operador == OP_ARITMETICA.DIVIDIDO : 
-            if isinstance(exp1, str) or isinstance(exp2, str) : 
-                # ERROR SEMANTICO: OPERACION NO SOPORTADA POR STRING
-                return None
-            return exp1 / exp2
-        elif expresion.operador == OP_ARITMETICA.POTENCIA : 
-            if isinstance(exp1, str) :
-                if isinstance(exp2, int) :
-                    return exp1 * exp2
-                else :
-                    # ERROR SEMANTICO: SE ESPERABA UN INT
-                    return None
-            return exp1 ** exp2
+        
+        if expresion.operador == OP_ARITMETICA.MAS :
+            if (isinstance(exp1, int) or isinstance(exp1, float) or isinstance(exp1, bool)) and (isinstance(exp2, int) or isinstance(exp2, float) or isinstance(exp2, bool)) :
+                return exp1 + exp2
+            if (isinstance(exp1, str) or isinstance(exp2, str)) :
+                if isinstance(exp1, str) and len(exp1) == 1 : exp1 = int(exp1)
+                if isinstance(exp2, str) and len(exp2) == 1 : exp2 = int(exp2)
+                return exp1 + exp2
+            
+            # TODO: Agregar error
+            print('Error semántico: En +, se esperaba Int64, Float64, Char o Bool')
+            return None
+        elif expresion.operador == OP_ARITMETICA.MENOS :
+            if (isinstance(exp1, int) or isinstance(exp1, float) or isinstance(exp1, bool)) and (isinstance(exp2, int) or isinstance(exp2, float) or isinstance(exp2, bool)) :
+                return exp1 - exp2
+            
+            # TODO: Agregar error
+            print('Error semántico: En -, se esperaba Int64, Float64 o Bool')
+            return None
+        elif expresion.operador == OP_ARITMETICA.POR :
+            if isinstance(exp1, bool) and isinstance(exp2, bool) : return bool(exp1 * exp2)
+            if (isinstance(exp1, int) or isinstance(exp1, float) or isinstance(exp1, bool)) and (isinstance(exp2, int) or isinstance(exp2, float) or isinstance(exp2, bool)) :
+                if isinstance(exp1, bool) and isinstance(exp2, bool) :
+                    return bool(exp1 * exp2)
+                return exp1 * exp2
+            if isinstance(exp1, str) and isinstance(exp2, str) : return exp1 + exp2
+            
+            # TODO: Agregar error
+            print('Error semántico: En *, se esperaba Int64, Float64 o Bool')
+            return None
+        elif expresion.operador == OP_ARITMETICA.DIVIDIDO :
+            if (isinstance(exp1, int) or isinstance(exp1, float) or isinstance(exp1, bool)) and (isinstance(exp2, int) or isinstance(exp2, float) or isinstance(exp2, bool)) :
+                return exp1 / exp2
+            
+            # TODO: Agregar error
+            print('Error semántico: En /, se esperaba Int64, Float64 o Bool')
+            return None
+        elif expresion.operador == OP_ARITMETICA.MODULO :
+            if (isinstance(exp1, int) or isinstance(exp1, float) or isinstance(exp1, bool)) and (isinstance(exp2, int) or isinstance(exp2, float) or isinstance(exp2, bool)) :
+                return exp1 % exp2
+            
+            # TODO: Agregar error
+            print('Error semántico: En %, se esperaba Int64, Float64 o Bool')
+            return None
+        elif expresion.operador == OP_ARITMETICA.POTENCIA :
+            if (isinstance(exp1, int) or isinstance(exp1, float) or isinstance(exp1, bool)) and (isinstance(exp2, int) or isinstance(exp2, float) or isinstance(exp2, bool)) :
+                if isinstance(exp1, bool) : return bool(exp1 ** exp2)
+                return exp1 ** exp2
+            elif isinstance(exp1, str) and (isinstance(exp2, int) or isinstance(exp2, float)) :
+                return exp1 * exp2
+            
+            # TODO: Agregar error
+            print('Error semántico: En ^, se esperaba Int64, Float64, Bool o string ^ Int64')
+            return None
     elif isinstance(expresion, Negativo) :
+        print(expresion)
         exp1 = ejecutar_aritmetica(expresion.exp1, ts)
+
         return exp1 * -1
     elif isinstance(expresion, Numero) :
         return expresion.val

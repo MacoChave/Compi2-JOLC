@@ -6,14 +6,14 @@ class Print(Instruccion) :
         self.exp = exp
 
     def __str__(self) -> str:
-        return 'Instancia print'
+        return f'type: print exp: {self.exp}'
 
 class Println(Instruccion) :
     def __init__(self, exp) :
         self.exp = exp
 
     def __str__(self) -> str:
-        return 'Instancia println'
+        return f'type: print exp: {self.exp}'
 
 class Mientras(Instruccion) :
     def __init__(self, condicion, instrucciones = []) :
@@ -21,7 +21,7 @@ class Mientras(Instruccion) :
         self.instrucciones = instrucciones
 
     def __str__(self) -> str:
-        return 'Instancia mientras'
+        return f'type: while cond: {self.condicion} instrucciones: {self.instrucciones}'
 
 class Definicion(Instruccion) :
     def __init__(self, id, exp = None) :
@@ -29,7 +29,7 @@ class Definicion(Instruccion) :
         self.exp = exp
 
     def __str__(self) -> str:
-        return f'id: {self.id} exp: {self.exp}'
+        return f'type: definicion id: {self.id} exp: {self.exp}'
 
 class If(Instruccion) :
     def __init__(self, condicion, instrucciones = []) :
@@ -37,7 +37,7 @@ class If(Instruccion) :
         self.instrucciones = instrucciones
 
     def __str__(self) -> str:
-        return 'Instancia if'
+        return f'type: if condicion: {self.condicion} then: {self.instrucciones}'
 
 class IfElse(Instruccion) :
     def __init__(self, condicion, instrucciones_v = [], instrucciones_f = []) :
@@ -46,4 +46,4 @@ class IfElse(Instruccion) :
         self.instrucciones_f = instrucciones_f
 
     def __str__(self) -> str:
-        return 'Instancia if else'
+        return f'type: if condicion: {self.condicion} then: {self.instrucciones_v} else {self.instrucciones_f}'

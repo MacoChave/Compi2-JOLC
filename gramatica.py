@@ -2,9 +2,11 @@ reservadas = {
     'Int64': 'INT',
     'Float64': 'FLOAT',
     'String': 'STR',
+    'Char': 'CHR',
     'Bool': 'BOOL',
     'true': 'TRUE',
     'false': 'FALSE',
+    'Nothing': 'NOTHING',
     'print': 'PRINT',
     'println': 'PRINTLN',
     'typeof': 'TYPEOF',
@@ -30,6 +32,7 @@ tokens = [
     'MINUS',
     'TIMES',
     'DIV',
+    'MOD',
     'POT',
     'LESS',
     'LESSEQ',
@@ -39,7 +42,7 @@ tokens = [
     'DIFERENT',
     'DECIMAL',
     'NUMBER',
-    'CHAR',
+    'CARACTER',
     'STRING',
     'ID'
 ] + list(reservadas.values())
@@ -57,6 +60,7 @@ t_PLUS = r'\+'
 t_MINUS = r'-'
 t_TIMES = r'\*'
 t_DIV = r'/'
+t_MOD = r'%'
 t_POT = r'\^'
 t_LESS = r'<'
 t_LESSEQ = r'<='
@@ -83,7 +87,7 @@ def t_NUMBER(t) :
         t.value = 0
     return t
 
-def t_CHAR(t) :
+def t_CARACTER(t) :
     r'\'([^\\\n]|(\\.))\''
     char = t.value[1:-1]
     if len(char) == 1 : t.value = char[0]
@@ -137,6 +141,7 @@ precedence = (
     ('nonassoc', 'LESS', 'GREATHER', 'LESSEQ', 'GREATHEREQ', 'EQUALITY', 'DIFERENT'),
     ('left', 'PLUS', 'MINUS'),
     ('left', 'TIMES', 'DIV'),
+    ('left', 'MOD'),
     ('left', 'POT'),
     ('right', 'UMINUS'),
 )
@@ -232,20 +237,22 @@ def p_aritmetica_binaria(t) :
                         | exp_aritmetica MINUS exp_aritmetica
                         | exp_aritmetica TIMES exp_aritmetica
                         | exp_aritmetica DIV exp_aritmetica
+                        | exp_aritmetica MOD exp_aritmetica
                         | exp_aritmetica POT exp_aritmetica'''
     if t[2] == '+'      : t[0] = AritmeticaBinaria(t[1], t[3], OP_ARITMETICA.MAS)
     elif t[2] == '-'    : t[0] = AritmeticaBinaria(t[1], t[3], OP_ARITMETICA.MENOS)
     elif t[2] == '*'    : t[0] = AritmeticaBinaria(t[1], t[3], OP_ARITMETICA.POR)
     elif t[2] == '/'    : t[0] = AritmeticaBinaria(t[1], t[3], OP_ARITMETICA.DIVIDIDO)
+    elif t[2] == '%'    : t[0] = AritmeticaBinaria(t[1], t[3], OP_ARITMETICA.MODULO)
     elif t[2] == '^'    : t[0] = AritmeticaBinaria(t[1], t[3], OP_ARITMETICA.POTENCIA)
     
 def p_aritmetica_negativo(t) :
     'exp_aritmetica : MINUS exp_aritmetica %prec UMINUS'
-    t[0] = Negativo(t[1])
+    t[0] = Negativo(t[2])
 
 def p_aritmetica_agrupacion(t) :
     'exp_aritmetica : LPAR exp_logica RPAR'
-    t[0] = t[1]
+    t[0] = t[2]
 
 def p_aritmetica_basico_num(t) :
     'exp_aritmetica  : NUMBER'
@@ -256,7 +263,7 @@ def p_aritmetica_basico_dec(t) :
     t[0] = Numero(t[1])
 
 def p_aritmetica_basico_char(t) :
-    'exp_aritmetica : CHAR'
+    'exp_aritmetica : CARACTER'
     t[0] = Caracter(t[1])
 
 def p_aritmetica_basico_str(t) :

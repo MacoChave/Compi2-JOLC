@@ -16,6 +16,7 @@ reservadas = {
     'if': 'IF',
     'else': 'ELSE',
     'while': 'WHILE',
+    'end': 'END'
 }
 
 tokens = [
@@ -125,14 +126,14 @@ def t_error(t) :
     print(f'Error léxico: Caracter {t.value[0]} no reconocido')
     error = Error('Error léxico', f'Caracter {t.value[0]} no reconocido', t.lexer.lineno)
     global lista_errores
-    lista_errores.agregar(error)
+    lista_errores.append(error)
     t.lexer.skip(1)
 
 from te import Error, TablaError
 import ply.lex as lex
 lexer = lex.lex()
 
-lista_errores = TablaError()
+lista_errores = []
 
 precedence = (
     ('left', 'AND'),
@@ -189,16 +190,16 @@ def p_asignacion(t) :
     t[0] = Definicion(t[1], t[3])
 
 def p_while(t) :
-    'while : WHILE LPAR exp_logica RPAR LBRACE instrucciones RBRACE'
-    t[0] = Mientras(t[3], t[6])
+    'while : WHILE exp_logica instrucciones END SEMICOL'
+    t[0] = Mientras(t[2], t[3])
 
 def p_if(t) :
-    'if : IF LPAR exp_logica RPAR LBRACE instrucciones RBRACE'
-    t[0] = If(t[3], t[6])
+    'if : IF exp_logica instrucciones END SEMICOL'
+    t[0] = If(t[2], t[3])
 
 def p_if_else(t) :
-    'if_else : IF LPAR exp_logica RPAR LBRACE instrucciones RBRACE ELSE LBRACE instrucciones RBRACE'
-    t[0] = IfElse(t[3], t[6], t[10])
+    'if_else : IF exp_logica instrucciones ELSE instrucciones END SEMICOL'
+    t[0] = IfElse(t[2], t[3], t[5])
 
 def p_logica_binaria(t) :
     '''exp_logica    : exp_logica AND exp_logica
@@ -287,10 +288,12 @@ def p_error(t) :
     print(t)
     print(f'Error sintáctico: {t.value} no esperado')
     error = Error('Error sintáctico', f'{t.value} no se esperaba', t.lexer.lineno)
-    lista_errores.agregar(error)
+    lista_errores.append(error)
 
 import ply.yacc as yacc
 parser = yacc.yacc()
 
 def parse(input) :
+    global lista_errores
+    lista_errores.clear()
     return parser.parse(input)

@@ -12,6 +12,7 @@ def ejecutar_print(instruccion, ts) :
     if isinstance(res, bool) :
         if res : res = 'True'
         else : res = 'False'
+    print('devuelvo ', res)
     return res
 
 def ejecutar_println(instruccion, ts) :
@@ -38,11 +39,14 @@ def ejecutar_definicion(instruccion, ts) :
 def ejecutar_mientras(instruccion, ts) :
     print('toy en while')
     cond = ejecutar_logica(instruccion.condicion, ts)
+    print('cond es ', cond)
     response = ''
     if isinstance(cond, bool) :
         while cond :
             ts_local = TS.TablaSimbolo(ts.simbolos)
-            return ejecutar_instrucciones(instruccion.instrucciones, ts_local)
+            response = f'{response}{ejecutar_instrucciones(instruccion.instrucciones, ts_local)}'
+            cond = ejecutar_logica(instruccion.condicion, ts)
+            print('cond es ', cond)
         return response
     else :
         # TODO: Agregar error

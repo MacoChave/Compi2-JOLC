@@ -50,3 +50,15 @@ class NativaLog10(FuncionNativa) :
 class NativaSqrt(FuncionNativa) :
     def __init__(self, exp) -> None:
         self.exp = exp
+
+class NativaLength(FuncionNativa) :
+    def __init__(self, exp) -> None:
+        self.exp = exp
+
+class NativaUppercase(FuncionNativa) :
+    def __init__(self, exp) -> None:
+        self.exp = exp
+
+class NativaLowercase(FuncionNativa) :
+    def __init__(self, exp) -> None:
+        self.exp = exp

@@ -19,6 +19,7 @@ reservadas = {
     'tan': 'TAN',
     'log10': 'LOG10',
     'sqrt': 'SQRT',
+    'length': 'LENGTH',
     'uppercase': 'UPPERCASE',
     'lowercase': 'LOWERCASE',
     'if': 'IF',
@@ -340,32 +341,34 @@ def p_aritmetica_nativa_sin(t) :
     'exp_aritmetica : SIN LPAR exp_logica RPAR'
     t[0] = NativaSin(t[3])
     
-
 def p_aritmetica_nativa_cos(t) :
     'exp_aritmetica : COS LPAR exp_logica RPAR'
     t[0] = NativaCos(t[3])
     
-
 def p_aritmetica_nativa_tan(t) :
     'exp_aritmetica : TAN LPAR exp_logica RPAR'
     t[0] = NativaTan(t[3])
     
-
 def p_aritmetica_nativa_log10(t) :
     'exp_aritmetica : LOG10 LPAR exp_logica RPAR'
     t[0] = NativaLog10(t[3])
-    
 
 def p_aritmetica_nativa_sqrt(t) :
     'exp_aritmetica : SQRT LPAR exp_logica RPAR'
     t[0] = NativaSqrt(t[3])
     
-    # 'sin': 'SIN',
-    # 'cos': 'COS',
-    # 'tan': 'TAN',
-    # 'log10': 'LOG10',
-    # 'sqrt': 'SQRT',
-
+def p_aritmetica_nativa_length(t) :
+    'exp_aritmetica : LENGTH LPAR exp_logica RPAR'
+    t[0] = NativaLength(t[3])
+    
+def p_aritmetica_nativa_uppercase(t) :
+    'exp_aritmetica : UPPERCASE LPAR exp_logica RPAR'
+    t[0] = NativaUppercase(t[3])
+    
+def p_aritmetica_nativa_lowercase(t) :
+    'exp_aritmetica : LOWERCASE LPAR exp_logica RPAR'
+    t[0] = NativaLowercase(t[3])
+    
 def p_error(t) :
     global lista_errores
     print(t)

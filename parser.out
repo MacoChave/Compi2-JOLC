@@ -3,10 +3,8 @@ Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 Unused terminals:
 
     LBRACE
-    LOWERCASE
     NOTHING
     RBRACE
-    UPPERCASE
 
 Grammar
 
@@ -71,6 +69,9 @@ Rule 57    exp_aritmetica -> COS LPAR exp_logica RPAR
 Rule 58    exp_aritmetica -> TAN LPAR exp_logica RPAR
 Rule 59    exp_aritmetica -> LOG10 LPAR exp_logica RPAR
 Rule 60    exp_aritmetica -> SQRT LPAR exp_logica RPAR
+Rule 61    exp_aritmetica -> LENGTH LPAR exp_logica RPAR
+Rule 62    exp_aritmetica -> UPPERCASE LPAR exp_logica RPAR
+Rule 63    exp_aritmetica -> LOWERCASE LPAR exp_logica RPAR
 
 Terminals, with rules where they appear
 
@@ -97,11 +98,12 @@ ID                   : 15 16 50
 IF                   : 23 24
 INT64                : 17
 LBRACE               : 
+LENGTH               : 61
 LESS                 : 29
 LESSEQ               : 30
 LOG10                : 59
-LOWERCASE            : 
-LPAR                 : 11 12 43 51 52 53 54 55 56 57 58 59 60
+LOWERCASE            : 63
+LPAR                 : 11 12 43 51 52 53 54 55 56 57 58 59 60 61 62 63
 MINUS                : 37 42
 MOD                  : 40
 NOT                  : 27
@@ -114,7 +116,7 @@ POT                  : 41
 PRINT                : 11
 PRINTLN              : 12
 RBRACE               : 
-RPAR                 : 11 12 43 51 52 53 54 55 56 57 58 59 60
+RPAR                 : 11 12 43 51 52 53 54 55 56 57 58 59 60 61 62 63
 SEMICOL              : 22 23 24
 SIN                  : 56
 SQRT                 : 60
@@ -125,7 +127,7 @@ TIMES                : 38
 TRUE                 : 48
 TRUNC                : 54
 TYPEOF               : 51
-UPPERCASE            : 
+UPPERCASE            : 62
 WHILE                : 22
 error                : 
 
@@ -135,7 +137,7 @@ asignacion           : 7
 data_type            : 54 55
 definicion           : 6
 exp_aritmetica       : 35 36 36 37 37 38 38 39 39 40 40 41 41 42
-exp_logica           : 13 14 16 22 23 24 25 25 26 26 27 43 51 52 53 54 55 56 57 58 59 60
+exp_logica           : 13 14 16 22 23 24 25 25 26 26 27 43 51 52 53 54 55 56 57 58 59 60 61 62 63
 exp_relacional       : 28 29 29 30 30 31 31 32 32 33 33 34 34
 if                   : 9
 if_else              : 10
@@ -409,6 +411,9 @@ state 14
     (58) exp_aritmetica -> . TAN LPAR exp_logica RPAR
     (59) exp_aritmetica -> . LOG10 LPAR exp_logica RPAR
     (60) exp_aritmetica -> . SQRT LPAR exp_logica RPAR
+    (61) exp_aritmetica -> . LENGTH LPAR exp_logica RPAR
+    (62) exp_aritmetica -> . UPPERCASE LPAR exp_logica RPAR
+    (63) exp_aritmetica -> . LOWERCASE LPAR exp_logica RPAR
 
     NOT             shift and go to state 21
     MINUS           shift and go to state 24
@@ -430,6 +435,9 @@ state 14
     TAN             shift and go to state 40
     LOG10           shift and go to state 41
     SQRT            shift and go to state 42
+    LENGTH          shift and go to state 43
+    UPPERCASE       shift and go to state 44
+    LOWERCASE       shift and go to state 45
 
     exp_logica                     shift and go to state 20
     exp_relacional                 shift and go to state 22
@@ -475,6 +483,9 @@ state 15
     (58) exp_aritmetica -> . TAN LPAR exp_logica RPAR
     (59) exp_aritmetica -> . LOG10 LPAR exp_logica RPAR
     (60) exp_aritmetica -> . SQRT LPAR exp_logica RPAR
+    (61) exp_aritmetica -> . LENGTH LPAR exp_logica RPAR
+    (62) exp_aritmetica -> . UPPERCASE LPAR exp_logica RPAR
+    (63) exp_aritmetica -> . LOWERCASE LPAR exp_logica RPAR
 
     NOT             shift and go to state 21
     MINUS           shift and go to state 24
@@ -496,8 +507,11 @@ state 15
     TAN             shift and go to state 40
     LOG10           shift and go to state 41
     SQRT            shift and go to state 42
+    LENGTH          shift and go to state 43
+    UPPERCASE       shift and go to state 44
+    LOWERCASE       shift and go to state 45
 
-    exp_logica                     shift and go to state 43
+    exp_logica                     shift and go to state 46
     exp_relacional                 shift and go to state 22
     exp_aritmetica                 shift and go to state 23
 
@@ -556,6 +570,9 @@ state 17
     (58) exp_aritmetica -> . TAN LPAR exp_logica RPAR
     (59) exp_aritmetica -> . LOG10 LPAR exp_logica RPAR
     (60) exp_aritmetica -> . SQRT LPAR exp_logica RPAR
+    (61) exp_aritmetica -> . LENGTH LPAR exp_logica RPAR
+    (62) exp_aritmetica -> . UPPERCASE LPAR exp_logica RPAR
+    (63) exp_aritmetica -> . LOWERCASE LPAR exp_logica RPAR
 
     NOT             shift and go to state 21
     MINUS           shift and go to state 24
@@ -577,9 +594,12 @@ state 17
     TAN             shift and go to state 40
     LOG10           shift and go to state 41
     SQRT            shift and go to state 42
+    LENGTH          shift and go to state 43
+    UPPERCASE       shift and go to state 44
+    LOWERCASE       shift and go to state 45
 
-    print_args                     shift and go to state 44
-    exp_logica                     shift and go to state 45
+    print_args                     shift and go to state 47
+    exp_logica                     shift and go to state 48
     exp_relacional                 shift and go to state 22
     exp_aritmetica                 shift and go to state 23
 
@@ -624,6 +644,9 @@ state 18
     (58) exp_aritmetica -> . TAN LPAR exp_logica RPAR
     (59) exp_aritmetica -> . LOG10 LPAR exp_logica RPAR
     (60) exp_aritmetica -> . SQRT LPAR exp_logica RPAR
+    (61) exp_aritmetica -> . LENGTH LPAR exp_logica RPAR
+    (62) exp_aritmetica -> . UPPERCASE LPAR exp_logica RPAR
+    (63) exp_aritmetica -> . LOWERCASE LPAR exp_logica RPAR
 
     NOT             shift and go to state 21
     MINUS           shift and go to state 24
@@ -645,9 +668,12 @@ state 18
     TAN             shift and go to state 40
     LOG10           shift and go to state 41
     SQRT            shift and go to state 42
+    LENGTH          shift and go to state 43
+    UPPERCASE       shift and go to state 44
+    LOWERCASE       shift and go to state 45
 
-    print_args                     shift and go to state 46
-    exp_logica                     shift and go to state 45
+    print_args                     shift and go to state 49
+    exp_logica                     shift and go to state 48
     exp_relacional                 shift and go to state 22
     exp_aritmetica                 shift and go to state 23
 
@@ -690,6 +716,9 @@ state 19
     (58) exp_aritmetica -> . TAN LPAR exp_logica RPAR
     (59) exp_aritmetica -> . LOG10 LPAR exp_logica RPAR
     (60) exp_aritmetica -> . SQRT LPAR exp_logica RPAR
+    (61) exp_aritmetica -> . LENGTH LPAR exp_logica RPAR
+    (62) exp_aritmetica -> . UPPERCASE LPAR exp_logica RPAR
+    (63) exp_aritmetica -> . LOWERCASE LPAR exp_logica RPAR
 
     NOT             shift and go to state 21
     MINUS           shift and go to state 24
@@ -711,8 +740,11 @@ state 19
     TAN             shift and go to state 40
     LOG10           shift and go to state 41
     SQRT            shift and go to state 42
+    LENGTH          shift and go to state 43
+    UPPERCASE       shift and go to state 44
+    LOWERCASE       shift and go to state 45
 
-    exp_logica                     shift and go to state 47
+    exp_logica                     shift and go to state 50
     exp_relacional                 shift and go to state 22
     exp_aritmetica                 shift and go to state 23
 
@@ -738,15 +770,15 @@ state 20
     (23) if -> . IF exp_logica instrucciones END SEMICOL
     (24) if_else -> . IF exp_logica instrucciones ELSE instrucciones END SEMICOL
 
-    AND             shift and go to state 49
-    OR              shift and go to state 50
+    AND             shift and go to state 52
+    OR              shift and go to state 53
     PRINT           shift and go to state 11
     PRINTLN         shift and go to state 12
     ID              shift and go to state 13
     WHILE           shift and go to state 14
     IF              shift and go to state 15
 
-    instrucciones                  shift and go to state 48
+    instrucciones                  shift and go to state 51
     instruccion                    shift and go to state 3
     print                          shift and go to state 4
     println                        shift and go to state 5
@@ -795,6 +827,9 @@ state 21
     (58) exp_aritmetica -> . TAN LPAR exp_logica RPAR
     (59) exp_aritmetica -> . LOG10 LPAR exp_logica RPAR
     (60) exp_aritmetica -> . SQRT LPAR exp_logica RPAR
+    (61) exp_aritmetica -> . LENGTH LPAR exp_logica RPAR
+    (62) exp_aritmetica -> . UPPERCASE LPAR exp_logica RPAR
+    (63) exp_aritmetica -> . LOWERCASE LPAR exp_logica RPAR
 
     NOT             shift and go to state 21
     MINUS           shift and go to state 24
@@ -816,8 +851,11 @@ state 21
     TAN             shift and go to state 40
     LOG10           shift and go to state 41
     SQRT            shift and go to state 42
+    LENGTH          shift and go to state 43
+    UPPERCASE       shift and go to state 44
+    LOWERCASE       shift and go to state 45
 
-    exp_logica                     shift and go to state 51
+    exp_logica                     shift and go to state 54
     exp_relacional                 shift and go to state 22
     exp_aritmetica                 shift and go to state 23
 
@@ -843,12 +881,12 @@ state 22
     $end            reduce using rule 28 (exp_logica -> exp_relacional .)
     END             reduce using rule 28 (exp_logica -> exp_relacional .)
     ELSE            reduce using rule 28 (exp_logica -> exp_relacional .)
-    LESS            shift and go to state 52
-    LESSEQ          shift and go to state 53
-    GREATHER        shift and go to state 54
-    GREATHEREQ      shift and go to state 55
-    EQUALITY        shift and go to state 56
-    DIFERENT        shift and go to state 57
+    LESS            shift and go to state 55
+    LESSEQ          shift and go to state 56
+    GREATHER        shift and go to state 57
+    GREATHEREQ      shift and go to state 58
+    EQUALITY        shift and go to state 59
+    DIFERENT        shift and go to state 60
 
 
 state 23
@@ -879,12 +917,12 @@ state 23
     $end            reduce using rule 35 (exp_relacional -> exp_aritmetica .)
     END             reduce using rule 35 (exp_relacional -> exp_aritmetica .)
     ELSE            reduce using rule 35 (exp_relacional -> exp_aritmetica .)
-    PLUS            shift and go to state 58
-    MINUS           shift and go to state 59
-    TIMES           shift and go to state 60
-    DIV             shift and go to state 61
-    MOD             shift and go to state 62
-    POT             shift and go to state 63
+    PLUS            shift and go to state 61
+    MINUS           shift and go to state 62
+    TIMES           shift and go to state 63
+    DIV             shift and go to state 64
+    MOD             shift and go to state 65
+    POT             shift and go to state 66
 
 
 state 24
@@ -915,6 +953,9 @@ state 24
     (58) exp_aritmetica -> . TAN LPAR exp_logica RPAR
     (59) exp_aritmetica -> . LOG10 LPAR exp_logica RPAR
     (60) exp_aritmetica -> . SQRT LPAR exp_logica RPAR
+    (61) exp_aritmetica -> . LENGTH LPAR exp_logica RPAR
+    (62) exp_aritmetica -> . UPPERCASE LPAR exp_logica RPAR
+    (63) exp_aritmetica -> . LOWERCASE LPAR exp_logica RPAR
 
     MINUS           shift and go to state 24
     LPAR            shift and go to state 25
@@ -935,8 +976,11 @@ state 24
     TAN             shift and go to state 40
     LOG10           shift and go to state 41
     SQRT            shift and go to state 42
+    LENGTH          shift and go to state 43
+    UPPERCASE       shift and go to state 44
+    LOWERCASE       shift and go to state 45
 
-    exp_aritmetica                 shift and go to state 64
+    exp_aritmetica                 shift and go to state 67
 
 state 25
 
@@ -977,6 +1021,9 @@ state 25
     (58) exp_aritmetica -> . TAN LPAR exp_logica RPAR
     (59) exp_aritmetica -> . LOG10 LPAR exp_logica RPAR
     (60) exp_aritmetica -> . SQRT LPAR exp_logica RPAR
+    (61) exp_aritmetica -> . LENGTH LPAR exp_logica RPAR
+    (62) exp_aritmetica -> . UPPERCASE LPAR exp_logica RPAR
+    (63) exp_aritmetica -> . LOWERCASE LPAR exp_logica RPAR
 
     NOT             shift and go to state 21
     MINUS           shift and go to state 24
@@ -998,8 +1045,11 @@ state 25
     TAN             shift and go to state 40
     LOG10           shift and go to state 41
     SQRT            shift and go to state 42
+    LENGTH          shift and go to state 43
+    UPPERCASE       shift and go to state 44
+    LOWERCASE       shift and go to state 45
 
-    exp_logica                     shift and go to state 65
+    exp_logica                     shift and go to state 68
     exp_relacional                 shift and go to state 22
     exp_aritmetica                 shift and go to state 23
 
@@ -1217,73 +1267,94 @@ state 33
 
     (51) exp_aritmetica -> TYPEOF . LPAR exp_logica RPAR
 
-    LPAR            shift and go to state 66
+    LPAR            shift and go to state 69
 
 
 state 34
 
     (52) exp_aritmetica -> STRING . LPAR exp_logica RPAR
 
-    LPAR            shift and go to state 67
+    LPAR            shift and go to state 70
 
 
 state 35
 
     (53) exp_aritmetica -> FLOAT . LPAR exp_logica RPAR
 
-    LPAR            shift and go to state 68
+    LPAR            shift and go to state 71
 
 
 state 36
 
     (54) exp_aritmetica -> TRUNC . LPAR data_type COMMA exp_logica RPAR
 
-    LPAR            shift and go to state 69
+    LPAR            shift and go to state 72
 
 
 state 37
 
     (55) exp_aritmetica -> PARSE . LPAR data_type COMMA exp_logica RPAR
 
-    LPAR            shift and go to state 70
+    LPAR            shift and go to state 73
 
 
 state 38
 
     (56) exp_aritmetica -> SIN . LPAR exp_logica RPAR
 
-    LPAR            shift and go to state 71
+    LPAR            shift and go to state 74
 
 
 state 39
 
     (57) exp_aritmetica -> COS . LPAR exp_logica RPAR
 
-    LPAR            shift and go to state 72
+    LPAR            shift and go to state 75
 
 
 state 40
 
     (58) exp_aritmetica -> TAN . LPAR exp_logica RPAR
 
-    LPAR            shift and go to state 73
+    LPAR            shift and go to state 76
 
 
 state 41
 
     (59) exp_aritmetica -> LOG10 . LPAR exp_logica RPAR
 
-    LPAR            shift and go to state 74
+    LPAR            shift and go to state 77
 
 
 state 42
 
     (60) exp_aritmetica -> SQRT . LPAR exp_logica RPAR
 
-    LPAR            shift and go to state 75
+    LPAR            shift and go to state 78
 
 
 state 43
+
+    (61) exp_aritmetica -> LENGTH . LPAR exp_logica RPAR
+
+    LPAR            shift and go to state 79
+
+
+state 44
+
+    (62) exp_aritmetica -> UPPERCASE . LPAR exp_logica RPAR
+
+    LPAR            shift and go to state 80
+
+
+state 45
+
+    (63) exp_aritmetica -> LOWERCASE . LPAR exp_logica RPAR
+
+    LPAR            shift and go to state 81
+
+
+state 46
 
     (23) if -> IF exp_logica . instrucciones END SEMICOL
     (24) if_else -> IF exp_logica . instrucciones ELSE instrucciones END SEMICOL
@@ -1306,15 +1377,15 @@ state 43
     (23) if -> . IF exp_logica instrucciones END SEMICOL
     (24) if_else -> . IF exp_logica instrucciones ELSE instrucciones END SEMICOL
 
-    AND             shift and go to state 49
-    OR              shift and go to state 50
+    AND             shift and go to state 52
+    OR              shift and go to state 53
     PRINT           shift and go to state 11
     PRINTLN         shift and go to state 12
     ID              shift and go to state 13
     WHILE           shift and go to state 14
     IF              shift and go to state 15
 
-    instrucciones                  shift and go to state 76
+    instrucciones                  shift and go to state 82
     instruccion                    shift and go to state 3
     print                          shift and go to state 4
     println                        shift and go to state 5
@@ -1324,16 +1395,16 @@ state 43
     if                             shift and go to state 9
     if_else                        shift and go to state 10
 
-state 44
+state 47
 
     (11) print -> PRINT LPAR print_args . RPAR
     (13) print_args -> print_args . COMMA exp_logica
 
-    RPAR            shift and go to state 77
-    COMMA           shift and go to state 78
+    RPAR            shift and go to state 83
+    COMMA           shift and go to state 84
 
 
-state 45
+state 48
 
     (14) print_args -> exp_logica .
     (25) exp_logica -> exp_logica . AND exp_logica
@@ -1341,20 +1412,20 @@ state 45
 
     RPAR            reduce using rule 14 (print_args -> exp_logica .)
     COMMA           reduce using rule 14 (print_args -> exp_logica .)
-    AND             shift and go to state 49
-    OR              shift and go to state 50
+    AND             shift and go to state 52
+    OR              shift and go to state 53
 
 
-state 46
+state 49
 
     (12) println -> PRINTLN LPAR print_args . RPAR
     (13) print_args -> print_args . COMMA exp_logica
 
-    RPAR            shift and go to state 79
-    COMMA           shift and go to state 78
+    RPAR            shift and go to state 85
+    COMMA           shift and go to state 84
 
 
-state 47
+state 50
 
     (16) asignacion -> ID EQUAL exp_logica .
     (25) exp_logica -> exp_logica . AND exp_logica
@@ -1368,11 +1439,11 @@ state 47
     $end            reduce using rule 16 (asignacion -> ID EQUAL exp_logica .)
     END             reduce using rule 16 (asignacion -> ID EQUAL exp_logica .)
     ELSE            reduce using rule 16 (asignacion -> ID EQUAL exp_logica .)
-    AND             shift and go to state 49
-    OR              shift and go to state 50
+    AND             shift and go to state 52
+    OR              shift and go to state 53
 
 
-state 48
+state 51
 
     (22) while -> WHILE exp_logica instrucciones . END SEMICOL
     (2) instrucciones -> instrucciones . instruccion
@@ -1391,7 +1462,7 @@ state 48
     (23) if -> . IF exp_logica instrucciones END SEMICOL
     (24) if_else -> . IF exp_logica instrucciones ELSE instrucciones END SEMICOL
 
-    END             shift and go to state 80
+    END             shift and go to state 86
     PRINT           shift and go to state 11
     PRINTLN         shift and go to state 12
     ID              shift and go to state 13
@@ -1407,7 +1478,7 @@ state 48
     if                             shift and go to state 9
     if_else                        shift and go to state 10
 
-state 49
+state 52
 
     (25) exp_logica -> exp_logica AND . exp_logica
     (25) exp_logica -> . exp_logica AND exp_logica
@@ -1446,6 +1517,9 @@ state 49
     (58) exp_aritmetica -> . TAN LPAR exp_logica RPAR
     (59) exp_aritmetica -> . LOG10 LPAR exp_logica RPAR
     (60) exp_aritmetica -> . SQRT LPAR exp_logica RPAR
+    (61) exp_aritmetica -> . LENGTH LPAR exp_logica RPAR
+    (62) exp_aritmetica -> . UPPERCASE LPAR exp_logica RPAR
+    (63) exp_aritmetica -> . LOWERCASE LPAR exp_logica RPAR
 
     NOT             shift and go to state 21
     MINUS           shift and go to state 24
@@ -1467,12 +1541,15 @@ state 49
     TAN             shift and go to state 40
     LOG10           shift and go to state 41
     SQRT            shift and go to state 42
+    LENGTH          shift and go to state 43
+    UPPERCASE       shift and go to state 44
+    LOWERCASE       shift and go to state 45
 
-    exp_logica                     shift and go to state 81
+    exp_logica                     shift and go to state 87
     exp_relacional                 shift and go to state 22
     exp_aritmetica                 shift and go to state 23
 
-state 50
+state 53
 
     (26) exp_logica -> exp_logica OR . exp_logica
     (25) exp_logica -> . exp_logica AND exp_logica
@@ -1511,6 +1588,9 @@ state 50
     (58) exp_aritmetica -> . TAN LPAR exp_logica RPAR
     (59) exp_aritmetica -> . LOG10 LPAR exp_logica RPAR
     (60) exp_aritmetica -> . SQRT LPAR exp_logica RPAR
+    (61) exp_aritmetica -> . LENGTH LPAR exp_logica RPAR
+    (62) exp_aritmetica -> . UPPERCASE LPAR exp_logica RPAR
+    (63) exp_aritmetica -> . LOWERCASE LPAR exp_logica RPAR
 
     NOT             shift and go to state 21
     MINUS           shift and go to state 24
@@ -1532,12 +1612,15 @@ state 50
     TAN             shift and go to state 40
     LOG10           shift and go to state 41
     SQRT            shift and go to state 42
+    LENGTH          shift and go to state 43
+    UPPERCASE       shift and go to state 44
+    LOWERCASE       shift and go to state 45
 
-    exp_logica                     shift and go to state 82
+    exp_logica                     shift and go to state 88
     exp_relacional                 shift and go to state 22
     exp_aritmetica                 shift and go to state 23
 
-state 51
+state 54
 
     (27) exp_logica -> NOT exp_logica .
     (25) exp_logica -> exp_logica . AND exp_logica
@@ -1556,11 +1639,11 @@ state 51
     END             reduce using rule 27 (exp_logica -> NOT exp_logica .)
     ELSE            reduce using rule 27 (exp_logica -> NOT exp_logica .)
 
-  ! AND             [ shift and go to state 49 ]
-  ! OR              [ shift and go to state 50 ]
+  ! AND             [ shift and go to state 52 ]
+  ! OR              [ shift and go to state 53 ]
 
 
-state 52
+state 55
 
     (29) exp_relacional -> exp_relacional LESS . exp_relacional
     (29) exp_relacional -> . exp_relacional LESS exp_relacional
@@ -1595,6 +1678,9 @@ state 52
     (58) exp_aritmetica -> . TAN LPAR exp_logica RPAR
     (59) exp_aritmetica -> . LOG10 LPAR exp_logica RPAR
     (60) exp_aritmetica -> . SQRT LPAR exp_logica RPAR
+    (61) exp_aritmetica -> . LENGTH LPAR exp_logica RPAR
+    (62) exp_aritmetica -> . UPPERCASE LPAR exp_logica RPAR
+    (63) exp_aritmetica -> . LOWERCASE LPAR exp_logica RPAR
 
     MINUS           shift and go to state 24
     LPAR            shift and go to state 25
@@ -1615,11 +1701,14 @@ state 52
     TAN             shift and go to state 40
     LOG10           shift and go to state 41
     SQRT            shift and go to state 42
+    LENGTH          shift and go to state 43
+    UPPERCASE       shift and go to state 44
+    LOWERCASE       shift and go to state 45
 
-    exp_relacional                 shift and go to state 83
+    exp_relacional                 shift and go to state 89
     exp_aritmetica                 shift and go to state 23
 
-state 53
+state 56
 
     (30) exp_relacional -> exp_relacional LESSEQ . exp_relacional
     (29) exp_relacional -> . exp_relacional LESS exp_relacional
@@ -1654,6 +1743,9 @@ state 53
     (58) exp_aritmetica -> . TAN LPAR exp_logica RPAR
     (59) exp_aritmetica -> . LOG10 LPAR exp_logica RPAR
     (60) exp_aritmetica -> . SQRT LPAR exp_logica RPAR
+    (61) exp_aritmetica -> . LENGTH LPAR exp_logica RPAR
+    (62) exp_aritmetica -> . UPPERCASE LPAR exp_logica RPAR
+    (63) exp_aritmetica -> . LOWERCASE LPAR exp_logica RPAR
 
     MINUS           shift and go to state 24
     LPAR            shift and go to state 25
@@ -1674,11 +1766,14 @@ state 53
     TAN             shift and go to state 40
     LOG10           shift and go to state 41
     SQRT            shift and go to state 42
+    LENGTH          shift and go to state 43
+    UPPERCASE       shift and go to state 44
+    LOWERCASE       shift and go to state 45
 
-    exp_relacional                 shift and go to state 84
+    exp_relacional                 shift and go to state 90
     exp_aritmetica                 shift and go to state 23
 
-state 54
+state 57
 
     (31) exp_relacional -> exp_relacional GREATHER . exp_relacional
     (29) exp_relacional -> . exp_relacional LESS exp_relacional
@@ -1713,6 +1808,9 @@ state 54
     (58) exp_aritmetica -> . TAN LPAR exp_logica RPAR
     (59) exp_aritmetica -> . LOG10 LPAR exp_logica RPAR
     (60) exp_aritmetica -> . SQRT LPAR exp_logica RPAR
+    (61) exp_aritmetica -> . LENGTH LPAR exp_logica RPAR
+    (62) exp_aritmetica -> . UPPERCASE LPAR exp_logica RPAR
+    (63) exp_aritmetica -> . LOWERCASE LPAR exp_logica RPAR
 
     MINUS           shift and go to state 24
     LPAR            shift and go to state 25
@@ -1733,11 +1831,14 @@ state 54
     TAN             shift and go to state 40
     LOG10           shift and go to state 41
     SQRT            shift and go to state 42
+    LENGTH          shift and go to state 43
+    UPPERCASE       shift and go to state 44
+    LOWERCASE       shift and go to state 45
 
-    exp_relacional                 shift and go to state 85
+    exp_relacional                 shift and go to state 91
     exp_aritmetica                 shift and go to state 23
 
-state 55
+state 58
 
     (32) exp_relacional -> exp_relacional GREATHEREQ . exp_relacional
     (29) exp_relacional -> . exp_relacional LESS exp_relacional
@@ -1772,6 +1873,9 @@ state 55
     (58) exp_aritmetica -> . TAN LPAR exp_logica RPAR
     (59) exp_aritmetica -> . LOG10 LPAR exp_logica RPAR
     (60) exp_aritmetica -> . SQRT LPAR exp_logica RPAR
+    (61) exp_aritmetica -> . LENGTH LPAR exp_logica RPAR
+    (62) exp_aritmetica -> . UPPERCASE LPAR exp_logica RPAR
+    (63) exp_aritmetica -> . LOWERCASE LPAR exp_logica RPAR
 
     MINUS           shift and go to state 24
     LPAR            shift and go to state 25
@@ -1792,11 +1896,14 @@ state 55
     TAN             shift and go to state 40
     LOG10           shift and go to state 41
     SQRT            shift and go to state 42
+    LENGTH          shift and go to state 43
+    UPPERCASE       shift and go to state 44
+    LOWERCASE       shift and go to state 45
 
-    exp_relacional                 shift and go to state 86
+    exp_relacional                 shift and go to state 92
     exp_aritmetica                 shift and go to state 23
 
-state 56
+state 59
 
     (33) exp_relacional -> exp_relacional EQUALITY . exp_relacional
     (29) exp_relacional -> . exp_relacional LESS exp_relacional
@@ -1831,6 +1938,9 @@ state 56
     (58) exp_aritmetica -> . TAN LPAR exp_logica RPAR
     (59) exp_aritmetica -> . LOG10 LPAR exp_logica RPAR
     (60) exp_aritmetica -> . SQRT LPAR exp_logica RPAR
+    (61) exp_aritmetica -> . LENGTH LPAR exp_logica RPAR
+    (62) exp_aritmetica -> . UPPERCASE LPAR exp_logica RPAR
+    (63) exp_aritmetica -> . LOWERCASE LPAR exp_logica RPAR
 
     MINUS           shift and go to state 24
     LPAR            shift and go to state 25
@@ -1851,11 +1961,14 @@ state 56
     TAN             shift and go to state 40
     LOG10           shift and go to state 41
     SQRT            shift and go to state 42
+    LENGTH          shift and go to state 43
+    UPPERCASE       shift and go to state 44
+    LOWERCASE       shift and go to state 45
 
-    exp_relacional                 shift and go to state 87
+    exp_relacional                 shift and go to state 93
     exp_aritmetica                 shift and go to state 23
 
-state 57
+state 60
 
     (34) exp_relacional -> exp_relacional DIFERENT . exp_relacional
     (29) exp_relacional -> . exp_relacional LESS exp_relacional
@@ -1890,6 +2003,9 @@ state 57
     (58) exp_aritmetica -> . TAN LPAR exp_logica RPAR
     (59) exp_aritmetica -> . LOG10 LPAR exp_logica RPAR
     (60) exp_aritmetica -> . SQRT LPAR exp_logica RPAR
+    (61) exp_aritmetica -> . LENGTH LPAR exp_logica RPAR
+    (62) exp_aritmetica -> . UPPERCASE LPAR exp_logica RPAR
+    (63) exp_aritmetica -> . LOWERCASE LPAR exp_logica RPAR
 
     MINUS           shift and go to state 24
     LPAR            shift and go to state 25
@@ -1910,11 +2026,14 @@ state 57
     TAN             shift and go to state 40
     LOG10           shift and go to state 41
     SQRT            shift and go to state 42
+    LENGTH          shift and go to state 43
+    UPPERCASE       shift and go to state 44
+    LOWERCASE       shift and go to state 45
 
-    exp_relacional                 shift and go to state 88
+    exp_relacional                 shift and go to state 94
     exp_aritmetica                 shift and go to state 23
 
-state 58
+state 61
 
     (36) exp_aritmetica -> exp_aritmetica PLUS . exp_aritmetica
     (36) exp_aritmetica -> . exp_aritmetica PLUS exp_aritmetica
@@ -1942,6 +2061,9 @@ state 58
     (58) exp_aritmetica -> . TAN LPAR exp_logica RPAR
     (59) exp_aritmetica -> . LOG10 LPAR exp_logica RPAR
     (60) exp_aritmetica -> . SQRT LPAR exp_logica RPAR
+    (61) exp_aritmetica -> . LENGTH LPAR exp_logica RPAR
+    (62) exp_aritmetica -> . UPPERCASE LPAR exp_logica RPAR
+    (63) exp_aritmetica -> . LOWERCASE LPAR exp_logica RPAR
 
     MINUS           shift and go to state 24
     LPAR            shift and go to state 25
@@ -1962,10 +2084,13 @@ state 58
     TAN             shift and go to state 40
     LOG10           shift and go to state 41
     SQRT            shift and go to state 42
+    LENGTH          shift and go to state 43
+    UPPERCASE       shift and go to state 44
+    LOWERCASE       shift and go to state 45
 
-    exp_aritmetica                 shift and go to state 89
+    exp_aritmetica                 shift and go to state 95
 
-state 59
+state 62
 
     (37) exp_aritmetica -> exp_aritmetica MINUS . exp_aritmetica
     (36) exp_aritmetica -> . exp_aritmetica PLUS exp_aritmetica
@@ -1993,6 +2118,9 @@ state 59
     (58) exp_aritmetica -> . TAN LPAR exp_logica RPAR
     (59) exp_aritmetica -> . LOG10 LPAR exp_logica RPAR
     (60) exp_aritmetica -> . SQRT LPAR exp_logica RPAR
+    (61) exp_aritmetica -> . LENGTH LPAR exp_logica RPAR
+    (62) exp_aritmetica -> . UPPERCASE LPAR exp_logica RPAR
+    (63) exp_aritmetica -> . LOWERCASE LPAR exp_logica RPAR
 
     MINUS           shift and go to state 24
     LPAR            shift and go to state 25
@@ -2013,10 +2141,13 @@ state 59
     TAN             shift and go to state 40
     LOG10           shift and go to state 41
     SQRT            shift and go to state 42
+    LENGTH          shift and go to state 43
+    UPPERCASE       shift and go to state 44
+    LOWERCASE       shift and go to state 45
 
-    exp_aritmetica                 shift and go to state 90
+    exp_aritmetica                 shift and go to state 96
 
-state 60
+state 63
 
     (38) exp_aritmetica -> exp_aritmetica TIMES . exp_aritmetica
     (36) exp_aritmetica -> . exp_aritmetica PLUS exp_aritmetica
@@ -2044,6 +2175,9 @@ state 60
     (58) exp_aritmetica -> . TAN LPAR exp_logica RPAR
     (59) exp_aritmetica -> . LOG10 LPAR exp_logica RPAR
     (60) exp_aritmetica -> . SQRT LPAR exp_logica RPAR
+    (61) exp_aritmetica -> . LENGTH LPAR exp_logica RPAR
+    (62) exp_aritmetica -> . UPPERCASE LPAR exp_logica RPAR
+    (63) exp_aritmetica -> . LOWERCASE LPAR exp_logica RPAR
 
     MINUS           shift and go to state 24
     LPAR            shift and go to state 25
@@ -2064,10 +2198,13 @@ state 60
     TAN             shift and go to state 40
     LOG10           shift and go to state 41
     SQRT            shift and go to state 42
+    LENGTH          shift and go to state 43
+    UPPERCASE       shift and go to state 44
+    LOWERCASE       shift and go to state 45
 
-    exp_aritmetica                 shift and go to state 91
+    exp_aritmetica                 shift and go to state 97
 
-state 61
+state 64
 
     (39) exp_aritmetica -> exp_aritmetica DIV . exp_aritmetica
     (36) exp_aritmetica -> . exp_aritmetica PLUS exp_aritmetica
@@ -2095,6 +2232,9 @@ state 61
     (58) exp_aritmetica -> . TAN LPAR exp_logica RPAR
     (59) exp_aritmetica -> . LOG10 LPAR exp_logica RPAR
     (60) exp_aritmetica -> . SQRT LPAR exp_logica RPAR
+    (61) exp_aritmetica -> . LENGTH LPAR exp_logica RPAR
+    (62) exp_aritmetica -> . UPPERCASE LPAR exp_logica RPAR
+    (63) exp_aritmetica -> . LOWERCASE LPAR exp_logica RPAR
 
     MINUS           shift and go to state 24
     LPAR            shift and go to state 25
@@ -2115,10 +2255,13 @@ state 61
     TAN             shift and go to state 40
     LOG10           shift and go to state 41
     SQRT            shift and go to state 42
+    LENGTH          shift and go to state 43
+    UPPERCASE       shift and go to state 44
+    LOWERCASE       shift and go to state 45
 
-    exp_aritmetica                 shift and go to state 92
+    exp_aritmetica                 shift and go to state 98
 
-state 62
+state 65
 
     (40) exp_aritmetica -> exp_aritmetica MOD . exp_aritmetica
     (36) exp_aritmetica -> . exp_aritmetica PLUS exp_aritmetica
@@ -2146,6 +2289,9 @@ state 62
     (58) exp_aritmetica -> . TAN LPAR exp_logica RPAR
     (59) exp_aritmetica -> . LOG10 LPAR exp_logica RPAR
     (60) exp_aritmetica -> . SQRT LPAR exp_logica RPAR
+    (61) exp_aritmetica -> . LENGTH LPAR exp_logica RPAR
+    (62) exp_aritmetica -> . UPPERCASE LPAR exp_logica RPAR
+    (63) exp_aritmetica -> . LOWERCASE LPAR exp_logica RPAR
 
     MINUS           shift and go to state 24
     LPAR            shift and go to state 25
@@ -2166,10 +2312,13 @@ state 62
     TAN             shift and go to state 40
     LOG10           shift and go to state 41
     SQRT            shift and go to state 42
+    LENGTH          shift and go to state 43
+    UPPERCASE       shift and go to state 44
+    LOWERCASE       shift and go to state 45
 
-    exp_aritmetica                 shift and go to state 93
+    exp_aritmetica                 shift and go to state 99
 
-state 63
+state 66
 
     (41) exp_aritmetica -> exp_aritmetica POT . exp_aritmetica
     (36) exp_aritmetica -> . exp_aritmetica PLUS exp_aritmetica
@@ -2197,6 +2346,9 @@ state 63
     (58) exp_aritmetica -> . TAN LPAR exp_logica RPAR
     (59) exp_aritmetica -> . LOG10 LPAR exp_logica RPAR
     (60) exp_aritmetica -> . SQRT LPAR exp_logica RPAR
+    (61) exp_aritmetica -> . LENGTH LPAR exp_logica RPAR
+    (62) exp_aritmetica -> . UPPERCASE LPAR exp_logica RPAR
+    (63) exp_aritmetica -> . LOWERCASE LPAR exp_logica RPAR
 
     MINUS           shift and go to state 24
     LPAR            shift and go to state 25
@@ -2217,10 +2369,13 @@ state 63
     TAN             shift and go to state 40
     LOG10           shift and go to state 41
     SQRT            shift and go to state 42
+    LENGTH          shift and go to state 43
+    UPPERCASE       shift and go to state 44
+    LOWERCASE       shift and go to state 45
 
-    exp_aritmetica                 shift and go to state 94
+    exp_aritmetica                 shift and go to state 100
 
-state 64
+state 67
 
     (42) exp_aritmetica -> MINUS exp_aritmetica .
     (36) exp_aritmetica -> exp_aritmetica . PLUS exp_aritmetica
@@ -2255,26 +2410,26 @@ state 64
     END             reduce using rule 42 (exp_aritmetica -> MINUS exp_aritmetica .)
     ELSE            reduce using rule 42 (exp_aritmetica -> MINUS exp_aritmetica .)
 
-  ! PLUS            [ shift and go to state 58 ]
-  ! MINUS           [ shift and go to state 59 ]
-  ! TIMES           [ shift and go to state 60 ]
-  ! DIV             [ shift and go to state 61 ]
-  ! MOD             [ shift and go to state 62 ]
-  ! POT             [ shift and go to state 63 ]
+  ! PLUS            [ shift and go to state 61 ]
+  ! MINUS           [ shift and go to state 62 ]
+  ! TIMES           [ shift and go to state 63 ]
+  ! DIV             [ shift and go to state 64 ]
+  ! MOD             [ shift and go to state 65 ]
+  ! POT             [ shift and go to state 66 ]
 
 
-state 65
+state 68
 
     (43) exp_aritmetica -> LPAR exp_logica . RPAR
     (25) exp_logica -> exp_logica . AND exp_logica
     (26) exp_logica -> exp_logica . OR exp_logica
 
-    RPAR            shift and go to state 95
-    AND             shift and go to state 49
-    OR              shift and go to state 50
+    RPAR            shift and go to state 101
+    AND             shift and go to state 52
+    OR              shift and go to state 53
 
 
-state 66
+state 69
 
     (51) exp_aritmetica -> TYPEOF LPAR . exp_logica RPAR
     (25) exp_logica -> . exp_logica AND exp_logica
@@ -2313,6 +2468,9 @@ state 66
     (58) exp_aritmetica -> . TAN LPAR exp_logica RPAR
     (59) exp_aritmetica -> . LOG10 LPAR exp_logica RPAR
     (60) exp_aritmetica -> . SQRT LPAR exp_logica RPAR
+    (61) exp_aritmetica -> . LENGTH LPAR exp_logica RPAR
+    (62) exp_aritmetica -> . UPPERCASE LPAR exp_logica RPAR
+    (63) exp_aritmetica -> . LOWERCASE LPAR exp_logica RPAR
 
     NOT             shift and go to state 21
     MINUS           shift and go to state 24
@@ -2334,12 +2492,15 @@ state 66
     TAN             shift and go to state 40
     LOG10           shift and go to state 41
     SQRT            shift and go to state 42
+    LENGTH          shift and go to state 43
+    UPPERCASE       shift and go to state 44
+    LOWERCASE       shift and go to state 45
 
-    exp_logica                     shift and go to state 96
+    exp_logica                     shift and go to state 102
     exp_relacional                 shift and go to state 22
     exp_aritmetica                 shift and go to state 23
 
-state 67
+state 70
 
     (52) exp_aritmetica -> STRING LPAR . exp_logica RPAR
     (25) exp_logica -> . exp_logica AND exp_logica
@@ -2378,6 +2539,9 @@ state 67
     (58) exp_aritmetica -> . TAN LPAR exp_logica RPAR
     (59) exp_aritmetica -> . LOG10 LPAR exp_logica RPAR
     (60) exp_aritmetica -> . SQRT LPAR exp_logica RPAR
+    (61) exp_aritmetica -> . LENGTH LPAR exp_logica RPAR
+    (62) exp_aritmetica -> . UPPERCASE LPAR exp_logica RPAR
+    (63) exp_aritmetica -> . LOWERCASE LPAR exp_logica RPAR
 
     NOT             shift and go to state 21
     MINUS           shift and go to state 24
@@ -2399,12 +2563,15 @@ state 67
     TAN             shift and go to state 40
     LOG10           shift and go to state 41
     SQRT            shift and go to state 42
+    LENGTH          shift and go to state 43
+    UPPERCASE       shift and go to state 44
+    LOWERCASE       shift and go to state 45
 
-    exp_logica                     shift and go to state 97
+    exp_logica                     shift and go to state 103
     exp_relacional                 shift and go to state 22
     exp_aritmetica                 shift and go to state 23
 
-state 68
+state 71
 
     (53) exp_aritmetica -> FLOAT LPAR . exp_logica RPAR
     (25) exp_logica -> . exp_logica AND exp_logica
@@ -2443,6 +2610,9 @@ state 68
     (58) exp_aritmetica -> . TAN LPAR exp_logica RPAR
     (59) exp_aritmetica -> . LOG10 LPAR exp_logica RPAR
     (60) exp_aritmetica -> . SQRT LPAR exp_logica RPAR
+    (61) exp_aritmetica -> . LENGTH LPAR exp_logica RPAR
+    (62) exp_aritmetica -> . UPPERCASE LPAR exp_logica RPAR
+    (63) exp_aritmetica -> . LOWERCASE LPAR exp_logica RPAR
 
     NOT             shift and go to state 21
     MINUS           shift and go to state 24
@@ -2464,12 +2634,15 @@ state 68
     TAN             shift and go to state 40
     LOG10           shift and go to state 41
     SQRT            shift and go to state 42
+    LENGTH          shift and go to state 43
+    UPPERCASE       shift and go to state 44
+    LOWERCASE       shift and go to state 45
 
-    exp_logica                     shift and go to state 98
+    exp_logica                     shift and go to state 104
     exp_relacional                 shift and go to state 22
     exp_aritmetica                 shift and go to state 23
 
-state 69
+state 72
 
     (54) exp_aritmetica -> TRUNC LPAR . data_type COMMA exp_logica RPAR
     (17) data_type -> . INT64
@@ -2478,15 +2651,15 @@ state 69
     (20) data_type -> . CHR
     (21) data_type -> . BOOL
 
-    INT64           shift and go to state 100
-    FLOAT64         shift and go to state 101
-    STR             shift and go to state 102
-    CHR             shift and go to state 103
-    BOOL            shift and go to state 104
+    INT64           shift and go to state 106
+    FLOAT64         shift and go to state 107
+    STR             shift and go to state 108
+    CHR             shift and go to state 109
+    BOOL            shift and go to state 110
 
-    data_type                      shift and go to state 99
+    data_type                      shift and go to state 105
 
-state 70
+state 73
 
     (55) exp_aritmetica -> PARSE LPAR . data_type COMMA exp_logica RPAR
     (17) data_type -> . INT64
@@ -2495,15 +2668,15 @@ state 70
     (20) data_type -> . CHR
     (21) data_type -> . BOOL
 
-    INT64           shift and go to state 100
-    FLOAT64         shift and go to state 101
-    STR             shift and go to state 102
-    CHR             shift and go to state 103
-    BOOL            shift and go to state 104
+    INT64           shift and go to state 106
+    FLOAT64         shift and go to state 107
+    STR             shift and go to state 108
+    CHR             shift and go to state 109
+    BOOL            shift and go to state 110
 
-    data_type                      shift and go to state 105
+    data_type                      shift and go to state 111
 
-state 71
+state 74
 
     (56) exp_aritmetica -> SIN LPAR . exp_logica RPAR
     (25) exp_logica -> . exp_logica AND exp_logica
@@ -2542,6 +2715,9 @@ state 71
     (58) exp_aritmetica -> . TAN LPAR exp_logica RPAR
     (59) exp_aritmetica -> . LOG10 LPAR exp_logica RPAR
     (60) exp_aritmetica -> . SQRT LPAR exp_logica RPAR
+    (61) exp_aritmetica -> . LENGTH LPAR exp_logica RPAR
+    (62) exp_aritmetica -> . UPPERCASE LPAR exp_logica RPAR
+    (63) exp_aritmetica -> . LOWERCASE LPAR exp_logica RPAR
 
     NOT             shift and go to state 21
     MINUS           shift and go to state 24
@@ -2563,12 +2739,15 @@ state 71
     TAN             shift and go to state 40
     LOG10           shift and go to state 41
     SQRT            shift and go to state 42
+    LENGTH          shift and go to state 43
+    UPPERCASE       shift and go to state 44
+    LOWERCASE       shift and go to state 45
 
-    exp_logica                     shift and go to state 106
+    exp_logica                     shift and go to state 112
     exp_relacional                 shift and go to state 22
     exp_aritmetica                 shift and go to state 23
 
-state 72
+state 75
 
     (57) exp_aritmetica -> COS LPAR . exp_logica RPAR
     (25) exp_logica -> . exp_logica AND exp_logica
@@ -2607,6 +2786,9 @@ state 72
     (58) exp_aritmetica -> . TAN LPAR exp_logica RPAR
     (59) exp_aritmetica -> . LOG10 LPAR exp_logica RPAR
     (60) exp_aritmetica -> . SQRT LPAR exp_logica RPAR
+    (61) exp_aritmetica -> . LENGTH LPAR exp_logica RPAR
+    (62) exp_aritmetica -> . UPPERCASE LPAR exp_logica RPAR
+    (63) exp_aritmetica -> . LOWERCASE LPAR exp_logica RPAR
 
     NOT             shift and go to state 21
     MINUS           shift and go to state 24
@@ -2628,12 +2810,15 @@ state 72
     TAN             shift and go to state 40
     LOG10           shift and go to state 41
     SQRT            shift and go to state 42
+    LENGTH          shift and go to state 43
+    UPPERCASE       shift and go to state 44
+    LOWERCASE       shift and go to state 45
 
-    exp_logica                     shift and go to state 107
+    exp_logica                     shift and go to state 113
     exp_relacional                 shift and go to state 22
     exp_aritmetica                 shift and go to state 23
 
-state 73
+state 76
 
     (58) exp_aritmetica -> TAN LPAR . exp_logica RPAR
     (25) exp_logica -> . exp_logica AND exp_logica
@@ -2672,6 +2857,9 @@ state 73
     (58) exp_aritmetica -> . TAN LPAR exp_logica RPAR
     (59) exp_aritmetica -> . LOG10 LPAR exp_logica RPAR
     (60) exp_aritmetica -> . SQRT LPAR exp_logica RPAR
+    (61) exp_aritmetica -> . LENGTH LPAR exp_logica RPAR
+    (62) exp_aritmetica -> . UPPERCASE LPAR exp_logica RPAR
+    (63) exp_aritmetica -> . LOWERCASE LPAR exp_logica RPAR
 
     NOT             shift and go to state 21
     MINUS           shift and go to state 24
@@ -2693,12 +2881,15 @@ state 73
     TAN             shift and go to state 40
     LOG10           shift and go to state 41
     SQRT            shift and go to state 42
+    LENGTH          shift and go to state 43
+    UPPERCASE       shift and go to state 44
+    LOWERCASE       shift and go to state 45
 
-    exp_logica                     shift and go to state 108
+    exp_logica                     shift and go to state 114
     exp_relacional                 shift and go to state 22
     exp_aritmetica                 shift and go to state 23
 
-state 74
+state 77
 
     (59) exp_aritmetica -> LOG10 LPAR . exp_logica RPAR
     (25) exp_logica -> . exp_logica AND exp_logica
@@ -2737,6 +2928,9 @@ state 74
     (58) exp_aritmetica -> . TAN LPAR exp_logica RPAR
     (59) exp_aritmetica -> . LOG10 LPAR exp_logica RPAR
     (60) exp_aritmetica -> . SQRT LPAR exp_logica RPAR
+    (61) exp_aritmetica -> . LENGTH LPAR exp_logica RPAR
+    (62) exp_aritmetica -> . UPPERCASE LPAR exp_logica RPAR
+    (63) exp_aritmetica -> . LOWERCASE LPAR exp_logica RPAR
 
     NOT             shift and go to state 21
     MINUS           shift and go to state 24
@@ -2758,12 +2952,15 @@ state 74
     TAN             shift and go to state 40
     LOG10           shift and go to state 41
     SQRT            shift and go to state 42
+    LENGTH          shift and go to state 43
+    UPPERCASE       shift and go to state 44
+    LOWERCASE       shift and go to state 45
 
-    exp_logica                     shift and go to state 109
+    exp_logica                     shift and go to state 115
     exp_relacional                 shift and go to state 22
     exp_aritmetica                 shift and go to state 23
 
-state 75
+state 78
 
     (60) exp_aritmetica -> SQRT LPAR . exp_logica RPAR
     (25) exp_logica -> . exp_logica AND exp_logica
@@ -2802,6 +2999,9 @@ state 75
     (58) exp_aritmetica -> . TAN LPAR exp_logica RPAR
     (59) exp_aritmetica -> . LOG10 LPAR exp_logica RPAR
     (60) exp_aritmetica -> . SQRT LPAR exp_logica RPAR
+    (61) exp_aritmetica -> . LENGTH LPAR exp_logica RPAR
+    (62) exp_aritmetica -> . UPPERCASE LPAR exp_logica RPAR
+    (63) exp_aritmetica -> . LOWERCASE LPAR exp_logica RPAR
 
     NOT             shift and go to state 21
     MINUS           shift and go to state 24
@@ -2823,12 +3023,228 @@ state 75
     TAN             shift and go to state 40
     LOG10           shift and go to state 41
     SQRT            shift and go to state 42
+    LENGTH          shift and go to state 43
+    UPPERCASE       shift and go to state 44
+    LOWERCASE       shift and go to state 45
 
-    exp_logica                     shift and go to state 110
+    exp_logica                     shift and go to state 116
     exp_relacional                 shift and go to state 22
     exp_aritmetica                 shift and go to state 23
 
-state 76
+state 79
+
+    (61) exp_aritmetica -> LENGTH LPAR . exp_logica RPAR
+    (25) exp_logica -> . exp_logica AND exp_logica
+    (26) exp_logica -> . exp_logica OR exp_logica
+    (27) exp_logica -> . NOT exp_logica
+    (28) exp_logica -> . exp_relacional
+    (29) exp_relacional -> . exp_relacional LESS exp_relacional
+    (30) exp_relacional -> . exp_relacional LESSEQ exp_relacional
+    (31) exp_relacional -> . exp_relacional GREATHER exp_relacional
+    (32) exp_relacional -> . exp_relacional GREATHEREQ exp_relacional
+    (33) exp_relacional -> . exp_relacional EQUALITY exp_relacional
+    (34) exp_relacional -> . exp_relacional DIFERENT exp_relacional
+    (35) exp_relacional -> . exp_aritmetica
+    (36) exp_aritmetica -> . exp_aritmetica PLUS exp_aritmetica
+    (37) exp_aritmetica -> . exp_aritmetica MINUS exp_aritmetica
+    (38) exp_aritmetica -> . exp_aritmetica TIMES exp_aritmetica
+    (39) exp_aritmetica -> . exp_aritmetica DIV exp_aritmetica
+    (40) exp_aritmetica -> . exp_aritmetica MOD exp_aritmetica
+    (41) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
+    (42) exp_aritmetica -> . MINUS exp_aritmetica
+    (43) exp_aritmetica -> . LPAR exp_logica RPAR
+    (44) exp_aritmetica -> . NUMBERO
+    (45) exp_aritmetica -> . DECIMAL
+    (46) exp_aritmetica -> . CARACTER
+    (47) exp_aritmetica -> . CADENA
+    (48) exp_aritmetica -> . TRUE
+    (49) exp_aritmetica -> . FALSE
+    (50) exp_aritmetica -> . ID
+    (51) exp_aritmetica -> . TYPEOF LPAR exp_logica RPAR
+    (52) exp_aritmetica -> . STRING LPAR exp_logica RPAR
+    (53) exp_aritmetica -> . FLOAT LPAR exp_logica RPAR
+    (54) exp_aritmetica -> . TRUNC LPAR data_type COMMA exp_logica RPAR
+    (55) exp_aritmetica -> . PARSE LPAR data_type COMMA exp_logica RPAR
+    (56) exp_aritmetica -> . SIN LPAR exp_logica RPAR
+    (57) exp_aritmetica -> . COS LPAR exp_logica RPAR
+    (58) exp_aritmetica -> . TAN LPAR exp_logica RPAR
+    (59) exp_aritmetica -> . LOG10 LPAR exp_logica RPAR
+    (60) exp_aritmetica -> . SQRT LPAR exp_logica RPAR
+    (61) exp_aritmetica -> . LENGTH LPAR exp_logica RPAR
+    (62) exp_aritmetica -> . UPPERCASE LPAR exp_logica RPAR
+    (63) exp_aritmetica -> . LOWERCASE LPAR exp_logica RPAR
+
+    NOT             shift and go to state 21
+    MINUS           shift and go to state 24
+    LPAR            shift and go to state 25
+    NUMBERO         shift and go to state 26
+    DECIMAL         shift and go to state 27
+    CARACTER        shift and go to state 28
+    CADENA          shift and go to state 29
+    TRUE            shift and go to state 30
+    FALSE           shift and go to state 31
+    ID              shift and go to state 32
+    TYPEOF          shift and go to state 33
+    STRING          shift and go to state 34
+    FLOAT           shift and go to state 35
+    TRUNC           shift and go to state 36
+    PARSE           shift and go to state 37
+    SIN             shift and go to state 38
+    COS             shift and go to state 39
+    TAN             shift and go to state 40
+    LOG10           shift and go to state 41
+    SQRT            shift and go to state 42
+    LENGTH          shift and go to state 43
+    UPPERCASE       shift and go to state 44
+    LOWERCASE       shift and go to state 45
+
+    exp_logica                     shift and go to state 117
+    exp_relacional                 shift and go to state 22
+    exp_aritmetica                 shift and go to state 23
+
+state 80
+
+    (62) exp_aritmetica -> UPPERCASE LPAR . exp_logica RPAR
+    (25) exp_logica -> . exp_logica AND exp_logica
+    (26) exp_logica -> . exp_logica OR exp_logica
+    (27) exp_logica -> . NOT exp_logica
+    (28) exp_logica -> . exp_relacional
+    (29) exp_relacional -> . exp_relacional LESS exp_relacional
+    (30) exp_relacional -> . exp_relacional LESSEQ exp_relacional
+    (31) exp_relacional -> . exp_relacional GREATHER exp_relacional
+    (32) exp_relacional -> . exp_relacional GREATHEREQ exp_relacional
+    (33) exp_relacional -> . exp_relacional EQUALITY exp_relacional
+    (34) exp_relacional -> . exp_relacional DIFERENT exp_relacional
+    (35) exp_relacional -> . exp_aritmetica
+    (36) exp_aritmetica -> . exp_aritmetica PLUS exp_aritmetica
+    (37) exp_aritmetica -> . exp_aritmetica MINUS exp_aritmetica
+    (38) exp_aritmetica -> . exp_aritmetica TIMES exp_aritmetica
+    (39) exp_aritmetica -> . exp_aritmetica DIV exp_aritmetica
+    (40) exp_aritmetica -> . exp_aritmetica MOD exp_aritmetica
+    (41) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
+    (42) exp_aritmetica -> . MINUS exp_aritmetica
+    (43) exp_aritmetica -> . LPAR exp_logica RPAR
+    (44) exp_aritmetica -> . NUMBERO
+    (45) exp_aritmetica -> . DECIMAL
+    (46) exp_aritmetica -> . CARACTER
+    (47) exp_aritmetica -> . CADENA
+    (48) exp_aritmetica -> . TRUE
+    (49) exp_aritmetica -> . FALSE
+    (50) exp_aritmetica -> . ID
+    (51) exp_aritmetica -> . TYPEOF LPAR exp_logica RPAR
+    (52) exp_aritmetica -> . STRING LPAR exp_logica RPAR
+    (53) exp_aritmetica -> . FLOAT LPAR exp_logica RPAR
+    (54) exp_aritmetica -> . TRUNC LPAR data_type COMMA exp_logica RPAR
+    (55) exp_aritmetica -> . PARSE LPAR data_type COMMA exp_logica RPAR
+    (56) exp_aritmetica -> . SIN LPAR exp_logica RPAR
+    (57) exp_aritmetica -> . COS LPAR exp_logica RPAR
+    (58) exp_aritmetica -> . TAN LPAR exp_logica RPAR
+    (59) exp_aritmetica -> . LOG10 LPAR exp_logica RPAR
+    (60) exp_aritmetica -> . SQRT LPAR exp_logica RPAR
+    (61) exp_aritmetica -> . LENGTH LPAR exp_logica RPAR
+    (62) exp_aritmetica -> . UPPERCASE LPAR exp_logica RPAR
+    (63) exp_aritmetica -> . LOWERCASE LPAR exp_logica RPAR
+
+    NOT             shift and go to state 21
+    MINUS           shift and go to state 24
+    LPAR            shift and go to state 25
+    NUMBERO         shift and go to state 26
+    DECIMAL         shift and go to state 27
+    CARACTER        shift and go to state 28
+    CADENA          shift and go to state 29
+    TRUE            shift and go to state 30
+    FALSE           shift and go to state 31
+    ID              shift and go to state 32
+    TYPEOF          shift and go to state 33
+    STRING          shift and go to state 34
+    FLOAT           shift and go to state 35
+    TRUNC           shift and go to state 36
+    PARSE           shift and go to state 37
+    SIN             shift and go to state 38
+    COS             shift and go to state 39
+    TAN             shift and go to state 40
+    LOG10           shift and go to state 41
+    SQRT            shift and go to state 42
+    LENGTH          shift and go to state 43
+    UPPERCASE       shift and go to state 44
+    LOWERCASE       shift and go to state 45
+
+    exp_logica                     shift and go to state 118
+    exp_relacional                 shift and go to state 22
+    exp_aritmetica                 shift and go to state 23
+
+state 81
+
+    (63) exp_aritmetica -> LOWERCASE LPAR . exp_logica RPAR
+    (25) exp_logica -> . exp_logica AND exp_logica
+    (26) exp_logica -> . exp_logica OR exp_logica
+    (27) exp_logica -> . NOT exp_logica
+    (28) exp_logica -> . exp_relacional
+    (29) exp_relacional -> . exp_relacional LESS exp_relacional
+    (30) exp_relacional -> . exp_relacional LESSEQ exp_relacional
+    (31) exp_relacional -> . exp_relacional GREATHER exp_relacional
+    (32) exp_relacional -> . exp_relacional GREATHEREQ exp_relacional
+    (33) exp_relacional -> . exp_relacional EQUALITY exp_relacional
+    (34) exp_relacional -> . exp_relacional DIFERENT exp_relacional
+    (35) exp_relacional -> . exp_aritmetica
+    (36) exp_aritmetica -> . exp_aritmetica PLUS exp_aritmetica
+    (37) exp_aritmetica -> . exp_aritmetica MINUS exp_aritmetica
+    (38) exp_aritmetica -> . exp_aritmetica TIMES exp_aritmetica
+    (39) exp_aritmetica -> . exp_aritmetica DIV exp_aritmetica
+    (40) exp_aritmetica -> . exp_aritmetica MOD exp_aritmetica
+    (41) exp_aritmetica -> . exp_aritmetica POT exp_aritmetica
+    (42) exp_aritmetica -> . MINUS exp_aritmetica
+    (43) exp_aritmetica -> . LPAR exp_logica RPAR
+    (44) exp_aritmetica -> . NUMBERO
+    (45) exp_aritmetica -> . DECIMAL
+    (46) exp_aritmetica -> . CARACTER
+    (47) exp_aritmetica -> . CADENA
+    (48) exp_aritmetica -> . TRUE
+    (49) exp_aritmetica -> . FALSE
+    (50) exp_aritmetica -> . ID
+    (51) exp_aritmetica -> . TYPEOF LPAR exp_logica RPAR
+    (52) exp_aritmetica -> . STRING LPAR exp_logica RPAR
+    (53) exp_aritmetica -> . FLOAT LPAR exp_logica RPAR
+    (54) exp_aritmetica -> . TRUNC LPAR data_type COMMA exp_logica RPAR
+    (55) exp_aritmetica -> . PARSE LPAR data_type COMMA exp_logica RPAR
+    (56) exp_aritmetica -> . SIN LPAR exp_logica RPAR
+    (57) exp_aritmetica -> . COS LPAR exp_logica RPAR
+    (58) exp_aritmetica -> . TAN LPAR exp_logica RPAR
+    (59) exp_aritmetica -> . LOG10 LPAR exp_logica RPAR
+    (60) exp_aritmetica -> . SQRT LPAR exp_logica RPAR
+    (61) exp_aritmetica -> . LENGTH LPAR exp_logica RPAR
+    (62) exp_aritmetica -> . UPPERCASE LPAR exp_logica RPAR
+    (63) exp_aritmetica -> . LOWERCASE LPAR exp_logica RPAR
+
+    NOT             shift and go to state 21
+    MINUS           shift and go to state 24
+    LPAR            shift and go to state 25
+    NUMBERO         shift and go to state 26
+    DECIMAL         shift and go to state 27
+    CARACTER        shift and go to state 28
+    CADENA          shift and go to state 29
+    TRUE            shift and go to state 30
+    FALSE           shift and go to state 31
+    ID              shift and go to state 32
+    TYPEOF          shift and go to state 33
+    STRING          shift and go to state 34
+    FLOAT           shift and go to state 35
+    TRUNC           shift and go to state 36
+    PARSE           shift and go to state 37
+    SIN             shift and go to state 38
+    COS             shift and go to state 39
+    TAN             shift and go to state 40
+    LOG10           shift and go to state 41
+    SQRT            shift and go to state 42
+    LENGTH          shift and go to state 43
+    UPPERCASE       shift and go to state 44
+    LOWERCASE       shift and go to state 45
+
+    exp_logica                     shift and go to state 119
+    exp_relacional                 shift and go to state 22
+    exp_aritmetica                 shift and go to state 23
+
+state 82
 
     (23) if -> IF exp_logica instrucciones . END SEMICOL
     (24) if_else -> IF exp_logica instrucciones . ELSE instrucciones END SEMICOL
@@ -2848,8 +3264,8 @@ state 76
     (23) if -> . IF exp_logica instrucciones END SEMICOL
     (24) if_else -> . IF exp_logica instrucciones ELSE instrucciones END SEMICOL
 
-    END             shift and go to state 111
-    ELSE            shift and go to state 112
+    END             shift and go to state 120
+    ELSE            shift and go to state 121
     PRINT           shift and go to state 11
     PRINTLN         shift and go to state 12
     ID              shift and go to state 13
@@ -2865,7 +3281,7 @@ state 76
     if                             shift and go to state 9
     if_else                        shift and go to state 10
 
-state 77
+state 83
 
     (11) print -> PRINT LPAR print_args RPAR .
 
@@ -2879,7 +3295,7 @@ state 77
     ELSE            reduce using rule 11 (print -> PRINT LPAR print_args RPAR .)
 
 
-state 78
+state 84
 
     (13) print_args -> print_args COMMA . exp_logica
     (25) exp_logica -> . exp_logica AND exp_logica
@@ -2918,6 +3334,9 @@ state 78
     (58) exp_aritmetica -> . TAN LPAR exp_logica RPAR
     (59) exp_aritmetica -> . LOG10 LPAR exp_logica RPAR
     (60) exp_aritmetica -> . SQRT LPAR exp_logica RPAR
+    (61) exp_aritmetica -> . LENGTH LPAR exp_logica RPAR
+    (62) exp_aritmetica -> . UPPERCASE LPAR exp_logica RPAR
+    (63) exp_aritmetica -> . LOWERCASE LPAR exp_logica RPAR
 
     NOT             shift and go to state 21
     MINUS           shift and go to state 24
@@ -2939,12 +3358,15 @@ state 78
     TAN             shift and go to state 40
     LOG10           shift and go to state 41
     SQRT            shift and go to state 42
+    LENGTH          shift and go to state 43
+    UPPERCASE       shift and go to state 44
+    LOWERCASE       shift and go to state 45
 
-    exp_logica                     shift and go to state 113
+    exp_logica                     shift and go to state 122
     exp_relacional                 shift and go to state 22
     exp_aritmetica                 shift and go to state 23
 
-state 79
+state 85
 
     (12) println -> PRINTLN LPAR print_args RPAR .
 
@@ -2958,14 +3380,14 @@ state 79
     ELSE            reduce using rule 12 (println -> PRINTLN LPAR print_args RPAR .)
 
 
-state 80
+state 86
 
     (22) while -> WHILE exp_logica instrucciones END . SEMICOL
 
-    SEMICOL         shift and go to state 114
+    SEMICOL         shift and go to state 123
 
 
-state 81
+state 87
 
     (25) exp_logica -> exp_logica AND exp_logica .
     (25) exp_logica -> exp_logica . AND exp_logica
@@ -2982,13 +3404,13 @@ state 81
     $end            reduce using rule 25 (exp_logica -> exp_logica AND exp_logica .)
     END             reduce using rule 25 (exp_logica -> exp_logica AND exp_logica .)
     ELSE            reduce using rule 25 (exp_logica -> exp_logica AND exp_logica .)
-    OR              shift and go to state 50
+    OR              shift and go to state 53
 
   ! OR              [ reduce using rule 25 (exp_logica -> exp_logica AND exp_logica .) ]
-  ! AND             [ shift and go to state 49 ]
+  ! AND             [ shift and go to state 52 ]
 
 
-state 82
+state 88
 
     (26) exp_logica -> exp_logica OR exp_logica .
     (25) exp_logica -> exp_logica . AND exp_logica
@@ -3007,11 +3429,11 @@ state 82
     END             reduce using rule 26 (exp_logica -> exp_logica OR exp_logica .)
     ELSE            reduce using rule 26 (exp_logica -> exp_logica OR exp_logica .)
 
-  ! AND             [ shift and go to state 49 ]
-  ! OR              [ shift and go to state 50 ]
+  ! AND             [ shift and go to state 52 ]
+  ! OR              [ shift and go to state 53 ]
 
 
-state 83
+state 89
 
     (29) exp_relacional -> exp_relacional LESS exp_relacional .
     (29) exp_relacional -> exp_relacional . LESS exp_relacional
@@ -3040,15 +3462,15 @@ state 83
     END             reduce using rule 29 (exp_relacional -> exp_relacional LESS exp_relacional .)
     ELSE            reduce using rule 29 (exp_relacional -> exp_relacional LESS exp_relacional .)
 
-  ! LESS            [ shift and go to state 52 ]
-  ! LESSEQ          [ shift and go to state 53 ]
-  ! GREATHER        [ shift and go to state 54 ]
-  ! GREATHEREQ      [ shift and go to state 55 ]
-  ! EQUALITY        [ shift and go to state 56 ]
-  ! DIFERENT        [ shift and go to state 57 ]
+  ! LESS            [ shift and go to state 55 ]
+  ! LESSEQ          [ shift and go to state 56 ]
+  ! GREATHER        [ shift and go to state 57 ]
+  ! GREATHEREQ      [ shift and go to state 58 ]
+  ! EQUALITY        [ shift and go to state 59 ]
+  ! DIFERENT        [ shift and go to state 60 ]
 
 
-state 84
+state 90
 
     (30) exp_relacional -> exp_relacional LESSEQ exp_relacional .
     (29) exp_relacional -> exp_relacional . LESS exp_relacional
@@ -3077,15 +3499,15 @@ state 84
     END             reduce using rule 30 (exp_relacional -> exp_relacional LESSEQ exp_relacional .)
     ELSE            reduce using rule 30 (exp_relacional -> exp_relacional LESSEQ exp_relacional .)
 
-  ! LESS            [ shift and go to state 52 ]
-  ! LESSEQ          [ shift and go to state 53 ]
-  ! GREATHER        [ shift and go to state 54 ]
-  ! GREATHEREQ      [ shift and go to state 55 ]
-  ! EQUALITY        [ shift and go to state 56 ]
-  ! DIFERENT        [ shift and go to state 57 ]
+  ! LESS            [ shift and go to state 55 ]
+  ! LESSEQ          [ shift and go to state 56 ]
+  ! GREATHER        [ shift and go to state 57 ]
+  ! GREATHEREQ      [ shift and go to state 58 ]
+  ! EQUALITY        [ shift and go to state 59 ]
+  ! DIFERENT        [ shift and go to state 60 ]
 
 
-state 85
+state 91
 
     (31) exp_relacional -> exp_relacional GREATHER exp_relacional .
     (29) exp_relacional -> exp_relacional . LESS exp_relacional
@@ -3114,15 +3536,15 @@ state 85
     END             reduce using rule 31 (exp_relacional -> exp_relacional GREATHER exp_relacional .)
     ELSE            reduce using rule 31 (exp_relacional -> exp_relacional GREATHER exp_relacional .)
 
-  ! LESS            [ shift and go to state 52 ]
-  ! LESSEQ          [ shift and go to state 53 ]
-  ! GREATHER        [ shift and go to state 54 ]
-  ! GREATHEREQ      [ shift and go to state 55 ]
-  ! EQUALITY        [ shift and go to state 56 ]
-  ! DIFERENT        [ shift and go to state 57 ]
+  ! LESS            [ shift and go to state 55 ]
+  ! LESSEQ          [ shift and go to state 56 ]
+  ! GREATHER        [ shift and go to state 57 ]
+  ! GREATHEREQ      [ shift and go to state 58 ]
+  ! EQUALITY        [ shift and go to state 59 ]
+  ! DIFERENT        [ shift and go to state 60 ]
 
 
-state 86
+state 92
 
     (32) exp_relacional -> exp_relacional GREATHEREQ exp_relacional .
     (29) exp_relacional -> exp_relacional . LESS exp_relacional
@@ -3151,15 +3573,15 @@ state 86
     END             reduce using rule 32 (exp_relacional -> exp_relacional GREATHEREQ exp_relacional .)
     ELSE            reduce using rule 32 (exp_relacional -> exp_relacional GREATHEREQ exp_relacional .)
 
-  ! LESS            [ shift and go to state 52 ]
-  ! LESSEQ          [ shift and go to state 53 ]
-  ! GREATHER        [ shift and go to state 54 ]
-  ! GREATHEREQ      [ shift and go to state 55 ]
-  ! EQUALITY        [ shift and go to state 56 ]
-  ! DIFERENT        [ shift and go to state 57 ]
+  ! LESS            [ shift and go to state 55 ]
+  ! LESSEQ          [ shift and go to state 56 ]
+  ! GREATHER        [ shift and go to state 57 ]
+  ! GREATHEREQ      [ shift and go to state 58 ]
+  ! EQUALITY        [ shift and go to state 59 ]
+  ! DIFERENT        [ shift and go to state 60 ]
 
 
-state 87
+state 93
 
     (33) exp_relacional -> exp_relacional EQUALITY exp_relacional .
     (29) exp_relacional -> exp_relacional . LESS exp_relacional
@@ -3188,15 +3610,15 @@ state 87
     END             reduce using rule 33 (exp_relacional -> exp_relacional EQUALITY exp_relacional .)
     ELSE            reduce using rule 33 (exp_relacional -> exp_relacional EQUALITY exp_relacional .)
 
-  ! LESS            [ shift and go to state 52 ]
-  ! LESSEQ          [ shift and go to state 53 ]
-  ! GREATHER        [ shift and go to state 54 ]
-  ! GREATHEREQ      [ shift and go to state 55 ]
-  ! EQUALITY        [ shift and go to state 56 ]
-  ! DIFERENT        [ shift and go to state 57 ]
+  ! LESS            [ shift and go to state 55 ]
+  ! LESSEQ          [ shift and go to state 56 ]
+  ! GREATHER        [ shift and go to state 57 ]
+  ! GREATHEREQ      [ shift and go to state 58 ]
+  ! EQUALITY        [ shift and go to state 59 ]
+  ! DIFERENT        [ shift and go to state 60 ]
 
 
-state 88
+state 94
 
     (34) exp_relacional -> exp_relacional DIFERENT exp_relacional .
     (29) exp_relacional -> exp_relacional . LESS exp_relacional
@@ -3225,15 +3647,15 @@ state 88
     END             reduce using rule 34 (exp_relacional -> exp_relacional DIFERENT exp_relacional .)
     ELSE            reduce using rule 34 (exp_relacional -> exp_relacional DIFERENT exp_relacional .)
 
-  ! LESS            [ shift and go to state 52 ]
-  ! LESSEQ          [ shift and go to state 53 ]
-  ! GREATHER        [ shift and go to state 54 ]
-  ! GREATHEREQ      [ shift and go to state 55 ]
-  ! EQUALITY        [ shift and go to state 56 ]
-  ! DIFERENT        [ shift and go to state 57 ]
+  ! LESS            [ shift and go to state 55 ]
+  ! LESSEQ          [ shift and go to state 56 ]
+  ! GREATHER        [ shift and go to state 57 ]
+  ! GREATHEREQ      [ shift and go to state 58 ]
+  ! EQUALITY        [ shift and go to state 59 ]
+  ! DIFERENT        [ shift and go to state 60 ]
 
 
-state 89
+state 95
 
     (36) exp_aritmetica -> exp_aritmetica PLUS exp_aritmetica .
     (36) exp_aritmetica -> exp_aritmetica . PLUS exp_aritmetica
@@ -3263,20 +3685,20 @@ state 89
     $end            reduce using rule 36 (exp_aritmetica -> exp_aritmetica PLUS exp_aritmetica .)
     END             reduce using rule 36 (exp_aritmetica -> exp_aritmetica PLUS exp_aritmetica .)
     ELSE            reduce using rule 36 (exp_aritmetica -> exp_aritmetica PLUS exp_aritmetica .)
-    TIMES           shift and go to state 60
-    DIV             shift and go to state 61
-    MOD             shift and go to state 62
-    POT             shift and go to state 63
+    TIMES           shift and go to state 63
+    DIV             shift and go to state 64
+    MOD             shift and go to state 65
+    POT             shift and go to state 66
 
   ! TIMES           [ reduce using rule 36 (exp_aritmetica -> exp_aritmetica PLUS exp_aritmetica .) ]
   ! DIV             [ reduce using rule 36 (exp_aritmetica -> exp_aritmetica PLUS exp_aritmetica .) ]
   ! MOD             [ reduce using rule 36 (exp_aritmetica -> exp_aritmetica PLUS exp_aritmetica .) ]
   ! POT             [ reduce using rule 36 (exp_aritmetica -> exp_aritmetica PLUS exp_aritmetica .) ]
-  ! PLUS            [ shift and go to state 58 ]
-  ! MINUS           [ shift and go to state 59 ]
+  ! PLUS            [ shift and go to state 61 ]
+  ! MINUS           [ shift and go to state 62 ]
 
 
-state 90
+state 96
 
     (37) exp_aritmetica -> exp_aritmetica MINUS exp_aritmetica .
     (36) exp_aritmetica -> exp_aritmetica . PLUS exp_aritmetica
@@ -3306,20 +3728,20 @@ state 90
     $end            reduce using rule 37 (exp_aritmetica -> exp_aritmetica MINUS exp_aritmetica .)
     END             reduce using rule 37 (exp_aritmetica -> exp_aritmetica MINUS exp_aritmetica .)
     ELSE            reduce using rule 37 (exp_aritmetica -> exp_aritmetica MINUS exp_aritmetica .)
-    TIMES           shift and go to state 60
-    DIV             shift and go to state 61
-    MOD             shift and go to state 62
-    POT             shift and go to state 63
+    TIMES           shift and go to state 63
+    DIV             shift and go to state 64
+    MOD             shift and go to state 65
+    POT             shift and go to state 66
 
   ! TIMES           [ reduce using rule 37 (exp_aritmetica -> exp_aritmetica MINUS exp_aritmetica .) ]
   ! DIV             [ reduce using rule 37 (exp_aritmetica -> exp_aritmetica MINUS exp_aritmetica .) ]
   ! MOD             [ reduce using rule 37 (exp_aritmetica -> exp_aritmetica MINUS exp_aritmetica .) ]
   ! POT             [ reduce using rule 37 (exp_aritmetica -> exp_aritmetica MINUS exp_aritmetica .) ]
-  ! PLUS            [ shift and go to state 58 ]
-  ! MINUS           [ shift and go to state 59 ]
+  ! PLUS            [ shift and go to state 61 ]
+  ! MINUS           [ shift and go to state 62 ]
 
 
-state 91
+state 97
 
     (38) exp_aritmetica -> exp_aritmetica TIMES exp_aritmetica .
     (36) exp_aritmetica -> exp_aritmetica . PLUS exp_aritmetica
@@ -3351,18 +3773,18 @@ state 91
     $end            reduce using rule 38 (exp_aritmetica -> exp_aritmetica TIMES exp_aritmetica .)
     END             reduce using rule 38 (exp_aritmetica -> exp_aritmetica TIMES exp_aritmetica .)
     ELSE            reduce using rule 38 (exp_aritmetica -> exp_aritmetica TIMES exp_aritmetica .)
-    MOD             shift and go to state 62
-    POT             shift and go to state 63
+    MOD             shift and go to state 65
+    POT             shift and go to state 66
 
   ! MOD             [ reduce using rule 38 (exp_aritmetica -> exp_aritmetica TIMES exp_aritmetica .) ]
   ! POT             [ reduce using rule 38 (exp_aritmetica -> exp_aritmetica TIMES exp_aritmetica .) ]
-  ! PLUS            [ shift and go to state 58 ]
-  ! MINUS           [ shift and go to state 59 ]
-  ! TIMES           [ shift and go to state 60 ]
-  ! DIV             [ shift and go to state 61 ]
+  ! PLUS            [ shift and go to state 61 ]
+  ! MINUS           [ shift and go to state 62 ]
+  ! TIMES           [ shift and go to state 63 ]
+  ! DIV             [ shift and go to state 64 ]
 
 
-state 92
+state 98
 
     (39) exp_aritmetica -> exp_aritmetica DIV exp_aritmetica .
     (36) exp_aritmetica -> exp_aritmetica . PLUS exp_aritmetica
@@ -3394,18 +3816,18 @@ state 92
     $end            reduce using rule 39 (exp_aritmetica -> exp_aritmetica DIV exp_aritmetica .)
     END             reduce using rule 39 (exp_aritmetica -> exp_aritmetica DIV exp_aritmetica .)
     ELSE            reduce using rule 39 (exp_aritmetica -> exp_aritmetica DIV exp_aritmetica .)
-    MOD             shift and go to state 62
-    POT             shift and go to state 63
+    MOD             shift and go to state 65
+    POT             shift and go to state 66
 
   ! MOD             [ reduce using rule 39 (exp_aritmetica -> exp_aritmetica DIV exp_aritmetica .) ]
   ! POT             [ reduce using rule 39 (exp_aritmetica -> exp_aritmetica DIV exp_aritmetica .) ]
-  ! PLUS            [ shift and go to state 58 ]
-  ! MINUS           [ shift and go to state 59 ]
-  ! TIMES           [ shift and go to state 60 ]
-  ! DIV             [ shift and go to state 61 ]
+  ! PLUS            [ shift and go to state 61 ]
+  ! MINUS           [ shift and go to state 62 ]
+  ! TIMES           [ shift and go to state 63 ]
+  ! DIV             [ shift and go to state 64 ]
 
 
-state 93
+state 99
 
     (40) exp_aritmetica -> exp_aritmetica MOD exp_aritmetica .
     (36) exp_aritmetica -> exp_aritmetica . PLUS exp_aritmetica
@@ -3438,17 +3860,17 @@ state 93
     $end            reduce using rule 40 (exp_aritmetica -> exp_aritmetica MOD exp_aritmetica .)
     END             reduce using rule 40 (exp_aritmetica -> exp_aritmetica MOD exp_aritmetica .)
     ELSE            reduce using rule 40 (exp_aritmetica -> exp_aritmetica MOD exp_aritmetica .)
-    POT             shift and go to state 63
+    POT             shift and go to state 66
 
   ! POT             [ reduce using rule 40 (exp_aritmetica -> exp_aritmetica MOD exp_aritmetica .) ]
-  ! PLUS            [ shift and go to state 58 ]
-  ! MINUS           [ shift and go to state 59 ]
-  ! TIMES           [ shift and go to state 60 ]
-  ! DIV             [ shift and go to state 61 ]
-  ! MOD             [ shift and go to state 62 ]
+  ! PLUS            [ shift and go to state 61 ]
+  ! MINUS           [ shift and go to state 62 ]
+  ! TIMES           [ shift and go to state 63 ]
+  ! DIV             [ shift and go to state 64 ]
+  ! MOD             [ shift and go to state 65 ]
 
 
-state 94
+state 100
 
     (41) exp_aritmetica -> exp_aritmetica POT exp_aritmetica .
     (36) exp_aritmetica -> exp_aritmetica . PLUS exp_aritmetica
@@ -3483,15 +3905,15 @@ state 94
     END             reduce using rule 41 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
     ELSE            reduce using rule 41 (exp_aritmetica -> exp_aritmetica POT exp_aritmetica .)
 
-  ! PLUS            [ shift and go to state 58 ]
-  ! MINUS           [ shift and go to state 59 ]
-  ! TIMES           [ shift and go to state 60 ]
-  ! DIV             [ shift and go to state 61 ]
-  ! MOD             [ shift and go to state 62 ]
-  ! POT             [ shift and go to state 63 ]
+  ! PLUS            [ shift and go to state 61 ]
+  ! MINUS           [ shift and go to state 62 ]
+  ! TIMES           [ shift and go to state 63 ]
+  ! DIV             [ shift and go to state 64 ]
+  ! MOD             [ shift and go to state 65 ]
+  ! POT             [ shift and go to state 66 ]
 
 
-state 95
+state 101
 
     (43) exp_aritmetica -> LPAR exp_logica RPAR .
 
@@ -3521,151 +3943,184 @@ state 95
     ELSE            reduce using rule 43 (exp_aritmetica -> LPAR exp_logica RPAR .)
 
 
-state 96
+state 102
 
     (51) exp_aritmetica -> TYPEOF LPAR exp_logica . RPAR
     (25) exp_logica -> exp_logica . AND exp_logica
     (26) exp_logica -> exp_logica . OR exp_logica
 
-    RPAR            shift and go to state 115
-    AND             shift and go to state 49
-    OR              shift and go to state 50
+    RPAR            shift and go to state 124
+    AND             shift and go to state 52
+    OR              shift and go to state 53
 
 
-state 97
+state 103
 
     (52) exp_aritmetica -> STRING LPAR exp_logica . RPAR
     (25) exp_logica -> exp_logica . AND exp_logica
     (26) exp_logica -> exp_logica . OR exp_logica
 
-    RPAR            shift and go to state 116
-    AND             shift and go to state 49
-    OR              shift and go to state 50
+    RPAR            shift and go to state 125
+    AND             shift and go to state 52
+    OR              shift and go to state 53
 
 
-state 98
+state 104
 
     (53) exp_aritmetica -> FLOAT LPAR exp_logica . RPAR
     (25) exp_logica -> exp_logica . AND exp_logica
     (26) exp_logica -> exp_logica . OR exp_logica
 
-    RPAR            shift and go to state 117
-    AND             shift and go to state 49
-    OR              shift and go to state 50
+    RPAR            shift and go to state 126
+    AND             shift and go to state 52
+    OR              shift and go to state 53
 
 
-state 99
+state 105
 
     (54) exp_aritmetica -> TRUNC LPAR data_type . COMMA exp_logica RPAR
 
-    COMMA           shift and go to state 118
+    COMMA           shift and go to state 127
 
 
-state 100
+state 106
 
     (17) data_type -> INT64 .
 
     COMMA           reduce using rule 17 (data_type -> INT64 .)
 
 
-state 101
+state 107
 
     (18) data_type -> FLOAT64 .
 
     COMMA           reduce using rule 18 (data_type -> FLOAT64 .)
 
 
-state 102
+state 108
 
     (19) data_type -> STR .
 
     COMMA           reduce using rule 19 (data_type -> STR .)
 
 
-state 103
+state 109
 
     (20) data_type -> CHR .
 
     COMMA           reduce using rule 20 (data_type -> CHR .)
 
 
-state 104
+state 110
 
     (21) data_type -> BOOL .
 
     COMMA           reduce using rule 21 (data_type -> BOOL .)
 
 
-state 105
+state 111
 
     (55) exp_aritmetica -> PARSE LPAR data_type . COMMA exp_logica RPAR
 
-    COMMA           shift and go to state 119
+    COMMA           shift and go to state 128
 
 
-state 106
+state 112
 
     (56) exp_aritmetica -> SIN LPAR exp_logica . RPAR
     (25) exp_logica -> exp_logica . AND exp_logica
     (26) exp_logica -> exp_logica . OR exp_logica
 
-    RPAR            shift and go to state 120
-    AND             shift and go to state 49
-    OR              shift and go to state 50
+    RPAR            shift and go to state 129
+    AND             shift and go to state 52
+    OR              shift and go to state 53
 
 
-state 107
+state 113
 
     (57) exp_aritmetica -> COS LPAR exp_logica . RPAR
     (25) exp_logica -> exp_logica . AND exp_logica
     (26) exp_logica -> exp_logica . OR exp_logica
 
-    RPAR            shift and go to state 121
-    AND             shift and go to state 49
-    OR              shift and go to state 50
+    RPAR            shift and go to state 130
+    AND             shift and go to state 52
+    OR              shift and go to state 53
 
 
-state 108
+state 114
 
     (58) exp_aritmetica -> TAN LPAR exp_logica . RPAR
     (25) exp_logica -> exp_logica . AND exp_logica
     (26) exp_logica -> exp_logica . OR exp_logica
 
-    RPAR            shift and go to state 122
-    AND             shift and go to state 49
-    OR              shift and go to state 50
+    RPAR            shift and go to state 131
+    AND             shift and go to state 52
+    OR              shift and go to state 53
 
 
-state 109
+state 115
 
     (59) exp_aritmetica -> LOG10 LPAR exp_logica . RPAR
     (25) exp_logica -> exp_logica . AND exp_logica
     (26) exp_logica -> exp_logica . OR exp_logica
 
-    RPAR            shift and go to state 123
-    AND             shift and go to state 49
-    OR              shift and go to state 50
+    RPAR            shift and go to state 132
+    AND             shift and go to state 52
+    OR              shift and go to state 53
 
 
-state 110
+state 116
 
     (60) exp_aritmetica -> SQRT LPAR exp_logica . RPAR
     (25) exp_logica -> exp_logica . AND exp_logica
     (26) exp_logica -> exp_logica . OR exp_logica
 
-    RPAR            shift and go to state 124
-    AND             shift and go to state 49
-    OR              shift and go to state 50
+    RPAR            shift and go to state 133
+    AND             shift and go to state 52
+    OR              shift and go to state 53
 
 
-state 111
+state 117
+
+    (61) exp_aritmetica -> LENGTH LPAR exp_logica . RPAR
+    (25) exp_logica -> exp_logica . AND exp_logica
+    (26) exp_logica -> exp_logica . OR exp_logica
+
+    RPAR            shift and go to state 134
+    AND             shift and go to state 52
+    OR              shift and go to state 53
+
+
+state 118
+
+    (62) exp_aritmetica -> UPPERCASE LPAR exp_logica . RPAR
+    (25) exp_logica -> exp_logica . AND exp_logica
+    (26) exp_logica -> exp_logica . OR exp_logica
+
+    RPAR            shift and go to state 135
+    AND             shift and go to state 52
+    OR              shift and go to state 53
+
+
+state 119
+
+    (63) exp_aritmetica -> LOWERCASE LPAR exp_logica . RPAR
+    (25) exp_logica -> exp_logica . AND exp_logica
+    (26) exp_logica -> exp_logica . OR exp_logica
+
+    RPAR            shift and go to state 136
+    AND             shift and go to state 52
+    OR              shift and go to state 53
+
+
+state 120
 
     (23) if -> IF exp_logica instrucciones END . SEMICOL
 
-    SEMICOL         shift and go to state 125
+    SEMICOL         shift and go to state 137
 
 
-state 112
+state 121
 
     (24) if_else -> IF exp_logica instrucciones ELSE . instrucciones END SEMICOL
     (2) instrucciones -> . instrucciones instruccion
@@ -3691,7 +4146,7 @@ state 112
     WHILE           shift and go to state 14
     IF              shift and go to state 15
 
-    instrucciones                  shift and go to state 126
+    instrucciones                  shift and go to state 138
     instruccion                    shift and go to state 3
     print                          shift and go to state 4
     println                        shift and go to state 5
@@ -3701,7 +4156,7 @@ state 112
     if                             shift and go to state 9
     if_else                        shift and go to state 10
 
-state 113
+state 122
 
     (13) print_args -> print_args COMMA exp_logica .
     (25) exp_logica -> exp_logica . AND exp_logica
@@ -3709,11 +4164,11 @@ state 113
 
     RPAR            reduce using rule 13 (print_args -> print_args COMMA exp_logica .)
     COMMA           reduce using rule 13 (print_args -> print_args COMMA exp_logica .)
-    AND             shift and go to state 49
-    OR              shift and go to state 50
+    AND             shift and go to state 52
+    OR              shift and go to state 53
 
 
-state 114
+state 123
 
     (22) while -> WHILE exp_logica instrucciones END SEMICOL .
 
@@ -3727,7 +4182,7 @@ state 114
     ELSE            reduce using rule 22 (while -> WHILE exp_logica instrucciones END SEMICOL .)
 
 
-state 115
+state 124
 
     (51) exp_aritmetica -> TYPEOF LPAR exp_logica RPAR .
 
@@ -3757,7 +4212,7 @@ state 115
     ELSE            reduce using rule 51 (exp_aritmetica -> TYPEOF LPAR exp_logica RPAR .)
 
 
-state 116
+state 125
 
     (52) exp_aritmetica -> STRING LPAR exp_logica RPAR .
 
@@ -3787,7 +4242,7 @@ state 116
     ELSE            reduce using rule 52 (exp_aritmetica -> STRING LPAR exp_logica RPAR .)
 
 
-state 117
+state 126
 
     (53) exp_aritmetica -> FLOAT LPAR exp_logica RPAR .
 
@@ -3817,7 +4272,7 @@ state 117
     ELSE            reduce using rule 53 (exp_aritmetica -> FLOAT LPAR exp_logica RPAR .)
 
 
-state 118
+state 127
 
     (54) exp_aritmetica -> TRUNC LPAR data_type COMMA . exp_logica RPAR
     (25) exp_logica -> . exp_logica AND exp_logica
@@ -3856,6 +4311,9 @@ state 118
     (58) exp_aritmetica -> . TAN LPAR exp_logica RPAR
     (59) exp_aritmetica -> . LOG10 LPAR exp_logica RPAR
     (60) exp_aritmetica -> . SQRT LPAR exp_logica RPAR
+    (61) exp_aritmetica -> . LENGTH LPAR exp_logica RPAR
+    (62) exp_aritmetica -> . UPPERCASE LPAR exp_logica RPAR
+    (63) exp_aritmetica -> . LOWERCASE LPAR exp_logica RPAR
 
     NOT             shift and go to state 21
     MINUS           shift and go to state 24
@@ -3877,12 +4335,15 @@ state 118
     TAN             shift and go to state 40
     LOG10           shift and go to state 41
     SQRT            shift and go to state 42
+    LENGTH          shift and go to state 43
+    UPPERCASE       shift and go to state 44
+    LOWERCASE       shift and go to state 45
 
-    exp_logica                     shift and go to state 127
+    exp_logica                     shift and go to state 139
     exp_relacional                 shift and go to state 22
     exp_aritmetica                 shift and go to state 23
 
-state 119
+state 128
 
     (55) exp_aritmetica -> PARSE LPAR data_type COMMA . exp_logica RPAR
     (25) exp_logica -> . exp_logica AND exp_logica
@@ -3921,6 +4382,9 @@ state 119
     (58) exp_aritmetica -> . TAN LPAR exp_logica RPAR
     (59) exp_aritmetica -> . LOG10 LPAR exp_logica RPAR
     (60) exp_aritmetica -> . SQRT LPAR exp_logica RPAR
+    (61) exp_aritmetica -> . LENGTH LPAR exp_logica RPAR
+    (62) exp_aritmetica -> . UPPERCASE LPAR exp_logica RPAR
+    (63) exp_aritmetica -> . LOWERCASE LPAR exp_logica RPAR
 
     NOT             shift and go to state 21
     MINUS           shift and go to state 24
@@ -3942,12 +4406,15 @@ state 119
     TAN             shift and go to state 40
     LOG10           shift and go to state 41
     SQRT            shift and go to state 42
+    LENGTH          shift and go to state 43
+    UPPERCASE       shift and go to state 44
+    LOWERCASE       shift and go to state 45
 
-    exp_logica                     shift and go to state 128
+    exp_logica                     shift and go to state 140
     exp_relacional                 shift and go to state 22
     exp_aritmetica                 shift and go to state 23
 
-state 120
+state 129
 
     (56) exp_aritmetica -> SIN LPAR exp_logica RPAR .
 
@@ -3977,7 +4444,7 @@ state 120
     ELSE            reduce using rule 56 (exp_aritmetica -> SIN LPAR exp_logica RPAR .)
 
 
-state 121
+state 130
 
     (57) exp_aritmetica -> COS LPAR exp_logica RPAR .
 
@@ -4007,7 +4474,7 @@ state 121
     ELSE            reduce using rule 57 (exp_aritmetica -> COS LPAR exp_logica RPAR .)
 
 
-state 122
+state 131
 
     (58) exp_aritmetica -> TAN LPAR exp_logica RPAR .
 
@@ -4037,7 +4504,7 @@ state 122
     ELSE            reduce using rule 58 (exp_aritmetica -> TAN LPAR exp_logica RPAR .)
 
 
-state 123
+state 132
 
     (59) exp_aritmetica -> LOG10 LPAR exp_logica RPAR .
 
@@ -4067,7 +4534,7 @@ state 123
     ELSE            reduce using rule 59 (exp_aritmetica -> LOG10 LPAR exp_logica RPAR .)
 
 
-state 124
+state 133
 
     (60) exp_aritmetica -> SQRT LPAR exp_logica RPAR .
 
@@ -4097,7 +4564,97 @@ state 124
     ELSE            reduce using rule 60 (exp_aritmetica -> SQRT LPAR exp_logica RPAR .)
 
 
-state 125
+state 134
+
+    (61) exp_aritmetica -> LENGTH LPAR exp_logica RPAR .
+
+    PLUS            reduce using rule 61 (exp_aritmetica -> LENGTH LPAR exp_logica RPAR .)
+    MINUS           reduce using rule 61 (exp_aritmetica -> LENGTH LPAR exp_logica RPAR .)
+    TIMES           reduce using rule 61 (exp_aritmetica -> LENGTH LPAR exp_logica RPAR .)
+    DIV             reduce using rule 61 (exp_aritmetica -> LENGTH LPAR exp_logica RPAR .)
+    MOD             reduce using rule 61 (exp_aritmetica -> LENGTH LPAR exp_logica RPAR .)
+    POT             reduce using rule 61 (exp_aritmetica -> LENGTH LPAR exp_logica RPAR .)
+    LESS            reduce using rule 61 (exp_aritmetica -> LENGTH LPAR exp_logica RPAR .)
+    LESSEQ          reduce using rule 61 (exp_aritmetica -> LENGTH LPAR exp_logica RPAR .)
+    GREATHER        reduce using rule 61 (exp_aritmetica -> LENGTH LPAR exp_logica RPAR .)
+    GREATHEREQ      reduce using rule 61 (exp_aritmetica -> LENGTH LPAR exp_logica RPAR .)
+    EQUALITY        reduce using rule 61 (exp_aritmetica -> LENGTH LPAR exp_logica RPAR .)
+    DIFERENT        reduce using rule 61 (exp_aritmetica -> LENGTH LPAR exp_logica RPAR .)
+    AND             reduce using rule 61 (exp_aritmetica -> LENGTH LPAR exp_logica RPAR .)
+    OR              reduce using rule 61 (exp_aritmetica -> LENGTH LPAR exp_logica RPAR .)
+    PRINT           reduce using rule 61 (exp_aritmetica -> LENGTH LPAR exp_logica RPAR .)
+    PRINTLN         reduce using rule 61 (exp_aritmetica -> LENGTH LPAR exp_logica RPAR .)
+    ID              reduce using rule 61 (exp_aritmetica -> LENGTH LPAR exp_logica RPAR .)
+    WHILE           reduce using rule 61 (exp_aritmetica -> LENGTH LPAR exp_logica RPAR .)
+    IF              reduce using rule 61 (exp_aritmetica -> LENGTH LPAR exp_logica RPAR .)
+    RPAR            reduce using rule 61 (exp_aritmetica -> LENGTH LPAR exp_logica RPAR .)
+    COMMA           reduce using rule 61 (exp_aritmetica -> LENGTH LPAR exp_logica RPAR .)
+    $end            reduce using rule 61 (exp_aritmetica -> LENGTH LPAR exp_logica RPAR .)
+    END             reduce using rule 61 (exp_aritmetica -> LENGTH LPAR exp_logica RPAR .)
+    ELSE            reduce using rule 61 (exp_aritmetica -> LENGTH LPAR exp_logica RPAR .)
+
+
+state 135
+
+    (62) exp_aritmetica -> UPPERCASE LPAR exp_logica RPAR .
+
+    PLUS            reduce using rule 62 (exp_aritmetica -> UPPERCASE LPAR exp_logica RPAR .)
+    MINUS           reduce using rule 62 (exp_aritmetica -> UPPERCASE LPAR exp_logica RPAR .)
+    TIMES           reduce using rule 62 (exp_aritmetica -> UPPERCASE LPAR exp_logica RPAR .)
+    DIV             reduce using rule 62 (exp_aritmetica -> UPPERCASE LPAR exp_logica RPAR .)
+    MOD             reduce using rule 62 (exp_aritmetica -> UPPERCASE LPAR exp_logica RPAR .)
+    POT             reduce using rule 62 (exp_aritmetica -> UPPERCASE LPAR exp_logica RPAR .)
+    LESS            reduce using rule 62 (exp_aritmetica -> UPPERCASE LPAR exp_logica RPAR .)
+    LESSEQ          reduce using rule 62 (exp_aritmetica -> UPPERCASE LPAR exp_logica RPAR .)
+    GREATHER        reduce using rule 62 (exp_aritmetica -> UPPERCASE LPAR exp_logica RPAR .)
+    GREATHEREQ      reduce using rule 62 (exp_aritmetica -> UPPERCASE LPAR exp_logica RPAR .)
+    EQUALITY        reduce using rule 62 (exp_aritmetica -> UPPERCASE LPAR exp_logica RPAR .)
+    DIFERENT        reduce using rule 62 (exp_aritmetica -> UPPERCASE LPAR exp_logica RPAR .)
+    AND             reduce using rule 62 (exp_aritmetica -> UPPERCASE LPAR exp_logica RPAR .)
+    OR              reduce using rule 62 (exp_aritmetica -> UPPERCASE LPAR exp_logica RPAR .)
+    PRINT           reduce using rule 62 (exp_aritmetica -> UPPERCASE LPAR exp_logica RPAR .)
+    PRINTLN         reduce using rule 62 (exp_aritmetica -> UPPERCASE LPAR exp_logica RPAR .)
+    ID              reduce using rule 62 (exp_aritmetica -> UPPERCASE LPAR exp_logica RPAR .)
+    WHILE           reduce using rule 62 (exp_aritmetica -> UPPERCASE LPAR exp_logica RPAR .)
+    IF              reduce using rule 62 (exp_aritmetica -> UPPERCASE LPAR exp_logica RPAR .)
+    RPAR            reduce using rule 62 (exp_aritmetica -> UPPERCASE LPAR exp_logica RPAR .)
+    COMMA           reduce using rule 62 (exp_aritmetica -> UPPERCASE LPAR exp_logica RPAR .)
+    $end            reduce using rule 62 (exp_aritmetica -> UPPERCASE LPAR exp_logica RPAR .)
+    END             reduce using rule 62 (exp_aritmetica -> UPPERCASE LPAR exp_logica RPAR .)
+    ELSE            reduce using rule 62 (exp_aritmetica -> UPPERCASE LPAR exp_logica RPAR .)
+
+
+state 136
+
+    (63) exp_aritmetica -> LOWERCASE LPAR exp_logica RPAR .
+
+    PLUS            reduce using rule 63 (exp_aritmetica -> LOWERCASE LPAR exp_logica RPAR .)
+    MINUS           reduce using rule 63 (exp_aritmetica -> LOWERCASE LPAR exp_logica RPAR .)
+    TIMES           reduce using rule 63 (exp_aritmetica -> LOWERCASE LPAR exp_logica RPAR .)
+    DIV             reduce using rule 63 (exp_aritmetica -> LOWERCASE LPAR exp_logica RPAR .)
+    MOD             reduce using rule 63 (exp_aritmetica -> LOWERCASE LPAR exp_logica RPAR .)
+    POT             reduce using rule 63 (exp_aritmetica -> LOWERCASE LPAR exp_logica RPAR .)
+    LESS            reduce using rule 63 (exp_aritmetica -> LOWERCASE LPAR exp_logica RPAR .)
+    LESSEQ          reduce using rule 63 (exp_aritmetica -> LOWERCASE LPAR exp_logica RPAR .)
+    GREATHER        reduce using rule 63 (exp_aritmetica -> LOWERCASE LPAR exp_logica RPAR .)
+    GREATHEREQ      reduce using rule 63 (exp_aritmetica -> LOWERCASE LPAR exp_logica RPAR .)
+    EQUALITY        reduce using rule 63 (exp_aritmetica -> LOWERCASE LPAR exp_logica RPAR .)
+    DIFERENT        reduce using rule 63 (exp_aritmetica -> LOWERCASE LPAR exp_logica RPAR .)
+    AND             reduce using rule 63 (exp_aritmetica -> LOWERCASE LPAR exp_logica RPAR .)
+    OR              reduce using rule 63 (exp_aritmetica -> LOWERCASE LPAR exp_logica RPAR .)
+    PRINT           reduce using rule 63 (exp_aritmetica -> LOWERCASE LPAR exp_logica RPAR .)
+    PRINTLN         reduce using rule 63 (exp_aritmetica -> LOWERCASE LPAR exp_logica RPAR .)
+    ID              reduce using rule 63 (exp_aritmetica -> LOWERCASE LPAR exp_logica RPAR .)
+    WHILE           reduce using rule 63 (exp_aritmetica -> LOWERCASE LPAR exp_logica RPAR .)
+    IF              reduce using rule 63 (exp_aritmetica -> LOWERCASE LPAR exp_logica RPAR .)
+    RPAR            reduce using rule 63 (exp_aritmetica -> LOWERCASE LPAR exp_logica RPAR .)
+    COMMA           reduce using rule 63 (exp_aritmetica -> LOWERCASE LPAR exp_logica RPAR .)
+    $end            reduce using rule 63 (exp_aritmetica -> LOWERCASE LPAR exp_logica RPAR .)
+    END             reduce using rule 63 (exp_aritmetica -> LOWERCASE LPAR exp_logica RPAR .)
+    ELSE            reduce using rule 63 (exp_aritmetica -> LOWERCASE LPAR exp_logica RPAR .)
+
+
+state 137
 
     (23) if -> IF exp_logica instrucciones END SEMICOL .
 
@@ -4111,7 +4668,7 @@ state 125
     ELSE            reduce using rule 23 (if -> IF exp_logica instrucciones END SEMICOL .)
 
 
-state 126
+state 138
 
     (24) if_else -> IF exp_logica instrucciones ELSE instrucciones . END SEMICOL
     (2) instrucciones -> instrucciones . instruccion
@@ -4130,7 +4687,7 @@ state 126
     (23) if -> . IF exp_logica instrucciones END SEMICOL
     (24) if_else -> . IF exp_logica instrucciones ELSE instrucciones END SEMICOL
 
-    END             shift and go to state 129
+    END             shift and go to state 141
     PRINT           shift and go to state 11
     PRINTLN         shift and go to state 12
     ID              shift and go to state 13
@@ -4146,36 +4703,36 @@ state 126
     if                             shift and go to state 9
     if_else                        shift and go to state 10
 
-state 127
+state 139
 
     (54) exp_aritmetica -> TRUNC LPAR data_type COMMA exp_logica . RPAR
     (25) exp_logica -> exp_logica . AND exp_logica
     (26) exp_logica -> exp_logica . OR exp_logica
 
-    RPAR            shift and go to state 130
-    AND             shift and go to state 49
-    OR              shift and go to state 50
+    RPAR            shift and go to state 142
+    AND             shift and go to state 52
+    OR              shift and go to state 53
 
 
-state 128
+state 140
 
     (55) exp_aritmetica -> PARSE LPAR data_type COMMA exp_logica . RPAR
     (25) exp_logica -> exp_logica . AND exp_logica
     (26) exp_logica -> exp_logica . OR exp_logica
 
-    RPAR            shift and go to state 131
-    AND             shift and go to state 49
-    OR              shift and go to state 50
+    RPAR            shift and go to state 143
+    AND             shift and go to state 52
+    OR              shift and go to state 53
 
 
-state 129
+state 141
 
     (24) if_else -> IF exp_logica instrucciones ELSE instrucciones END . SEMICOL
 
-    SEMICOL         shift and go to state 132
+    SEMICOL         shift and go to state 144
 
 
-state 130
+state 142
 
     (54) exp_aritmetica -> TRUNC LPAR data_type COMMA exp_logica RPAR .
 
@@ -4205,7 +4762,7 @@ state 130
     ELSE            reduce using rule 54 (exp_aritmetica -> TRUNC LPAR data_type COMMA exp_logica RPAR .)
 
 
-state 131
+state 143
 
     (55) exp_aritmetica -> PARSE LPAR data_type COMMA exp_logica RPAR .
 
@@ -4235,7 +4792,7 @@ state 131
     ELSE            reduce using rule 55 (exp_aritmetica -> PARSE LPAR data_type COMMA exp_logica RPAR .)
 
 
-state 132
+state 144
 
     (24) if_else -> IF exp_logica instrucciones ELSE instrucciones END SEMICOL .
 

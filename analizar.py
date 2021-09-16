@@ -204,12 +204,15 @@ def ejecutar_aritmetica(expresion, ts) :
 def ejecutar_funcion_nativa(expresion, ts) :
     exp = ejecutar_logica(expresion.exp, ts)
     if isinstance(expresion, NativaParse) :
-        if isinstance(exp, str) : 
-            print(expresion.tipo)
-            if expresion.tipo == DATA_TYPE.NUMERO : return int(exp)
-            elif expresion.tipo == DATA_TYPE.DECIMAL : return float(exp)
-            else : 
-                print('Error semántico: En parse, se esperaba convertir a Int64 o Float64')
+        if isinstance(exp, str) :
+            if exp.isnumeric() or exp.isdecimal() :
+                if expresion.tipo == DATA_TYPE.NUMERO : return int(exp)
+                elif expresion.tipo == DATA_TYPE.DECIMAL : return float(exp)
+                else : 
+                    print('Error semántico: En parse, se esperaba convertir a Int64 o Float64')
+                    return None
+            else :
+                print('Error semántico: En parse, la cadena no se puede convertir a Int64 o Float64')
                 return None
         else :
             print('Error semántico: En parse, se esperaba convertir de string')
@@ -272,6 +275,24 @@ def ejecutar_funcion_nativa(expresion, ts) :
             return math.sqrt(exp)
         else :
             print('Error semántico: Sqrt solo acepta Int64 o Float64')
+            return None
+    elif isinstance(expresion, NativaLength) :
+        if isinstance(exp, str) :
+            return len(exp)
+        else :
+            print('Error semántico: length solo acepta Int64 o Float64')
+            return None
+    elif isinstance(expresion, NativaUppercase) :
+        if isinstance(exp, str) :
+            return exp.upper()
+        else :
+            print('Error semántico: uppercase solo acepta Int64 o Float64')
+            return None
+    elif isinstance(expresion, NativaLowercase) :
+        if isinstance(exp, str) :
+            return exp.lower()
+        else :
+            print('Error semántico: lowercase solo acepta Int64 o Float64')
             return None
 
 def ejecutar_instrucciones(instrucciones, ts = TS.TablaSimbolo()) :

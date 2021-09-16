@@ -1,5 +1,6 @@
-from funciones import *
 import ts as TS
+import math
+from funciones import *
 from expresiones import *
 from instrucciones import *
 
@@ -213,7 +214,7 @@ def ejecutar_funcion_nativa(expresion, ts) :
         else :
             print('Error semántico: En parse, se esperaba convertir de string')
             return None
-    if isinstance(expresion, NativaTrunc) :
+    elif isinstance(expresion, NativaTrunc) :
         if isinstance(exp, float) :
             return int(exp)
         elif isinstance(exp, int) :
@@ -221,7 +222,7 @@ def ejecutar_funcion_nativa(expresion, ts) :
         else :
             print('Error semántico: En trunc, se esperaba un tipo Float64')
             return None
-    if isinstance(expresion, NativaFloat) :
+    elif isinstance(expresion, NativaFloat) :
         if isinstance(exp, int) :
             return float(exp)
         elif isinstance(exp, float) :
@@ -229,19 +230,49 @@ def ejecutar_funcion_nativa(expresion, ts) :
         else :
             print('Error semántico: En float, se esperaba un tipo Int64')
             return None
-    if isinstance(expresion, NativaString) :
+    elif isinstance(expresion, NativaString) :
         if isinstance(exp, int) or isinstance(exp, float) :
             return str(exp)
         else :
             print('Error semántico: En string, se esperaba un tipo Int64 o Float64')
             return None
-    if isinstance(expresion, NativaTypeof) :
+    elif isinstance(expresion, NativaTypeof) :
         if isinstance(exp, int) : return 'Int64'
         elif isinstance(exp, float) : return 'Float64'
         elif isinstance(exp, str) : return 'String'
         elif isinstance(exp, bool) : return 'Bool'
         elif isinstance(exp, str) : return 'Char'
         else : return None
+    elif isinstance(expresion, NativaSin) :
+        if isinstance(exp, int) or isinstance(exp, float) :
+            return math.sin(exp)
+        else :
+            print('Error semántico: Sin solo acepta Int64 o Float64')
+            return None
+    elif isinstance(expresion, NativaCos) :
+        if isinstance(exp, int) or isinstance(exp, float) :
+            return math.cos(exp)
+        else :
+            print('Error semántico: Cos solo acepta Int64 o Float64')
+            return None
+    elif isinstance(expresion, NativaTan) :
+        if isinstance(exp, int) or isinstance(exp, float) :
+            return math.tan(exp)
+        else :
+            print('Error semántico: Tan solo acepta Int64 o Float64')
+            return None
+    elif isinstance(expresion, NativaLog10) :
+        if isinstance(exp, int) or isinstance(exp, float) :
+            return math.log10(exp)
+        else :
+            print('Error semántico: Log10 solo acepta Int64 o Float64')
+            return None
+    elif isinstance(expresion, NativaSqrt) :
+        if isinstance(exp, int) or isinstance(exp, float) :
+            return math.sqrt(exp)
+        else :
+            print('Error semántico: Sqrt solo acepta Int64 o Float64')
+            return None
 
 def ejecutar_instrucciones(instrucciones, ts = TS.TablaSimbolo()) :
     response = ''

@@ -30,3 +30,23 @@ class NativaString(FuncionNativa) :
 class NativaTypeof(FuncionNativa) :
     def __init__(self, exp) -> None:
         self.exp = exp
+
+class NativaSin(FuncionNativa) :
+    def __init__(self, exp) -> None:
+        self.exp = exp
+
+class NativaCos(FuncionNativa) :
+    def __init__(self, exp) -> None:
+        self.exp = exp
+
+class NativaTan(FuncionNativa) :
+    def __init__(self, exp) -> None:
+        self.exp = exp
+
+class NativaLog10(FuncionNativa) :
+    def __init__(self, exp) -> None:
+        self.exp = exp
+
+class NativaSqrt(FuncionNativa) :
+    def __init__(self, exp) -> None:
+        self.exp = exp

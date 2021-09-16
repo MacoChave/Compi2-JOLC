@@ -1,6 +1,6 @@
 reservadas = {
-    'Int64': 'INT',
-    'Float64': 'FLOAT',
+    'Int64': 'INT64',
+    'Float64': 'FLOAT64',
     'String': 'STR',
     'Char': 'CHR',
     'Bool': 'BOOL',
@@ -11,6 +11,9 @@ reservadas = {
     'println': 'PRINTLN',
     'typeof': 'TYPEOF',
     'parse': 'PARSE',
+    'float': 'FLOAT',
+    'string': 'STRING',
+    'trunc': 'TRUNC',
     'uppercase': 'UPPERCASE',
     'lowercase': 'LOWERCASE',
     'if': 'IF',
@@ -21,6 +24,7 @@ reservadas = {
 
 tokens = [
     'SEMICOL',
+    'COMMA',
     'LBRACE',
     'RBRACE',
     'LPAR',
@@ -42,13 +46,14 @@ tokens = [
     'EQUALITY',
     'DIFERENT',
     'DECIMAL',
-    'NUMBER',
+    'NUMBERO',
     'CARACTER',
-    'STRING',
+    'CADENA',
     'ID'
 ] + list(reservadas.values())
 
 t_SEMICOL = r';'
+t_COMMA = r','
 t_LBRACE = r'{'
 t_RBRACE = r'}'
 t_LPAR = r'\('
@@ -79,7 +84,7 @@ def t_DECIMAL(t) :
         t.value = 0
     return t
 
-def t_NUMBER(t) :
+def t_NUMBERO(t) :
     r'\d+'
     try:
         t.value = int(t.value)
@@ -98,14 +103,14 @@ def t_CARACTER(t) :
 
     return t
 
-def t_STRING(t) :
+def t_CADENA(t) :
     r'\".*?\"'
     t.value = t.value[1:-1]
     return t
 
 def t_ID(t) :
     r'[a-zA-Z_][a-zA-Z_0-9]*'
-    t.type = reservadas.get(t.value.lower(), 'ID')
+    t.type = reservadas.get(t.value, 'ID')
     return t
 
 def t_COMMENT_MUL(t) :
@@ -129,7 +134,7 @@ def t_error(t) :
     lista_errores.append(error)
     t.lexer.skip(1)
 
-from te import Error, TablaError
+from te import Error
 import ply.lex as lex
 lexer = lex.lex()
 
@@ -149,6 +154,7 @@ precedence = (
 
 from instrucciones import *
 from expresiones import *
+from funciones import *
 
 def p_init(t) :
     'init : instrucciones'
@@ -174,12 +180,21 @@ def p_instruccion(t) :
     t[0] = t[1]
 
 def p_print(t) :
-    'print : PRINT LPAR exp_logica RPAR'
+    'print : PRINT LPAR print_args RPAR'
     t[0] = Print(t[3])
 
 def p_println(t) :
-    'println : PRINTLN LPAR exp_logica RPAR'
+    'println : PRINTLN LPAR print_args RPAR'
     t[0] = Println(t[3])
+
+def p_print_args(t) :
+    'print_args : print_args COMMA exp_logica'
+    t[1].append(t[3])
+    t[0] = t[1]
+
+def p_print_arg(t) :
+    'print_args : exp_logica'
+    t[0] = [t[1]]
 
 def p_definicion(t) :
     'definicion : ID'
@@ -188,6 +203,19 @@ def p_definicion(t) :
 def p_asignacion(t) :
     'asignacion : ID EQUAL exp_logica'
     t[0] = Definicion(t[1], t[3])
+
+def p_data_type(t) :
+    '''data_type    : INT64
+                    | FLOAT64
+                    | STR
+                    | CHR
+                    | BOOL'''
+    print(t[1])
+    if t[1] == 'Int64' : t[0] = DATA_TYPE.NUMERO
+    elif t[1] == 'Float64' : t[0] = DATA_TYPE.DECIMAL
+    elif t[1] == 'String' : t[0] = DATA_TYPE.CADENA
+    elif t[1] == 'Char' : t[0] = DATA_TYPE.CARACTER
+    elif t[1] == 'Bool' : t[0] = DATA_TYPE.BOLEANO
 
 def p_while(t) :
     'while : WHILE exp_logica instrucciones END SEMICOL'
@@ -256,7 +284,7 @@ def p_aritmetica_agrupacion(t) :
     t[0] = t[2]
 
 def p_aritmetica_basico_num(t) :
-    'exp_aritmetica  : NUMBER'
+    'exp_aritmetica  : NUMBERO'
     t[0] = Numero(t[1])
 
 def p_aritmetica_basico_dec(t) :
@@ -268,7 +296,7 @@ def p_aritmetica_basico_char(t) :
     t[0] = Caracter(t[1])
 
 def p_aritmetica_basico_str(t) :
-    'exp_aritmetica : STRING'
+    'exp_aritmetica : CADENA'
     t[0] = Cadena(t[1])
 
 def p_aritmetica_basico_true(t) :
@@ -282,6 +310,26 @@ def p_aritmetica_basico_false(t) :
 def p_aritmetica_basico_id(t) :
     'exp_aritmetica : ID'
     t[0] = Identificador(t[1])
+
+def p_aritmetica_nativa_typeof(t) :
+    'exp_aritmetica : TYPEOF LPAR exp_logica RPAR'
+    t[0] = NativaTypeof(t[3])
+
+def p_aritmetica_nativa_string(t) :
+    'exp_aritmetica : STRING LPAR exp_logica RPAR'
+    t[0] = NativaString(t[3])
+
+def p_aritmetica_nativa_float(t) :
+    'exp_aritmetica : FLOAT LPAR exp_logica RPAR'
+    t[0] = NativaFloat(t[3])
+
+def p_aritmetica_nativa_trunc(t) :
+    'exp_aritmetica : TRUNC LPAR data_type COMMA exp_logica RPAR'
+    t[0] = NativaTrunc(t[5])
+
+def p_aritmetica_nativa_parse(t) :
+    'exp_aritmetica : PARSE LPAR data_type COMMA exp_logica RPAR'
+    t[0] = NativaParse(t[3], t[5])
 
 def p_error(t) :
     global lista_errores

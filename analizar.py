@@ -1,31 +1,37 @@
+from funciones import *
 import ts as TS
 from expresiones import *
 from instrucciones import *
 
-def ejecutar_print(instruccion, ts) :
-    print('toy en print')
-    res = ejecutar_logica(instruccion.exp, ts)
-    if res is None : 
-        # TODO: Error semántico, Se esperaba una expresión
-        return ''
+def ejecutar_print(instruccion, ts) -> str :
+    res = ''
+    for instr in instruccion.exp :
+        cadena = ejecutar_logica(instr, ts)
+        if cadena is None : 
+            # TODO: Agregar error
+            print('Error semántico, En print, no hay expresión para imprimir')
+            cadena = ''
 
-    if isinstance(res, bool) :
-        if res : res = 'True'
-        else : res = 'False'
-    print('devuelvo ', res)
+        if isinstance(cadena, bool) :
+            if cadena : res = 'True'
+            else : res = 'False'
+        res = f'{res}{cadena}'
     return res
 
-def ejecutar_println(instruccion, ts) :
-    res = ejecutar_logica(instruccion.exp, ts)
-    if res is None : 
-        # TODO: Agregar error
-        print('Error semántico, En print, no hay expresión para imprimir')
-        return ''
+def ejecutar_println(instruccion, ts) -> str :
+    res = ''
+    for instr in instruccion.exp :
+        cadena = ejecutar_logica(instr, ts)
+        if cadena is None : 
+            # TODO: Agregar error
+            print('Error semántico, En print, no hay expresión para imprimir')
+            cadena = ''
 
-    if isinstance(res, bool) :
-        if res : res = 'True'
-        else : res = 'False'
-    res = f'{res}\n'
+        if isinstance(cadena, bool) :
+            if cadena : res = 'True'
+            else : res = 'False'
+        res = f'{res}{cadena}'
+        res = f'{res}\n'
     return res
 
 def ejecutar_definicion(instruccion, ts) :
@@ -37,23 +43,19 @@ def ejecutar_definicion(instruccion, ts) :
         ts.actualizar(simbolo)
 
 def ejecutar_mientras(instruccion, ts) :
-    print('toy en while')
     cond = ejecutar_logica(instruccion.condicion, ts)
-    print('cond es ', cond)
     response = ''
     if isinstance(cond, bool) :
         while cond :
             ts_local = TS.TablaSimbolo(ts.simbolos)
             response = f'{response}{ejecutar_instrucciones(instruccion.instrucciones, ts_local)}'
-            cond = ejecutar_logica(instruccion.condicion, ts)
-            print('cond es ', cond)
+            cond = ejecutar_logica(instruccion.condicion, ts_local)
         return response
     else :
         # TODO: Agregar error
         print('Error semántico: En while. Se esperaba un tipo bool en la condición')
 
 def ejecutar_if(instruccion, ts) :
-    print('toy en if')
     cond = ejecutar_logica(instruccion.condicion, ts)
     if isinstance(cond, bool) :
         if cond :
@@ -64,15 +66,12 @@ def ejecutar_if(instruccion, ts) :
         print('Error semántico: En if. Se esperaba un tipo bool en la condición')
 
 def ejecutar_if_else(instruccion, ts) :
-    print('toy en if else')
     cond = ejecutar_logica(instruccion.condicion, ts)
     ts_local = TS.TablaSimbolo(ts.simbolos)
     if isinstance(cond, bool) :
         if cond :
-            print('toy en then')
             return ejecutar_instrucciones(instruccion.instrucciones_v, ts_local)
         else :
-            print('toy en else')
             return ejecutar_instrucciones(instruccion.instrucciones_f, ts_local)
     else: 
         # TODO: Agregar error
@@ -99,9 +98,13 @@ def ejecutar_logica(expresion, ts) :
         return not exp1
     elif isinstance(expresion, ExpresionRelacional) : return ejecutar_relacional(expresion, ts)
     elif isinstance(expresion, ExpresionAritmetica) : return ejecutar_aritmetica(expresion, ts)
+    elif isinstance(expresion, FuncionNativa) :
+        return ejecutar_funcion_nativa(expresion, ts)
     
 def ejecutar_relacional(expresion, ts) :
     if isinstance(expresion, ExpresionAritmetica) : return ejecutar_aritmetica(expresion, ts)
+    elif isinstance(expresion, FuncionNativa) :
+        return ejecutar_funcion_nativa(expresion, ts)
     
     exp1 = ejecutar_relacional(expresion.exp1, ts)
     exp2 = ejecutar_relacional(expresion.exp2, ts)
@@ -194,10 +197,54 @@ def ejecutar_aritmetica(expresion, ts) :
         return False
     elif isinstance(expresion, Identificador) :
         return ts.obtener(expresion.id).valor
+    elif isinstance(expresion, FuncionNativa) :
+        return ejecutar_funcion_nativa(expresion, ts)
+
+def ejecutar_funcion_nativa(expresion, ts) :
+    exp = ejecutar_logica(expresion.exp, ts)
+    if isinstance(expresion, NativaParse) :
+        if isinstance(exp, str) : 
+            print(expresion.tipo)
+            if expresion.tipo == DATA_TYPE.NUMERO : return int(exp)
+            elif expresion.tipo == DATA_TYPE.DECIMAL : return float(exp)
+            else : 
+                print('Error semántico: En parse, se esperaba convertir a Int64 o Float64')
+                return None
+        else :
+            print('Error semántico: En parse, se esperaba convertir de string')
+            return None
+    if isinstance(expresion, NativaTrunc) :
+        if isinstance(exp, float) :
+            return int(exp)
+        elif isinstance(exp, int) :
+            return exp
+        else :
+            print('Error semántico: En trunc, se esperaba un tipo Float64')
+            return None
+    if isinstance(expresion, NativaFloat) :
+        if isinstance(exp, int) :
+            return float(exp)
+        elif isinstance(exp, float) :
+            return exp
+        else :
+            print('Error semántico: En float, se esperaba un tipo Int64')
+            return None
+    if isinstance(expresion, NativaString) :
+        if isinstance(exp, int) or isinstance(exp, float) :
+            return str(exp)
+        else :
+            print('Error semántico: En string, se esperaba un tipo Int64 o Float64')
+            return None
+    if isinstance(expresion, NativaTypeof) :
+        if isinstance(exp, int) : return 'Int64'
+        elif isinstance(exp, float) : return 'Float64'
+        elif isinstance(exp, str) : return 'String'
+        elif isinstance(exp, bool) : return 'Bool'
+        elif isinstance(exp, str) : return 'Char'
+        else : return None
 
 def ejecutar_instrucciones(instrucciones, ts = TS.TablaSimbolo()) :
     response = ''
-    print('toy en instrucciones')
     for instruccion in instrucciones :
         if isinstance(instruccion, Print) : 
             response = f'{response}{ejecutar_print(instruccion, ts)}'
@@ -212,5 +259,4 @@ def ejecutar_instrucciones(instrucciones, ts = TS.TablaSimbolo()) :
             response = f'{response}{ejecutar_if_else(instruccion, ts)}'
         else : 
             print('Error semantico: Instrucción no válida')
-    print('devuelvo ', response)
     return response

@@ -182,11 +182,11 @@ def p_instruccion(t) :
     t[0] = t[1]
 
 def p_print(t) :
-    'print : PRINT LPAR print_args RPAR'
+    'print : PRINT LPAR print_args RPAR semicolon'
     t[0] = Print(t[3])
 
 def p_println(t) :
-    'println : PRINTLN LPAR print_args RPAR'
+    'println : PRINTLN LPAR print_args RPAR semicolon'
     t[0] = Println(t[3])
 
 def p_print_args(t) :
@@ -199,7 +199,7 @@ def p_print_arg(t) :
     t[0] = [t[1]]
 
 def p_definicion(t) :
-    'definicion : ID asignacion'
+    'definicion : ID asignacion semicolon'
     t[0] = Definicion(t[1], t[2])
 
 def p_asignacion(t) :
@@ -232,18 +232,17 @@ def p_data_type(t) :
     elif t[1] == 'Bool' : t[0] = DATA_TYPE.BOLEANO
 
 def p_while(t) :
-    'while : WHILE exp_logica instrucciones END SEMICOL'
+    'while : WHILE exp_logica instrucciones END semicolon'
     t[0] = Mientras(t[2], t[3])
 
 def p_if(t) :
-    'if : IF exp_logica instrucciones END SEMICOL'
+    'if : IF exp_logica instrucciones END semicolon'
     t[0] = If(t[2], t[3])
 
 def p_if_else(t) :
-    'if_else : IF exp_logica instrucciones ELSE instrucciones END SEMICOL'
+    'if_else : IF exp_logica instrucciones ELSE instrucciones END semicolon'
     t[0] = IfElse(t[2], t[3], t[5])
 
-# FOR
 # def p_for(t) :
 #     'for : FOR ID IN string instrucciones END SEMICOL'
 
@@ -257,6 +256,10 @@ def p_if_else(t) :
 #     'for_list : array'
 
 # FUNCIONES
+
+def p_semicolon(t) :
+    '''semicolon    : SEMICOL
+                    | empty'''
 
 def p_logica_binaria(t) :
     '''exp_logica    : exp_logica AND exp_logica

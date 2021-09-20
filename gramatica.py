@@ -31,7 +31,7 @@ reservadas = {
 }
 
 tokens = [
-    'SEMICOL', 'COLON', 'COMMA',
+    'SEMICOL', 'AS', 'COLON', 'COMMA',
     'QUESTION',
     'LBRACE', 'RBRACE',
     'LPAR', 'RPAR',
@@ -45,6 +45,7 @@ tokens = [
 ] + list(reservadas.values())
 
 t_SEMICOL = r';'
+t_AS = r'::'
 t_COLON = r':'
 t_QUESTION = r'\?'
 t_COMMA = r','
@@ -202,11 +203,19 @@ def p_definicion(t) :
     t[0] = Definicion(t[1], t[2])
 
 def p_asignacion(t) :
-    'asignacion : EQUAL exp_logica'
+    'asignacion : EQUAL exp_logica assign_type'
     t[0] = t[2]
 
 def p_asignacion_empty(t) :
     'asignacion : empty'
+    t[0] = None
+
+def p_asignacion_type(t) :
+    'assign_type : AS data_type'
+    t[0] = t[2]
+
+def p_asignacion_type(t) :
+    'assign_type : empty'
     t[0] = None
 
 def p_data_type(t) :
@@ -307,8 +316,6 @@ def p_aritmetica_agrupacion(t) :
 
 def p_aritmetica_basico_num(t) :
     'exp_aritmetica  : NUMERO'
-    # print('NUMERO line number: ', t.lineno(1))
-    # print('NUMERO position: ', t.lineno(1))
     t[0] = Numero(t[1])
 
 def p_aritmetica_basico_dec(t) :

@@ -7,6 +7,7 @@ class OP_ARITMETICA(Enum) :
     DIVIDIDO = 4
     MODULO = 5
     POTENCIA = 6
+    RANGO = 7
 
 class OP_RELACIONAL(Enum) :
     MAYOR = 1
@@ -25,88 +26,106 @@ class ExpresionAritmetica :
     '''Clase para ExpresionAritmeticaes numéricas'''
 
 class AritmeticaBinaria(ExpresionAritmetica) :
-    def __init__(self, exp1, exp2, operador) :
+    def __init__(self, exp1, exp2, operador, line = 0) :
+        self.line = line
         self.exp1 = exp1
         self.exp2 = exp2
         self.operador = operador
     
     def __str__(self) -> str:
-        return f'type: Aritmetica exp1: {self.exp1} exp2: {self.exp2} operador: {self.operador}'
+        return f'Expresion: aritmetica binaria exp1: {self.exp1} exp2: {self.exp2} operador: {self.operador}' + '\n'
 
 class Negativo(ExpresionAritmetica) :
-    def __init__(self, exp1) :
+    def __init__(self, exp1, line = 0) :
+        self.line = line
         self.exp1 = exp1
     
     def __str__(self) -> str:
-        return f'type: Negativo exp1: {self.exp1}'
+        return f'Expresion: negativo exp1: {self.exp1}' + '\n'
 
 class Numero(ExpresionAritmetica) :
-    def __init__(self, val = 0) :
+    def __init__(self, val = 0, line = 0) :
+        self.line = line
         self.val = val
     
     def __str__(self) -> str:
-        return f'type: Numero val: {self.val}'
+        return f'Expresion: numero val: {self.val}' + '\n'
 
 class Identificador(ExpresionAritmetica) :
-    def __init__(self, id = '') :
+    def __init__(self, id = '', line = 0) :
+        self.line = line
         self.id = id
     
     def __str__(self) -> str:
-        return f'type: Identificador id: {self.id}'
+        return f'Expresion: identificador id: {self.id}' + '\n'
 
 class Cadena(ExpresionAritmetica) :
-    def __init__(self, val = '') :
+    def __init__(self, val = '', line = 0) :
+        self.line = line
         self.val = val
     
     def __str__(self) -> str:
-        return f'type: Cadena val: {self.val}'
+        return f'Expresion: cadena val: {self.val}' + '\n'
 
 class BoolTrue(ExpresionAritmetica) :
-    def __init__(self, val) :
+    def __init__(self, val, line = 0) :
+        self.line = line
         self.val = val
     
     def __str__(self) -> str:
-        return f'type: True val: {self.val}'
+        return f'Expresion: true val: {self.val}' + '\n'
 
 class BoolFalse(ExpresionAritmetica) :
-    def __init__(self, val) :
+    def __init__(self, val, line = 0) :
+        self.line = line
         self.val = val
     
     def __str__(self) -> str:
-        return f'type: False val: {self.val}'
+        return f'Expresion: false val: {self.val}' + '\n'
 
 class Caracter(ExpresionAritmetica) :
-    def __init__(self, val) :
+    def __init__(self, val, line = 0) :
+        self.line = line
         self.val = val
     
     def __str__(self) -> str:
-        return f'type: Caracter val: {self.val}'
+        return f'Expresion: caracter  val: {self.val}' + '\n'
+
+class Ternario(ExpresionAritmetica) :
+    def __init__(self, condicion, exp_then, exp_else, line = 0) :
+        self.line = line
+        self.condicion = condicion
+        self.exp_then = exp_then
+        self.exp_else = exp_else
 
 class ExpresionLogica :
     '''Clase para expresiones lógicas'''
 
 class LogicaBinaria(ExpresionLogica) :
-    def __init__(self, exp1, exp2, operador) :
+    def __init__(self, exp1, exp2, operador, line = 0) :
+        self.line = line
         self.exp1 = exp1
         self.exp2 = exp2
         self.operador = operador
     
     def __str__(self) -> str:
-        return f'type: Logica exp1: {self.exp1} exp2: {self.exp2} operador: {self.operador}'
+        return f'Expresion: logica binaria exp1: {self.exp1} exp2: {self.exp2} operador: {self.operador}' + '\n'
 
 class Negado(ExpresionLogica) :
-    def __init__(self, exp1, operador) :
+    def __init__(self, exp1, operador, line = 0) :
+        self.line = line
         self.exp1 = exp1
         self.operador = operador
     
     def __str__(self) -> str:
-        return f'type: negado: {self.exp1} operador: {self.operador}'
+        return f'Expresion: not exp1: {self.exp1} operador: {self.operador}' + '\n'
 
 class ExpresionRelacional() :
-    def __init__(self, exp1, exp2, operador) :
+    def __init__(self, exp1, exp2, operador, line = 0) :
+        self.line = line
         self.exp1 = exp1
         self.exp2 = exp2
         self.operador = operador
     
     def __str__(self) -> str:
-        return f'type: relacional: {self.exp1} exp2: {self.exp2} operador: {self.operador}'
+        return f'Expresion: relacional exp2: {self.exp1} exp2: {self.exp2} operador: {self.operador}' + '\n'

@@ -1,7 +1,7 @@
 from datetime import datetime
 
 class Error() :
-    def __init__(self, tipo, descripcion, linea, columna = 0) -> None:
+    def __init__(self, tipo, descripcion, linea = 0, columna = 0) -> None:
         self.tipo = tipo
         self.descripcion = descripcion
         self.linea = linea

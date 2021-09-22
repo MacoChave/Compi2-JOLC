@@ -6,3 +6,7 @@
 	width: fit-content;
 	margin: auto;
 }
+
+.code__area {
+	font-family: 'Syne Mono', monospace;
+}

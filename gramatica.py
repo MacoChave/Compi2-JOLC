@@ -19,51 +19,48 @@ reservadas = {
     'tan': 'TAN',
     'log10': 'LOG10',
     'sqrt': 'SQRT',
+    'length': 'LENGTH',
     'uppercase': 'UPPERCASE',
     'lowercase': 'LOWERCASE',
     'if': 'IF',
     'else': 'ELSE',
     'while': 'WHILE',
-    'end': 'END'
+    'for': 'FOR',
+    'in': 'IN',
+    'end': 'END',
+    'local': 'LOCAL',
+    'global': 'GLOBAL',
+    'function': 'FUNCTION'
 }
 
 tokens = [
-    'SEMICOL',
-    'COMMA',
-    'LBRACE',
-    'RBRACE',
-    'LPAR',
-    'RPAR',
+    'SEMICOL', 'AS', 'COLON', 'COMMA',
+    # 'QUESTION',
+    # 'LBRACE', 'RBRACE',
+    'LPAR', 'RPAR',
     'EQUAL',
-    'AND',
-    'OR',
-    'NOT',
-    'PLUS',
-    'MINUS',
-    'TIMES',
-    'DIV',
-    'MOD',
-    'POT',
-    'LESS',
-    'LESSEQ',
-    'GREATHER',
-    'GREATHEREQ',
-    'EQUALITY',
-    'DIFERENT',
-    'DECIMAL',
-    'NUMBERO',
-    'CARACTER',
-    'CADENA',
-    'ID'
+    # 'ADDITION', 'DIFFERENCE', 'PRODUCT', 'QUOTIENT',
+    'AND', 'OR', 'NOT',
+    'PLUS', 'MINUS', 'TIMES', 'DIV', 'MOD', 'POT',
+    'LESS', 'LESSEQ', 'GREATHER', 'GREATHEREQ',
+    'EQUALITY', 'DIFERENT',
+    'DECIMAL', 'NUMERO', 'CARACTER', 'CADENA', 'ID'
 ] + list(reservadas.values())
 
 t_SEMICOL = r';'
+t_AS = r'::'
+t_COLON = r':'
 t_COMMA = r','
-t_LBRACE = r'{'
-t_RBRACE = r'}'
+# t_QUESTION = r'\?'
+# t_LBRACE = r'{'
+# t_RBRACE = r'}'
 t_LPAR = r'\('
 t_RPAR = r'\)'
 t_EQUAL = r'='
+# t_ADDITION = r'\+='
+# t_DIFFERENCE = r'-='
+# t_PRODUCT = r'\*='
+# t_QUOTIENT = r'/='
 t_AND = r'&&'
 t_OR = r'\|\|'
 t_NOT = r'!'
@@ -89,7 +86,7 @@ def t_DECIMAL(t) :
         t.value = 0
     return t
 
-def t_NUMBERO(t) :
+def t_NUMERO(t) :
     r'\d+'
     try:
         t.value = int(t.value)
@@ -119,11 +116,11 @@ def t_ID(t) :
     return t
 
 def t_COMMENT_MUL(t) :
-    r'\#.*\n'
+    r'\#=(.|\n)*?=\#'
     t.lexer.lineno += t.value.count('\n')
 
 def t_COMMENT_SIM(t) :
-    r'\#=.*=\#'
+    r'\#.*\n'
     t.lexer.lineno += 1
 
 t_ignore = " \t"
@@ -146,14 +143,19 @@ lexer = lex.lex()
 lista_errores = []
 
 precedence = (
+    ('right', 'EQUAL'),
+    # ('right', 'ADDITION', 'DIFFERENCE'),
+    # ('right', 'PRODUCT', 'QUOTIENT'),
     ('left', 'AND'),
     ('left', 'OR'),
-    ('right', 'NOT'),
-    ('nonassoc', 'LESS', 'GREATHER', 'LESSEQ', 'GREATHEREQ', 'EQUALITY', 'DIFERENT'),
+    # ('left', 'QUESTION', 'COLON'),
+    ('nonassoc', 'EQUALITY', 'DIFERENT'),
+    ('nonassoc', 'LESS', 'GREATHER', 'LESSEQ', 'GREATHEREQ'),
+    ('left', 'COLON'),
     ('left', 'PLUS', 'MINUS'),
-    ('left', 'TIMES', 'DIV'),
-    ('left', 'MOD'),
+    ('left', 'TIMES', 'DIV', 'MOD'),
     ('left', 'POT'),
+    ('right', 'NOT'),
     ('right', 'UMINUS'),
 )
 
@@ -175,13 +177,14 @@ def p_instrucciones(t) :
     t[0] = [t[1]]
 
 def p_instruccion(t) :
-    '''instruccion  : print
-                    | println
-                    | definicion
-                    | asignacion
-                    | while
-                    | if
-                    | if_else'''
+    '''instruccion  : print semicolon
+                    | println semicolon
+                    | definicion semicolon
+                    | while semicolon
+                    | for semicolon
+                    | function semicolon
+                    | if semicolon
+                    | if_else semicolon'''
     t[0] = t[1]
 
 def p_print(t) :
@@ -202,19 +205,41 @@ def p_print_arg(t) :
     t[0] = [t[1]]
 
 def p_definicion(t) :
-    'definicion : ID'
-    t[0] = Definicion(t[1])
+    'definicion : ambito ID asignacion'
+    t[0] = Definicion(t[2], t[3])
+
+def p_ambito_local(t) :
+    'ambito : LOCAL'
+
+def p_ambito_global(t) :
+    'ambito : GLOBAL'
+
+def p_ambito_empty(t) :
+    'ambito : empty'
 
 def p_asignacion(t) :
-    'asignacion : ID EQUAL exp_logica'
-    t[0] = Definicion(t[1], t[3])
+    'asignacion : EQUAL exp_logica assign_type'
+    t[0] = t[2]
+
+def p_asignacion_empty(t) :
+    'asignacion : empty'
+    t[0] = None
+
+def p_asignacion_type(t) :
+    'assign_type : AS data_type'
+    t[0] = t[2]
+
+def p_asignacion_type_empty(t) :
+    'assign_type : empty'
+    t[0] = None
 
 def p_data_type(t) :
     '''data_type    : INT64
                     | FLOAT64
                     | STR
                     | CHR
-                    | BOOL'''
+                    | BOOL
+                    | NOTHING'''
     print(t[1])
     if t[1] == 'Int64' : t[0] = DATA_TYPE.NUMERO
     elif t[1] == 'Float64' : t[0] = DATA_TYPE.DECIMAL
@@ -223,16 +248,35 @@ def p_data_type(t) :
     elif t[1] == 'Bool' : t[0] = DATA_TYPE.BOLEANO
 
 def p_while(t) :
-    'while : WHILE exp_logica instrucciones END SEMICOL'
+    'while : WHILE exp_logica instrucciones END'
     t[0] = Mientras(t[2], t[3])
 
 def p_if(t) :
-    'if : IF exp_logica instrucciones END SEMICOL'
+    'if : IF exp_logica instrucciones END'
     t[0] = If(t[2], t[3])
 
 def p_if_else(t) :
-    'if_else : IF exp_logica instrucciones ELSE instrucciones END SEMICOL'
+    'if_else : IF exp_logica instrucciones ELSE instrucciones END'
     t[0] = IfElse(t[2], t[3], t[5])
+
+def p_for(t) :
+    'for : FOR ID IN CADENA instrucciones END'
+
+def p_function(t) :
+    'function : FUNCTION ID LPAR args RPAR instrucciones END'
+
+def p_function_args(t) :
+    'args : args COMMA ID'
+
+def p_function_arg(t) :
+    'args : ID'
+
+def p_function_arg_empty(t) :
+    'args : empty'
+
+def p_semicolon(t) :
+    '''semicolon    : SEMICOL
+                    | empty'''
 
 def p_logica_binaria(t) :
     '''exp_logica    : exp_logica AND exp_logica
@@ -272,13 +316,15 @@ def p_aritmetica_binaria(t) :
                         | exp_aritmetica TIMES exp_aritmetica
                         | exp_aritmetica DIV exp_aritmetica
                         | exp_aritmetica MOD exp_aritmetica
-                        | exp_aritmetica POT exp_aritmetica'''
+                        | exp_aritmetica POT exp_aritmetica
+                        | exp_aritmetica COLON exp_aritmetica'''
     if t[2] == '+'      : t[0] = AritmeticaBinaria(t[1], t[3], OP_ARITMETICA.MAS)
     elif t[2] == '-'    : t[0] = AritmeticaBinaria(t[1], t[3], OP_ARITMETICA.MENOS)
     elif t[2] == '*'    : t[0] = AritmeticaBinaria(t[1], t[3], OP_ARITMETICA.POR)
     elif t[2] == '/'    : t[0] = AritmeticaBinaria(t[1], t[3], OP_ARITMETICA.DIVIDIDO)
     elif t[2] == '%'    : t[0] = AritmeticaBinaria(t[1], t[3], OP_ARITMETICA.MODULO)
     elif t[2] == '^'    : t[0] = AritmeticaBinaria(t[1], t[3], OP_ARITMETICA.POTENCIA)
+    elif t[2] == ':'    : t[0] = AritmeticaBinaria(t[1], t[3], OP_ARITMETICA.RANGO)
     
 def p_aritmetica_negativo(t) :
     'exp_aritmetica : MINUS exp_aritmetica %prec UMINUS'
@@ -289,7 +335,7 @@ def p_aritmetica_agrupacion(t) :
     t[0] = t[2]
 
 def p_aritmetica_basico_num(t) :
-    'exp_aritmetica  : NUMBERO'
+    'exp_aritmetica  : NUMERO'
     t[0] = Numero(t[1])
 
 def p_aritmetica_basico_dec(t) :
@@ -340,32 +386,38 @@ def p_aritmetica_nativa_sin(t) :
     'exp_aritmetica : SIN LPAR exp_logica RPAR'
     t[0] = NativaSin(t[3])
     
-
 def p_aritmetica_nativa_cos(t) :
     'exp_aritmetica : COS LPAR exp_logica RPAR'
     t[0] = NativaCos(t[3])
     
-
 def p_aritmetica_nativa_tan(t) :
     'exp_aritmetica : TAN LPAR exp_logica RPAR'
     t[0] = NativaTan(t[3])
     
-
 def p_aritmetica_nativa_log10(t) :
     'exp_aritmetica : LOG10 LPAR exp_logica RPAR'
     t[0] = NativaLog10(t[3])
-    
 
 def p_aritmetica_nativa_sqrt(t) :
     'exp_aritmetica : SQRT LPAR exp_logica RPAR'
     t[0] = NativaSqrt(t[3])
     
-    # 'sin': 'SIN',
-    # 'cos': 'COS',
-    # 'tan': 'TAN',
-    # 'log10': 'LOG10',
-    # 'sqrt': 'SQRT',
+def p_aritmetica_nativa_length(t) :
+    'exp_aritmetica : LENGTH LPAR exp_logica RPAR'
+    t[0] = NativaLength(t[3])
+    
+def p_aritmetica_nativa_uppercase(t) :
+    'exp_aritmetica : UPPERCASE LPAR exp_logica RPAR'
+    t[0] = NativaUppercase(t[3])
+    
+def p_aritmetica_nativa_lowercase(t) :
+    'exp_aritmetica : LOWERCASE LPAR exp_logica RPAR'
+    t[0] = NativaLowercase(t[3])
 
+def p_empty(t) :
+    'empty :'
+    pass
+    
 def p_error(t) :
     global lista_errores
     print(t)

@@ -5,11 +5,13 @@
 			<h5 class="card-title">Código fuente</h5>
 			<form action="{{url_for('analize')}}" method="POST">
 				<textarea
-					class="form-control"
+					class="form-control code__area"
 					name="code"
 					id="code"
 					cols="30"
 					rows="20"
+					wrap="hard"
+					autofocus
 					placeholder="Escribe aquí el código"
 				>
 {{ source }}</textarea
@@ -22,11 +24,13 @@
 		<div class="card-body">
 			<h5 class="card-title">Consola</h5>
 			<textarea
-				class="form-control"
+				class="form-control code__area"
 				name="console"
 				id="console"
 				cols="30"
 				rows="20"
+				wrap="hard"
+				readonly
 				placeholder="Tus resultados se muestran aquí"
 			>
 {{ result }}</textarea

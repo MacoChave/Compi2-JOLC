@@ -27,16 +27,19 @@ reservadas = {
     'while': 'WHILE',
     'for': 'FOR',
     'in': 'IN',
-    'end': 'END'
+    'end': 'END',
+    'local': 'LOCAL',
+    'global': 'GLOBAL',
+    'function': 'FUNCTION'
 }
 
 tokens = [
     'SEMICOL', 'AS', 'COLON', 'COMMA',
-    'QUESTION',
-    'LBRACE', 'RBRACE',
+    # 'QUESTION',
+    # 'LBRACE', 'RBRACE',
     'LPAR', 'RPAR',
     'EQUAL',
-    'ADDITION', 'DIFFERENCE', 'PRODUCT', 'QUOTIENT',
+    # 'ADDITION', 'DIFFERENCE', 'PRODUCT', 'QUOTIENT',
     'AND', 'OR', 'NOT',
     'PLUS', 'MINUS', 'TIMES', 'DIV', 'MOD', 'POT',
     'LESS', 'LESSEQ', 'GREATHER', 'GREATHEREQ',
@@ -47,17 +50,17 @@ tokens = [
 t_SEMICOL = r';'
 t_AS = r'::'
 t_COLON = r':'
-t_QUESTION = r'\?'
 t_COMMA = r','
-t_LBRACE = r'{'
-t_RBRACE = r'}'
+# t_QUESTION = r'\?'
+# t_LBRACE = r'{'
+# t_RBRACE = r'}'
 t_LPAR = r'\('
 t_RPAR = r'\)'
 t_EQUAL = r'='
-t_ADDITION = r'\+='
-t_DIFFERENCE = r'-='
-t_PRODUCT = r'\*='
-t_QUOTIENT = r'/='
+# t_ADDITION = r'\+='
+# t_DIFFERENCE = r'-='
+# t_PRODUCT = r'\*='
+# t_QUOTIENT = r'/='
 t_AND = r'&&'
 t_OR = r'\|\|'
 t_NOT = r'!'
@@ -113,11 +116,11 @@ def t_ID(t) :
     return t
 
 def t_COMMENT_MUL(t) :
-    r'\#.*\n'
+    r'\#=(.|\n)*?=\#'
     t.lexer.lineno += t.value.count('\n')
 
 def t_COMMENT_SIM(t) :
-    r'\#=.*=\#'
+    r'\#.*\n'
     t.lexer.lineno += 1
 
 t_ignore = " \t"
@@ -141,13 +144,14 @@ lista_errores = []
 
 precedence = (
     ('right', 'EQUAL'),
-    ('right', 'ADDITION', 'DIFFERENCE'),
-    ('right', 'PRODUCT', 'QUOTIENT'),
+    # ('right', 'ADDITION', 'DIFFERENCE'),
+    # ('right', 'PRODUCT', 'QUOTIENT'),
     ('left', 'AND'),
     ('left', 'OR'),
-    ('left', 'QUESTION', 'COLON'),
+    # ('left', 'QUESTION', 'COLON'),
     ('nonassoc', 'EQUALITY', 'DIFERENT'),
     ('nonassoc', 'LESS', 'GREATHER', 'LESSEQ', 'GREATHEREQ'),
+    ('left', 'COLON'),
     ('left', 'PLUS', 'MINUS'),
     ('left', 'TIMES', 'DIV', 'MOD'),
     ('left', 'POT'),
@@ -173,20 +177,22 @@ def p_instrucciones(t) :
     t[0] = [t[1]]
 
 def p_instruccion(t) :
-    '''instruccion  : print
-                    | println
-                    | definicion
-                    | while
-                    | if
-                    | if_else'''
+    '''instruccion  : print semicolon
+                    | println semicolon
+                    | definicion semicolon
+                    | while semicolon
+                    | for semicolon
+                    | function semicolon
+                    | if semicolon
+                    | if_else semicolon'''
     t[0] = t[1]
 
 def p_print(t) :
-    'print : PRINT LPAR print_args RPAR semicolon'
+    'print : PRINT LPAR print_args RPAR'
     t[0] = Print(t[3])
 
 def p_println(t) :
-    'println : PRINTLN LPAR print_args RPAR semicolon'
+    'println : PRINTLN LPAR print_args RPAR'
     t[0] = Println(t[3])
 
 def p_print_args(t) :
@@ -199,8 +205,17 @@ def p_print_arg(t) :
     t[0] = [t[1]]
 
 def p_definicion(t) :
-    'definicion : ID asignacion semicolon'
-    t[0] = Definicion(t[1], t[2])
+    'definicion : ambito ID asignacion'
+    t[0] = Definicion(t[2], t[3])
+
+def p_ambito_local(t) :
+    'ambito : LOCAL'
+
+def p_ambito_global(t) :
+    'ambito : GLOBAL'
+
+def p_ambito_empty(t) :
+    'ambito : empty'
 
 def p_asignacion(t) :
     'asignacion : EQUAL exp_logica assign_type'
@@ -214,7 +229,7 @@ def p_asignacion_type(t) :
     'assign_type : AS data_type'
     t[0] = t[2]
 
-def p_asignacion_type(t) :
+def p_asignacion_type_empty(t) :
     'assign_type : empty'
     t[0] = None
 
@@ -223,7 +238,8 @@ def p_data_type(t) :
                     | FLOAT64
                     | STR
                     | CHR
-                    | BOOL'''
+                    | BOOL
+                    | NOTHING'''
     print(t[1])
     if t[1] == 'Int64' : t[0] = DATA_TYPE.NUMERO
     elif t[1] == 'Float64' : t[0] = DATA_TYPE.DECIMAL
@@ -232,30 +248,31 @@ def p_data_type(t) :
     elif t[1] == 'Bool' : t[0] = DATA_TYPE.BOLEANO
 
 def p_while(t) :
-    'while : WHILE exp_logica instrucciones END semicolon'
+    'while : WHILE exp_logica instrucciones END'
     t[0] = Mientras(t[2], t[3])
 
 def p_if(t) :
-    'if : IF exp_logica instrucciones END semicolon'
+    'if : IF exp_logica instrucciones END'
     t[0] = If(t[2], t[3])
 
 def p_if_else(t) :
-    'if_else : IF exp_logica instrucciones ELSE instrucciones END semicolon'
+    'if_else : IF exp_logica instrucciones ELSE instrucciones END'
     t[0] = IfElse(t[2], t[3], t[5])
 
-# def p_for(t) :
-#     'for : FOR ID IN string instrucciones END SEMICOL'
+def p_for(t) :
+    'for : FOR ID IN CADENA instrucciones END'
 
-# def p_for_list_range(t) :
-#     'for_list : range'
+def p_function(t) :
+    'function : FUNCTION ID LPAR args RPAR instrucciones END'
 
-# def p_for_list_string(t) :
-#     'for_list : CADENA'
+def p_function_args(t) :
+    'args : args COMMA ID'
 
-# def p_for_list_array(t) :
-#     'for_list : array'
+def p_function_arg(t) :
+    'args : ID'
 
-# FUNCIONES
+def p_function_arg_empty(t) :
+    'args : empty'
 
 def p_semicolon(t) :
     '''semicolon    : SEMICOL

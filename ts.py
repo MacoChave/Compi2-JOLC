@@ -1,8 +1,3 @@
-from enum import Enum
-
-class TIPO_DATO(Enum) :
-    NUMERO = 1
-
 class Simbolo() :
     id = ''
     valor = None
@@ -18,7 +13,6 @@ class Simbolo() :
 
 class TablaSimbolo() :
     simbolos = {}
-    simbolos_superior = {}
     
     def __init__(self, simbolos = {}) -> None:
         self.simbolos = simbolos
@@ -29,7 +23,7 @@ class TablaSimbolo() :
     def agregar(self, simbolo) :
         self.simbolos[simbolo.id] = simbolo
     
-    def obtener(self, id) :
+    def declarar(self, id) :
         if not id in self.simbolos :
             simbolo = Simbolo(id)
             self.agregar(simbolo)
@@ -37,5 +31,14 @@ class TablaSimbolo() :
 
         return self.simbolos[id]
     
+    def obtener(self, id) :
+        if not id in self.simbolos :
+            return None
+        
+        return self.simbolos[id]
+    
     def actualizar(self, simbolo) :
+        if not simbolo.id in self.simbolos : return False
+
         self.simbolos[simbolo.id] = simbolo
+        return True

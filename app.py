@@ -1,6 +1,6 @@
 from ts import TablaSimbolo
 from flask import Flask, render_template, request
-from analizar import ejecutar_instrucciones
+from analizar import *
 from gramatica import *
 
 app = Flask(__name__)
@@ -15,13 +15,17 @@ def editor():
 
 @app.route('/analize', methods=['POST'])
 def analize():
+    global globales
+    global errores
+    globales = TablaSimbolo()
+    errores = []
     if request.method == 'POST' :
         source = request.form['code']
         instrucciones = parse(source)
         tabla_simbolo = TablaSimbolo()
-        global lista_errores
-        result = ejecutar_instrucciones(instrucciones, tabla_simbolo, lista_errores)
-    return render_template('editor.html', source = source, result = result)
+        globales_inner = TablaSimbolo()
+        res = ejecutar_instrucciones(instrucciones, tabla_simbolo, globales_inner)
+    return render_template('editor.html', source = source, result = res)
 
 @app.route('/reports')
 def reports():

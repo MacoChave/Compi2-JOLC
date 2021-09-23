@@ -131,16 +131,10 @@ def t_newline(t) :
 
 def t_error(t) :
     print(f'Error léxico: Caracter {t.value[0]} no reconocido')
-    error = Error('Error léxico', f'Caracter {t.value[0]} no reconocido', t.lexer.lineno)
-    global lista_errores
-    lista_errores.append(error)
     t.lexer.skip(1)
 
-from te import Error
 import ply.lex as lex
 lexer = lex.lex()
-
-lista_errores = []
 
 precedence = (
     ('right', 'EQUAL'),
@@ -206,16 +200,19 @@ def p_print_arg(t) :
 
 def p_definicion(t) :
     'definicion : ambito ID asignacion'
-    t[0] = Definicion(t[2], t[3])
+    t[0] = Definicion(t[1], t[2], t[3])
 
 def p_ambito_local(t) :
     'ambito : LOCAL'
+    t[0] = ALCANCE_VAR.LOCAL
 
 def p_ambito_global(t) :
     'ambito : GLOBAL'
+    t[0] = ALCANCE_VAR.GLOBAL
 
 def p_ambito_empty(t) :
     'ambito : empty'
+    t[0] = ALCANCE_VAR.EMPTY
 
 def p_asignacion(t) :
     'asignacion : EQUAL exp_logica assign_type'
@@ -240,7 +237,6 @@ def p_data_type(t) :
                     | CHR
                     | BOOL
                     | NOTHING'''
-    print(t[1])
     if t[1] == 'Int64' : t[0] = DATA_TYPE.NUMERO
     elif t[1] == 'Float64' : t[0] = DATA_TYPE.DECIMAL
     elif t[1] == 'String' : t[0] = DATA_TYPE.CADENA
@@ -260,23 +256,38 @@ def p_if_else(t) :
     t[0] = IfElse(t[2], t[3], t[5])
 
 def p_for(t) :
-    'for : FOR ID IN CADENA instrucciones END'
+    'for : FOR ID IN for_list instrucciones END'
+    t[0] = For(t[2], t[4], t[5])
+
+def p_for_from_cadena(t) :
+    'for_list : CADENA'
+    t[0] = t[1]
 
 def p_function(t) :
-    'function : FUNCTION ID LPAR args RPAR instrucciones END'
+    'function : FUNCTION ID LPAR param RPAR instrucciones END'
+    t[0] = Funcion(t[2], t[6], t[4])
 
-def p_function_args(t) :
-    'args : args COMMA ID'
+def p_function_param_list(t) :
+    'param : params'
+    t[0] = t[1]
 
-def p_function_arg(t) :
-    'args : ID'
+def p_function_param_empty(t) :
+    'param : empty'
+    t[0] = []
 
-def p_function_arg_empty(t) :
-    'args : empty'
+def p_function_params(t) :
+    'params : params COMMA ID'
+    t[1].append(t[3])
+    t[0] = t[1]
+
+def p_function_param(t) :
+    'params : ID'
+    t[0] = [t[1]]
 
 def p_semicolon(t) :
     '''semicolon    : SEMICOL
                     | empty'''
+    pass
 
 def p_logica_binaria(t) :
     '''exp_logica    : exp_logica AND exp_logica
@@ -413,22 +424,38 @@ def p_aritmetica_nativa_uppercase(t) :
 def p_aritmetica_nativa_lowercase(t) :
     'exp_aritmetica : LOWERCASE LPAR exp_logica RPAR'
     t[0] = NativaLowercase(t[3])
+    
+def p_aritmetica_call(t) :
+    'exp_aritmetica : ID LPAR arg RPAR'
+    t[0] = CallFuncion(t[1], t[3])
+
+def p_aritmetica_call_arg(t) :
+    'arg : args'
+    t[0] = t[1]
+
+def p_aritmetica_call_empty(t) :
+    'arg : empty'
+    t[0] = []
+
+def p_aritmetica_call_args_list(t) :
+    'args : args COMMA exp_logica'
+    t[1].append(t[3])
+    t[0] = t[1]
+    
+def p_aritmetica_call_args(t) :
+    'args : exp_logica'
+    t[0] = [t[1]]
 
 def p_empty(t) :
     'empty :'
     pass
     
 def p_error(t) :
-    global lista_errores
     print(t)
     print(f'Error sintáctico: {t.value} no esperado')
-    error = Error('Error sintáctico', f'{t.value} no se esperaba', t.lexer.lineno)
-    lista_errores.append(error)
 
 import ply.yacc as yacc
 parser = yacc.yacc()
 
 def parse(input) :
-    global lista_errores
-    lista_errores.clear()
     return parser.parse(input)

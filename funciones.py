@@ -10,6 +10,11 @@ class DATA_TYPE(Enum) :
 class FuncionNativa :
     '''Clase abstracta para funciones'''
 
+class CallFuncion(FuncionNativa) :
+    def __init__(self, id, args) -> None:
+        self.id = id
+        self.args = args
+
 class NativaParse(FuncionNativa) :
     def __init__(self, tipo, exp) -> None:
         self.tipo = tipo

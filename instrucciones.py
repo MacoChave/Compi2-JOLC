@@ -1,3 +1,10 @@
+from enum import Enum
+
+class ALCANCE_VAR(Enum) :
+    GLOBAL = 1
+    LOCAL = 2
+    EMPTY = 3
+
 class Instruccion :
     '''Clase abstracta para instrucciones'''
 
@@ -27,10 +34,11 @@ class Mientras(Instruccion) :
         return f'inst: while cond: {self.condicion} instrucciones: {self.instrucciones}' + '\n'
 
 class Definicion(Instruccion) :
-    def __init__(self, id, exp = None, line = 0) :
+    def __init__(self, alcance, id, exp, line = 0) :
+        self.alcance = alcance
         self.id = id
-        self.line = line
         self.exp = exp
+        self.line = line
 
     def __str__(self) -> str:
         return f'inst: definicion id: {self.id} exp: {self.exp}' + '\n'
@@ -64,8 +72,10 @@ class For(Instruccion) :
         return f'inicio: {self.inicio} lista: {self.lista} instrucciones: {self.instrucciones}' + '\n'
 
 class Funcion(Instruccion) :
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, id, instrucciones, parametros = None) -> None:
+        self.id = id
+        self.instrucciones = instrucciones
+        self.parametros = parametros
     
     def __str__(self) -> str:
         return super().__str__()

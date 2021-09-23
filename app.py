@@ -5,7 +5,7 @@ from gramatica import *
 
 app = Flask(__name__)
 
-res = 0
+res = None
 
 @app.route('/')
 def home():
@@ -21,21 +21,23 @@ def analize():
     global errores
     global response
     global res
-    response = ''
     globales = TablaSimbolo()
     errores = []
+    response = ''
+    res = None
     if request.method == 'POST' :
         source = request.form['code']
         instrucciones = parse(source)
         tabla_simbolo = TablaSimbolo()
         globales_inner = TablaSimbolo()
         res = ejecutar_instrucciones(instrucciones, tabla_simbolo, globales_inner)
-    return render_template('editor.html', source = source, result = res[0], error = res[1])
+    return render_template('editor.html', source = source, result = res[0])
 
 @app.route('/reports')
 def reports():
     global res
-    return render_template('reports.html', error = res[1])
+    print(res[2])
+    return render_template('reports.html', error = res[1], ts = res[2])
 
 if __name__ == '__main__':
     app.run(debug=True)

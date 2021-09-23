@@ -436,4 +436,4 @@ def ejecutar_instrucciones(instrucciones: Instruccion, locales: TS.TablaSimbolo,
         else : 
             print('Error semantico: Instrucción no válida')
             errores.append(Error('Error semántico', 'Instrucción no reconocida'))
-    return response, errores
+    return response, errores, globales

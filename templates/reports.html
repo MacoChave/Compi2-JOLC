@@ -1,7 +1,21 @@
 {% extends "layout.html" %} {% block body %}
-<h1>Reportes</h1>
-<!-- <div id="graph"></div>
-<script>
-	d3.select('#graph').graphviz().renderDot('digraph { a -> b}');
-</script> -->
+<div class="container-fluid">
+	<h1>Reportes</h1>
+	<table class="table">
+		<thead>
+			<th>Tipo</th>
+			<th>Descripción</th>
+			<th>Fecha</th>
+		</thead>
+		<tbody>
+			{% for err in error %}
+			<tr>
+				<td>{{err.tipo}}</td>
+				<td>{{err.descripcion}}</td>
+				<td>{{err.fecha}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
 {% endblock %}

@@ -26,7 +26,7 @@ def ejecutar_print(instruccion: Print, locales: TS.TablaSimbolo, globales_inner:
             if cadena : cadena = 'True'
             else : cadena = 'False'
         response = f'{response}{cadena}'
-    print(response)
+    # print(response)
 
 def ejecutar_println(instruccion: Println, locales: TS.TablaSimbolo, globales_inner: TS.TablaSimbolo) :
     global response
@@ -44,7 +44,7 @@ def ejecutar_println(instruccion: Println, locales: TS.TablaSimbolo, globales_in
         response = f'{response}{cadena}'
 
     response = f'{response}\n'
-    print(response)
+    # print(response)
 
 # ========== ==========> DECLARACIÓN
 
@@ -126,26 +126,19 @@ def ejecutar_mientras(instruccion: Mientras, locales: TS.TablaSimbolo, globales_
         errores.append(Error('Error semántico', 'La condición del while esperaba tipo ::Bool'))
 
 def ejecutar_for(instruccion: For, locales: TS.TablaSimbolo, globales_inner: TS.TablaSimbolo) :
-    print('** TOY EN FOR')
-    print('*** BUSCO VARIABLE EN GLOBALES')
     simbolo = globales_inner.obtener(instruccion.inicio)
     if simbolo is None :
-        print('*** BUSCO VARIABLE EN LOCALES')
         simbolo = locales.declarar(instruccion.inicio)
         if isinstance(instruccion.lista, str) : 
-            print('*** LA LISTA ES STRING')
             lista = list(instruccion.lista)
             for i in lista :
-                print('**** RECORRIENDO LISTA', i)
                 simbolo.valor = i
                 locales.actualizar(simbolo)
                 ejecutar_instrucciones(instruccion.instrucciones, locales, globales_inner)
     else: 
         if isinstance(instruccion.lista, str) : 
-            print('*+* LA LISTA ES STRING')
             lista = list(instruccion.lista)
             for i in lista :
-                print('*+*+ RECORRIENDO LISTA', i)
                 simbolo.valor = i
                 globales_inner.actualizar(simbolo)
                 ejecutar_instrucciones(instruccion.instrucciones, locales, globales_inner)
@@ -443,4 +436,4 @@ def ejecutar_instrucciones(instrucciones: Instruccion, locales: TS.TablaSimbolo,
         else : 
             print('Error semantico: Instrucción no válida')
             errores.append(Error('Error semántico', 'Instrucción no reconocida'))
-    return response
+    return response, errores

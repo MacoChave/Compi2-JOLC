@@ -5,6 +5,8 @@ from gramatica import *
 
 app = Flask(__name__)
 
+res = 0
+
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -17,6 +19,9 @@ def editor():
 def analize():
     global globales
     global errores
+    global response
+    global res
+    response = ''
     globales = TablaSimbolo()
     errores = []
     if request.method == 'POST' :
@@ -25,11 +30,12 @@ def analize():
         tabla_simbolo = TablaSimbolo()
         globales_inner = TablaSimbolo()
         res = ejecutar_instrucciones(instrucciones, tabla_simbolo, globales_inner)
-    return render_template('editor.html', source = source, result = res)
+    return render_template('editor.html', source = source, result = res[0], error = res[1])
 
 @app.route('/reports')
 def reports():
-    return render_template('reports.html')
+    global res
+    return render_template('reports.html', error = res[1])
 
 if __name__ == '__main__':
     app.run(debug=True)
